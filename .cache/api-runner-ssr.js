@@ -1,4 +1,16 @@
 var plugins = [{
+      name: 'gatsby-plugin-image',
+      plugin: require('C:/Users/MSI-In/Documents/perso/projects/quityouraddiction/node_modules/gatsby-plugin-image/gatsby-ssr.js'),
+      options: {"plugins":[]},
+    },{
+      name: 'gatsby-omni-font-loader',
+      plugin: require('C:/Users/MSI-In/Documents/perso/projects/quityouraddiction/node_modules/gatsby-omni-font-loader/gatsby-ssr.js'),
+      options: {"plugins":[],"enableListener":true,"preconnect":["https://fonts.googleapis.com"],"web":[{"name":"Montserrat","file":"https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"}]},
+    },{
+      name: 'gatsby-plugin-manifest',
+      plugin: require('C:/Users/MSI-In/Documents/perso/projects/quityouraddiction/node_modules/gatsby-plugin-manifest/gatsby-ssr.js'),
+      options: {"plugins":[],"icon":"src/images/favicon.png","legacy":true,"theme_color_in_head":true,"cache_busting_mode":"query","crossOrigin":"anonymous","include_favicon":true,"cacheDigest":"562d10b26f99cedcbc979e4747f23905"},
+    },{
       name: 'partytown',
       plugin: require('C:/Users/MSI-In/Documents/perso/projects/quityouraddiction/node_modules/gatsby/dist/internal-plugins/partytown/gatsby-ssr.js'),
       options: {"plugins":[]},

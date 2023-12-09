@@ -1,0 +1,5 @@
+{
+    "codeium.aggressiveShutdown": true,
+    "codeium.detectProxy": false,
+    "codeium.enableSearch": true
+}

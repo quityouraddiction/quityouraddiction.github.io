@@ -1,14 +1,14 @@
 import * as React from "react";
 import Header from "./header";
-import { container } from "./layout.module.css";
+// import { container, body } from "./layout.module.css";
 
 const Layout = ({ pageTitle, children }) => {
   return (
-    <div className={container}>
+    <div className="bg-[#FBFBFB]">
 
       <Header></Header>
-        <h1>{pageTitle}</h1>
-        {children}
+        <h1 className="grid text-center content-center h-screen">{pageTitle}</h1>
+        {/* {children} */}
 
     </div>
   );
