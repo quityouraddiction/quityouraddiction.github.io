@@ -15,13 +15,17 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@mdx-js/react": "^2.3.0",
     "framer-motion": "^10.16.16",
     "gatsby": "^5.12.4",
     "gatsby-omni-font-loader": "^2.0.2",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.3",
+    "gatsby-plugin-mdx": "^5.12.3",
+    "gatsby-plugin-react-svg": "^3.3.0",
     "gatsby-plugin-sharp": "^5.12.3",
     "gatsby-source-filesystem": "^5.12.1",
+    "gatsby-transformer-sharp": "^5.12.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0"

@@ -1,15 +1,16 @@
-import * as React from "react";
-import Header from "./header";
-// import { container, body } from "./layout.module.css";
+import React from "react";
+import Header from "./header/header";
+import Footer from "./footer/footer";
 
-const Layout = ({ pageTitle, children }) => {
+
+const Layout = ({ children }) => {
   return (
-    <div className="bg-[#FBFBFB]">
+    <div className="">
 
-      <Header></Header>
-        <h1 className="grid text-center content-center h-screen">{pageTitle}</h1>
-        {/* {children} */}
-
+      <div className=""><Header /></div>
+      {/*  */}
+      <div className="mt-52">{children}</div>
+      <Footer className="h-16" />
     </div>
   );
 };

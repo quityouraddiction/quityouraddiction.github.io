@@ -2,19 +2,27 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  
   siteMetadata: {
-    title: "Quit Your Addiction",
+    title: `Quit Your Addiction`,
     siteUrl: `https://www.yourdomain.tld`,
   },
   plugins: [
-    "gatsby-plugin-postcss",
-    "gatsby-plugin-image",
-    "gatsby-plugin-sharp",
     {
-      resolve: 'gatsby-omni-font-loader',
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        icon: `src/images/favicon.png`,
+      },
+    },
+    `gatsby-plugin-postcss`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-react-svg`,
+    {
+      resolve: `gatsby-omni-font-loader`,
       options: {
         enableListener: true,
-        preconnect: ['https://fonts.googleapis.com'],
+        preconnect: [`https://fonts.googleapis.com`],
         web: [
           {
             name: `Montserrat`,
@@ -23,10 +31,21 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-mdx`,
     {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        icon: 'src/images/favicon.png',
+      resolve: `gatsby-source-filesystem`,
+      options:{
+        // name of the folder
+        name: `resources`,
+        path: `${__dirname}/content/resources`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options:{
+        // name of the folder
+        name: `addiction101`,
+        path: `${__dirname}/content/addiction101`,
       },
     },
   ],

@@ -1808,11 +1808,14 @@ function getForwards(collectedScripts) {
 
 exports.components = {
   "component---cache-dev-404-page-js": () => __webpack_require__.e(/*! import() | component---cache-dev-404-page-js */ "component---cache-dev-404-page-js").then(__webpack_require__.bind(__webpack_require__, /*! ./../../dev-404-page.js?export=default */ "./.cache/dev-404-page.js?export=default")),
+  "component---content-addiction-101-blog-1-mdx": () => __webpack_require__.e(/*! import() | component---content-addiction-101-blog-1-mdx */ "component---content-addiction-101-blog-1-mdx").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../content/addiction101/blog-1.mdx?export=default */ "./content/addiction101/blog-1.mdx?export=default")),
+  "component---content-addiction-101-blog-2-mdx": () => __webpack_require__.e(/*! import() | component---content-addiction-101-blog-2-mdx */ "component---content-addiction-101-blog-2-mdx").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../content/addiction101/blog-2.mdx?export=default */ "./content/addiction101/blog-2.mdx?export=default")),
+  "component---content-resources-blog-3-mdx": () => __webpack_require__.e(/*! import() | component---content-resources-blog-3-mdx */ "component---content-resources-blog-3-mdx").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../content/resources/blog-3.mdx?export=default */ "./content/resources/blog-3.mdx?export=default")),
+  "component---content-resources-blog-4-mdx": () => __webpack_require__.e(/*! import() | component---content-resources-blog-4-mdx */ "component---content-resources-blog-4-mdx").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../content/resources/blog-4.mdx?export=default */ "./content/resources/blog-4.mdx?export=default")),
   "component---src-pages-404-js": () => __webpack_require__.e(/*! import() | component---src-pages-404-js */ "component---src-pages-404-js").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../src/pages/404.js?export=default */ "./src/pages/404.js?export=default")),
   "component---src-pages-about-js": () => __webpack_require__.e(/*! import() | component---src-pages-about-js */ "component---src-pages-about-js").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../src/pages/about.js?export=default */ "./src/pages/about.js?export=default")),
   "component---src-pages-index-js": () => __webpack_require__.e(/*! import() | component---src-pages-index-js */ "component---src-pages-index-js").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../src/pages/index.js?export=default */ "./src/pages/index.js?export=default"))
 };
-
 exports.head = {
   "component---src-pages-404-js": () => __webpack_require__.e(/*! import() | component---src-pages-404-jshead */ "component---src-pages-404-jshead").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../src/pages/404.js?export=head */ "./src/pages/404.js?export=head")),
   "component---src-pages-about-js": () => __webpack_require__.e(/*! import() | component---src-pages-about-jshead */ "component---src-pages-about-jshead").then(__webpack_require__.bind(__webpack_require__, /*! ./../../../src/pages/about.js?export=head */ "./src/pages/about.js?export=head")),
@@ -1834,6 +1837,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   apiRunnerAsync: () => (/* binding */ apiRunnerAsync)
 /* harmony export */ });
 var plugins = [{
+  name: 'gatsby-plugin-manifest',
+  plugin: __webpack_require__(/*! ./node_modules/gatsby-plugin-manifest/gatsby-ssr.js */ "./node_modules/gatsby-plugin-manifest/gatsby-ssr.js"),
+  options: {
+    "plugins": [],
+    "icon": "src/images/favicon.png",
+    "legacy": true,
+    "theme_color_in_head": true,
+    "cache_busting_mode": "query",
+    "crossOrigin": "anonymous",
+    "include_favicon": true,
+    "cacheDigest": "562d10b26f99cedcbc979e4747f23905"
+  }
+}, {
   name: 'gatsby-plugin-image',
   plugin: __webpack_require__(/*! ./node_modules/gatsby-plugin-image/gatsby-ssr.js */ "./node_modules/gatsby-plugin-image/gatsby-ssr.js"),
   options: {
@@ -1850,19 +1866,6 @@ var plugins = [{
       "name": "Montserrat",
       "file": "https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
     }]
-  }
-}, {
-  name: 'gatsby-plugin-manifest',
-  plugin: __webpack_require__(/*! ./node_modules/gatsby-plugin-manifest/gatsby-ssr.js */ "./node_modules/gatsby-plugin-manifest/gatsby-ssr.js"),
-  options: {
-    "plugins": [],
-    "icon": "src/images/favicon.png",
-    "legacy": true,
-    "theme_color_in_head": true,
-    "cache_busting_mode": "query",
-    "crossOrigin": "anonymous",
-    "include_favicon": true,
-    "cacheDigest": "562d10b26f99cedcbc979e4747f23905"
   }
 }, {
   name: 'partytown',
@@ -3431,7 +3434,6 @@ const prefetch = function (url, options) {
     }).catch(() => {}); // 404s are logged to the console anyway
   });
 };
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (prefetch);
 
 /***/ }),

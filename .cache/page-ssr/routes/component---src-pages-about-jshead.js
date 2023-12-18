@@ -1,831 +1,112 @@
-"use strict";
 exports.id = "component---src-pages-about-jshead";
 exports.ids = ["component---src-pages-about-jshead"];
 exports.modules = {
 
-/***/ "./node_modules/camelcase/index.js":
+/***/ "./src/components/footer/footer.js":
 /*!*****************************************!*\
-  !*** ./node_modules/camelcase/index.js ***!
+  !*** ./src/components/footer/footer.js ***!
   \*****************************************/
-/***/ ((module) => {
-
-
-
-const UPPERCASE = /[\p{Lu}]/u;
-const LOWERCASE = /[\p{Ll}]/u;
-const LEADING_CAPITAL = /^[\p{Lu}](?![\p{Lu}])/gu;
-const IDENTIFIER = /([\p{Alpha}\p{N}_]|$)/u;
-const SEPARATORS = /[_.\- ]+/;
-
-const LEADING_SEPARATORS = new RegExp('^' + SEPARATORS.source);
-const SEPARATORS_AND_IDENTIFIER = new RegExp(SEPARATORS.source + IDENTIFIER.source, 'gu');
-const NUMBERS_AND_IDENTIFIER = new RegExp('\\d+' + IDENTIFIER.source, 'gu');
-
-const preserveCamelCase = (string, toLowerCase, toUpperCase) => {
-	let isLastCharLower = false;
-	let isLastCharUpper = false;
-	let isLastLastCharUpper = false;
-
-	for (let i = 0; i < string.length; i++) {
-		const character = string[i];
-
-		if (isLastCharLower && UPPERCASE.test(character)) {
-			string = string.slice(0, i) + '-' + string.slice(i);
-			isLastCharLower = false;
-			isLastLastCharUpper = isLastCharUpper;
-			isLastCharUpper = true;
-			i++;
-		} else if (isLastCharUpper && isLastLastCharUpper && LOWERCASE.test(character)) {
-			string = string.slice(0, i - 1) + '-' + string.slice(i - 1);
-			isLastLastCharUpper = isLastCharUpper;
-			isLastCharUpper = false;
-			isLastCharLower = true;
-		} else {
-			isLastCharLower = toLowerCase(character) === character && toUpperCase(character) !== character;
-			isLastLastCharUpper = isLastCharUpper;
-			isLastCharUpper = toUpperCase(character) === character && toLowerCase(character) !== character;
-		}
-	}
-
-	return string;
-};
-
-const preserveConsecutiveUppercase = (input, toLowerCase) => {
-	LEADING_CAPITAL.lastIndex = 0;
-
-	return input.replace(LEADING_CAPITAL, m1 => toLowerCase(m1));
-};
-
-const postProcess = (input, toUpperCase) => {
-	SEPARATORS_AND_IDENTIFIER.lastIndex = 0;
-	NUMBERS_AND_IDENTIFIER.lastIndex = 0;
-
-	return input.replace(SEPARATORS_AND_IDENTIFIER, (_, identifier) => toUpperCase(identifier))
-		.replace(NUMBERS_AND_IDENTIFIER, m => toUpperCase(m));
-};
-
-const camelCase = (input, options) => {
-	if (!(typeof input === 'string' || Array.isArray(input))) {
-		throw new TypeError('Expected the input to be `string | string[]`');
-	}
-
-	options = {
-		pascalCase: false,
-		preserveConsecutiveUppercase: false,
-		...options
-	};
-
-	if (Array.isArray(input)) {
-		input = input.map(x => x.trim())
-			.filter(x => x.length)
-			.join('-');
-	} else {
-		input = input.trim();
-	}
-
-	if (input.length === 0) {
-		return '';
-	}
-
-	const toLowerCase = options.locale === false ?
-		string => string.toLowerCase() :
-		string => string.toLocaleLowerCase(options.locale);
-	const toUpperCase = options.locale === false ?
-		string => string.toUpperCase() :
-		string => string.toLocaleUpperCase(options.locale);
-
-	if (input.length === 1) {
-		return options.pascalCase ? toUpperCase(input) : toLowerCase(input);
-	}
-
-	const hasUpperCase = input !== toLowerCase(input);
-
-	if (hasUpperCase) {
-		input = preserveCamelCase(input, toLowerCase, toUpperCase);
-	}
-
-	input = input.replace(LEADING_SEPARATORS, '');
-
-	if (options.preserveConsecutiveUppercase) {
-		input = preserveConsecutiveUppercase(input, toLowerCase);
-	} else {
-		input = toLowerCase(input);
-	}
-
-	if (options.pascalCase) {
-		input = toUpperCase(input.charAt(0)) + input.slice(1);
-	}
-
-	return postProcess(input, toUpperCase);
-};
-
-module.exports = camelCase;
-// TODO: Remove this for the next major release
-module.exports["default"] = camelCase;
-
-
-/***/ }),
-
-/***/ "./node_modules/gatsby-plugin-image/dist/gatsby-image.module.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/gatsby-plugin-image/dist/gatsby-image.module.js ***!
-  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   GatsbyImage: () => (/* binding */ X),
-/* harmony export */   MainImage: () => (/* binding */ D),
-/* harmony export */   Placeholder: () => (/* binding */ C),
-/* harmony export */   StaticImage: () => (/* binding */ Z),
-/* harmony export */   generateImageData: () => (/* binding */ b),
-/* harmony export */   getImage: () => (/* binding */ I),
-/* harmony export */   getImageData: () => (/* binding */ R),
-/* harmony export */   getLowResolutionImageURL: () => (/* binding */ y),
-/* harmony export */   getSrc: () => (/* binding */ W),
-/* harmony export */   getSrcSet: () => (/* binding */ j),
-/* harmony export */   withArtDirection: () => (/* binding */ _)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var camelcase__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! camelcase */ "./node_modules/camelcase/index.js");
-/* harmony import */ var camelcase__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(camelcase__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 
-
-
-
-function n() {
-  return n = Object.assign ? Object.assign.bind() : function (e) {
-    for (var t = 1; t < arguments.length; t++) {
-      var a = arguments[t];
-      for (var i in a) Object.prototype.hasOwnProperty.call(a, i) && (e[i] = a[i]);
-    }
-    return e;
-  }, n.apply(this, arguments);
-}
-function o(e, t) {
-  if (null == e) return {};
-  var a,
-    i,
-    r = {},
-    n = Object.keys(e);
-  for (i = 0; i < n.length; i++) t.indexOf(a = n[i]) >= 0 || (r[a] = e[a]);
-  return r;
-}
-var s = [.25, .5, 1, 2],
-  l = [750, 1080, 1366, 1920],
-  u = [320, 654, 768, 1024, 1366, 1600, 1920, 2048, 2560, 3440, 3840, 4096],
-  d = 800,
-  c = 800,
-  h = 4 / 3,
-  g = function (e) {
-    return console.warn(e);
-  },
-  p = function (e, t) {
-    return e - t;
-  },
-  m = function (e, t) {
-    switch (t) {
-      case "constrained":
-        return "(min-width: " + e + "px) " + e + "px, 100vw";
-      case "fixed":
-        return e + "px";
-      case "fullWidth":
-        return "100vw";
-      default:
-        return;
-    }
-  },
-  f = function (e) {
-    return e.map(function (e) {
-      return e.src + " " + e.width + "w";
-    }).join(",\n");
-  };
-function v(e) {
-  var t = e.lastIndexOf(".");
-  if (-1 !== t) {
-    var a = e.slice(t + 1);
-    if ("jpeg" === a) return "jpg";
-    if (3 === a.length || 4 === a.length) return a;
-  }
-}
-function w(e) {
-  var t = e.layout,
-    i = void 0 === t ? "constrained" : t,
-    r = e.width,
-    o = e.height,
-    s = e.sourceMetadata,
-    l = e.breakpoints,
-    u = e.aspectRatio,
-    d = e.formats,
-    g = void 0 === d ? ["auto", "webp"] : d;
-  return g = g.map(function (e) {
-    return e.toLowerCase();
-  }), i = camelcase__WEBPACK_IMPORTED_MODULE_1___default()(i), r && o ? n({}, e, {
-    formats: g,
-    layout: i,
-    aspectRatio: r / o
-  }) : (s.width && s.height && !u && (u = s.width / s.height), "fullWidth" === i ? (r = r || s.width || l[l.length - 1], o = o || Math.round(r / (u || h))) : (r || (r = o && u ? o * u : s.width ? s.width : o ? Math.round(o / h) : c), u && !o ? o = Math.round(r / u) : u || (u = r / o)), n({}, e, {
-    width: r,
-    height: o,
-    aspectRatio: u,
-    layout: i,
-    formats: g
-  }));
-}
-function y(e, t) {
-  var a;
-  return void 0 === t && (t = 20), null == (a = (0, (e = w(e)).generateImageSource)(e.filename, t, Math.round(t / e.aspectRatio), e.sourceMetadata.format || "jpg", e.fit, e.options)) ? void 0 : a.src;
-}
-function b(e) {
-  var t,
-    a = (e = w(e)).pluginName,
-    i = e.sourceMetadata,
-    r = e.generateImageSource,
-    o = e.layout,
-    u = e.fit,
-    d = e.options,
-    h = e.width,
-    p = e.height,
-    y = e.filename,
-    b = e.reporter,
-    S = void 0 === b ? {
-      warn: g
-    } : b,
-    N = e.backgroundColor,
-    x = e.placeholderURL;
-  if (a || S.warn('[gatsby-plugin-image] "generateImageData" was not passed a plugin name'), "function" != typeof r) throw new Error("generateImageSource must be a function");
-  i && (i.width || i.height) ? i.format || (i.format = v(y)) : i = {
-    width: h,
-    height: p,
-    format: (null == (t = i) ? void 0 : t.format) || v(y) || "auto"
-  };
-  var I = new Set(e.formats);
-  (0 === I.size || I.has("auto") || I.has("")) && (I.delete("auto"), I.delete(""), I.add(i.format)), I.has("jpg") && I.has("png") && (S.warn("[" + a + "] Specifying both 'jpg' and 'png' formats is not supported. Using 'auto' instead"), I.delete("jpg" === i.format ? "png" : "jpg"));
-  var W = function (e) {
-      var t = e.filename,
-        a = e.layout,
-        i = void 0 === a ? "constrained" : a,
-        r = e.sourceMetadata,
-        o = e.reporter,
-        u = void 0 === o ? {
-          warn: g
-        } : o,
-        d = e.breakpoints,
-        h = void 0 === d ? l : d,
-        p = Object.entries({
-          width: e.width,
-          height: e.height
-        }).filter(function (e) {
-          var t = e[1];
-          return "number" == typeof t && t < 1;
-        });
-      if (p.length) throw new Error("Specified dimensions for images must be positive numbers (> 0). Problem dimensions you have are " + p.map(function (e) {
-        return e.join(": ");
-      }).join(", "));
-      return "fixed" === i ? function (e) {
-        var t = e.filename,
-          a = e.sourceMetadata,
-          i = e.width,
-          r = e.height,
-          n = e.fit,
-          o = void 0 === n ? "cover" : n,
-          l = e.outputPixelDensities,
-          u = e.reporter,
-          d = void 0 === u ? {
-            warn: g
-          } : u,
-          h = a.width / a.height,
-          p = k(void 0 === l ? s : l);
-        if (i && r) {
-          var m = M(a, {
-            width: i,
-            height: r,
-            fit: o
-          });
-          i = m.width, r = m.height, h = m.aspectRatio;
-        }
-        i ? r || (r = Math.round(i / h)) : i = r ? Math.round(r * h) : c;
-        var f = i;
-        if (a.width < i || a.height < r) {
-          var v = a.width < i ? "width" : "height";
-          d.warn("\nThe requested " + v + ' "' + ("width" === v ? i : r) + 'px" for the image ' + t + " was larger than the actual image " + v + " of " + a[v] + "px. If possible, replace the current image with a larger one."), "width" === v ? (i = a.width, r = Math.round(i / h)) : i = (r = a.height) * h;
-        }
-        return {
-          sizes: p.filter(function (e) {
-            return e >= 1;
-          }).map(function (e) {
-            return Math.round(e * i);
-          }).filter(function (e) {
-            return e <= a.width;
-          }),
-          aspectRatio: h,
-          presentationWidth: f,
-          presentationHeight: Math.round(f / h),
-          unscaledWidth: i
-        };
-      }(e) : "constrained" === i ? E(e) : "fullWidth" === i ? E(n({
-        breakpoints: h
-      }, e)) : (u.warn("No valid layout was provided for the image at " + t + ". Valid image layouts are fixed, fullWidth, and constrained. Found " + i), {
-        sizes: [r.width],
-        presentationWidth: r.width,
-        presentationHeight: r.height,
-        aspectRatio: r.width / r.height,
-        unscaledWidth: r.width
-      });
-    }(n({}, e, {
-      sourceMetadata: i
-    })),
-    j = {
-      sources: []
-    },
-    R = e.sizes;
-  R || (R = m(W.presentationWidth, o)), I.forEach(function (e) {
-    var t = W.sizes.map(function (t) {
-      var i = r(y, t, Math.round(t / W.aspectRatio), e, u, d);
-      if (null != i && i.width && i.height && i.src && i.format) return i;
-      S.warn("[" + a + "] The resolver for image " + y + " returned an invalid value.");
-    }).filter(Boolean);
-    if ("jpg" === e || "png" === e || "auto" === e) {
-      var i = t.find(function (e) {
-        return e.width === W.unscaledWidth;
-      }) || t[0];
-      i && (j.fallback = {
-        src: i.src,
-        srcSet: f(t),
-        sizes: R
-      });
-    } else {
-      var n;
-      null == (n = j.sources) || n.push({
-        srcSet: f(t),
-        sizes: R,
-        type: "image/" + e
-      });
-    }
-  });
-  var _ = {
-    images: j,
-    layout: o,
-    backgroundColor: N
-  };
-  switch (x && (_.placeholder = {
-    fallback: x
-  }), o) {
-    case "fixed":
-      _.width = W.presentationWidth, _.height = W.presentationHeight;
-      break;
-    case "fullWidth":
-      _.width = 1, _.height = 1 / W.aspectRatio;
-      break;
-    case "constrained":
-      _.width = e.width || W.presentationWidth || 1, _.height = (_.width || 1) / W.aspectRatio;
-  }
-  return _;
-}
-var k = function (e) {
-  return Array.from(new Set([1].concat(e))).sort(p);
+const Footer = () => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
+    className: "p-10"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "footer"));
 };
-function E(e) {
-  var t,
-    a = e.sourceMetadata,
-    i = e.width,
-    r = e.height,
-    n = e.fit,
-    o = void 0 === n ? "cover" : n,
-    l = e.outputPixelDensities,
-    u = e.breakpoints,
-    c = e.layout,
-    h = a.width / a.height,
-    g = k(void 0 === l ? s : l);
-  if (i && r) {
-    var m = M(a, {
-      width: i,
-      height: r,
-      fit: o
-    });
-    i = m.width, r = m.height, h = m.aspectRatio;
-  }
-  i = i && Math.min(i, a.width), r = r && Math.min(r, a.height), i || r || (r = (i = Math.min(d, a.width)) / h), i || (i = r * h);
-  var f = i;
-  return (a.width < i || a.height < r) && (i = a.width, r = a.height), i = Math.round(i), (null == u ? void 0 : u.length) > 0 ? (t = u.filter(function (e) {
-    return e <= a.width;
-  })).length < u.length && !t.includes(a.width) && t.push(a.width) : t = (t = g.map(function (e) {
-    return Math.round(e * i);
-  })).filter(function (e) {
-    return e <= a.width;
-  }), "constrained" !== c || t.includes(i) || t.push(i), {
-    sizes: t = t.sort(p),
-    aspectRatio: h,
-    presentationWidth: f,
-    presentationHeight: Math.round(f / h),
-    unscaledWidth: i
-  };
-}
-function M(e, t) {
-  var a = e.width / e.height,
-    i = t.width,
-    r = t.height;
-  switch (t.fit) {
-    case "fill":
-      i = t.width ? t.width : e.width, r = t.height ? t.height : e.height;
-      break;
-    case "inside":
-      var n = t.width ? t.width : Number.MAX_SAFE_INTEGER,
-        o = t.height ? t.height : Number.MAX_SAFE_INTEGER;
-      i = Math.min(n, Math.round(o * a)), r = Math.min(o, Math.round(n / a));
-      break;
-    case "outside":
-      var s = t.width ? t.width : 0,
-        l = t.height ? t.height : 0;
-      i = Math.max(s, Math.round(l * a)), r = Math.max(l, Math.round(s / a));
-      break;
-    default:
-      t.width && !t.height && (i = t.width, r = Math.round(t.width / a)), t.height && !t.width && (i = Math.round(t.height * a), r = t.height);
-  }
-  return {
-    width: i,
-    height: r,
-    aspectRatio: i / r
-  };
-}
-var S = ["baseUrl", "urlBuilder", "sourceWidth", "sourceHeight", "pluginName", "formats", "breakpoints", "options"],
-  N = ["images", "placeholder"];
-function x() {
-  return "undefined" != typeof GATSBY___IMAGE && GATSBY___IMAGE;
-}
-var I = function (e) {
-    var t;
-    return function (e) {
-      var t, a;
-      return Boolean(null == e || null == (t = e.images) || null == (a = t.fallback) ? void 0 : a.src);
-    }(e) ? e : function (e) {
-      return Boolean(null == e ? void 0 : e.gatsbyImageData);
-    }(e) ? e.gatsbyImageData : function (e) {
-      return Boolean(null == e ? void 0 : e.gatsbyImage);
-    }(e) ? e.gatsbyImage : null == e || null == (t = e.childImageSharp) ? void 0 : t.gatsbyImageData;
-  },
-  W = function (e) {
-    var t, a, i;
-    return null == (t = I(e)) || null == (a = t.images) || null == (i = a.fallback) ? void 0 : i.src;
-  },
-  j = function (e) {
-    var t, a, i;
-    return null == (t = I(e)) || null == (a = t.images) || null == (i = a.fallback) ? void 0 : i.srcSet;
-  };
-function R(e) {
-  var t,
-    a = e.baseUrl,
-    i = e.urlBuilder,
-    r = e.sourceWidth,
-    s = e.sourceHeight,
-    l = e.pluginName,
-    d = void 0 === l ? "getImageData" : l,
-    c = e.formats,
-    h = void 0 === c ? ["auto"] : c,
-    g = e.breakpoints,
-    p = e.options,
-    m = o(e, S);
-  return null != (t = g) && t.length || "fullWidth" !== m.layout && "FULL_WIDTH" !== m.layout || (g = u), b(n({}, m, {
-    pluginName: d,
-    generateImageSource: function (e, t, a, r) {
-      return {
-        width: t,
-        height: a,
-        format: r,
-        src: i({
-          baseUrl: e,
-          width: t,
-          height: a,
-          options: p,
-          format: r
-        })
-      };
-    },
-    filename: a,
-    formats: h,
-    breakpoints: g,
-    sourceMetadata: {
-      width: r,
-      height: s,
-      format: "auto"
-    }
-  }));
-}
-function _(e, t) {
-  var a,
-    i,
-    r,
-    s = e.images,
-    l = e.placeholder,
-    u = n({}, o(e, N), {
-      images: n({}, s, {
-        sources: []
-      }),
-      placeholder: l && n({}, l, {
-        sources: []
-      })
-    });
-  return t.forEach(function (t) {
-    var a,
-      i = t.media,
-      r = t.image;
-    i ? (r.layout !== e.layout && "development" === "development" && console.warn('[gatsby-plugin-image] Mismatched image layout: expected "' + e.layout + '" but received "' + r.layout + '". All art-directed images use the same layout as the default image'), (a = u.images.sources).push.apply(a, r.images.sources.map(function (e) {
-      return n({}, e, {
-        media: i
-      });
-    }).concat([{
-      media: i,
-      srcSet: r.images.fallback.srcSet
-    }])), u.placeholder && u.placeholder.sources.push({
-      media: i,
-      srcSet: r.placeholder.fallback
-    })) :  true && console.warn("[gatsby-plugin-image] All art-directed images passed to must have a value set for `media`. Skipping.");
-  }), (a = u.images.sources).push.apply(a, s.sources), null != l && l.sources && (null == (i = u.placeholder) || (r = i.sources).push.apply(r, l.sources)), u;
-}
-var A,
-  O = ["src", "srcSet", "loading", "alt", "shouldLoad"],
-  T = ["fallback", "sources", "shouldLoad"],
-  z = function (t) {
-    var a = t.src,
-      i = t.srcSet,
-      r = t.loading,
-      s = t.alt,
-      l = void 0 === s ? "" : s,
-      u = t.shouldLoad,
-      d = o(t, O);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", n({}, d, {
-      decoding: "async",
-      loading: r,
-      src: u ? a : void 0,
-      "data-src": u ? void 0 : a,
-      srcSet: u ? i : void 0,
-      "data-srcset": u ? void 0 : i,
-      alt: l
-    }));
-  },
-  L = function (t) {
-    var a = t.fallback,
-      i = t.sources,
-      r = void 0 === i ? [] : i,
-      s = t.shouldLoad,
-      l = void 0 === s || s,
-      u = o(t, T),
-      d = u.sizes || (null == a ? void 0 : a.sizes),
-      c = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(z, n({}, u, a, {
-        sizes: d,
-        shouldLoad: l
-      }));
-    return r.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("picture", null, r.map(function (t) {
-      var a = t.media,
-        i = t.srcSet,
-        r = t.type;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("source", {
-        key: a + "-" + r + "-" + i,
-        type: r,
-        media: a,
-        srcSet: l ? i : void 0,
-        "data-srcset": l ? void 0 : i,
-        sizes: d
-      });
-    }), c) : c;
-  };
-z.propTypes = {
-  src: prop_types__WEBPACK_IMPORTED_MODULE_2__.string.isRequired,
-  alt: prop_types__WEBPACK_IMPORTED_MODULE_2__.string.isRequired,
-  sizes: prop_types__WEBPACK_IMPORTED_MODULE_2__.string,
-  srcSet: prop_types__WEBPACK_IMPORTED_MODULE_2__.string,
-  shouldLoad: prop_types__WEBPACK_IMPORTED_MODULE_2__.bool
-}, L.displayName = "Picture", L.propTypes = {
-  alt: prop_types__WEBPACK_IMPORTED_MODULE_2__.string.isRequired,
-  shouldLoad: prop_types__WEBPACK_IMPORTED_MODULE_2__.bool,
-  fallback: prop_types__WEBPACK_IMPORTED_MODULE_2__.exact({
-    src: prop_types__WEBPACK_IMPORTED_MODULE_2__.string.isRequired,
-    srcSet: prop_types__WEBPACK_IMPORTED_MODULE_2__.string,
-    sizes: prop_types__WEBPACK_IMPORTED_MODULE_2__.string
-  }),
-  sources: prop_types__WEBPACK_IMPORTED_MODULE_2__.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2__.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2__.exact({
-    media: prop_types__WEBPACK_IMPORTED_MODULE_2__.string.isRequired,
-    type: prop_types__WEBPACK_IMPORTED_MODULE_2__.string,
-    sizes: prop_types__WEBPACK_IMPORTED_MODULE_2__.string,
-    srcSet: prop_types__WEBPACK_IMPORTED_MODULE_2__.string.isRequired
-  }), prop_types__WEBPACK_IMPORTED_MODULE_2__.exact({
-    media: prop_types__WEBPACK_IMPORTED_MODULE_2__.string,
-    type: prop_types__WEBPACK_IMPORTED_MODULE_2__.string.isRequired,
-    sizes: prop_types__WEBPACK_IMPORTED_MODULE_2__.string,
-    srcSet: prop_types__WEBPACK_IMPORTED_MODULE_2__.string.isRequired
-  })]))
-};
-var q = ["fallback"],
-  C = function (t) {
-    var a = t.fallback,
-      i = o(t, q);
-    return a ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(L, n({}, i, {
-      fallback: {
-        src: a
-      },
-      "aria-hidden": !0,
-      alt: ""
-    })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", n({}, i));
-  };
-C.displayName = "Placeholder", C.propTypes = {
-  fallback: prop_types__WEBPACK_IMPORTED_MODULE_2__.string,
-  sources: null == (A = L.propTypes) ? void 0 : A.sources,
-  alt: function (e, t, a) {
-    return e[t] ? new Error("Invalid prop `" + t + "` supplied to `" + a + "`. Validation failed.") : null;
-  }
-};
-var D = function (t) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(L, n({}, t)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("noscript", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(L, n({}, t, {
-    shouldLoad: !0
-  }))));
-};
-D.displayName = "MainImage", D.propTypes = L.propTypes;
-var P = ["children"],
-  H = function () {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("script", {
-      type: "module",
-      dangerouslySetInnerHTML: {
-        __html: 'const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1,e.parentNode.parentNode.querySelector("[data-placeholder-image]").style.opacity=0)}}'
-      }
-    });
-  },
-  F = function (t) {
-    var a = t.layout,
-      i = t.width,
-      r = t.height;
-    return "fullWidth" === a ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      "aria-hidden": !0,
-      style: {
-        paddingTop: r / i * 100 + "%"
-      }
-    }) : "constrained" === a ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      style: {
-        maxWidth: i,
-        display: "block"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      alt: "",
-      role: "presentation",
-      "aria-hidden": "true",
-      src: "data:image/svg+xml;charset=utf-8,%3Csvg%20height='" + r + "'%20width='" + i + "'%20xmlns='http://www.w3.org/2000/svg'%20version='1.1'%3E%3C/svg%3E",
-      style: {
-        maxWidth: "100%",
-        display: "block",
-        position: "static"
-      }
-    })) : null;
-  },
-  B = function (a) {
-    var i = a.children,
-      r = o(a, P);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(F, n({}, r)), i, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(H, null));
-  },
-  G = ["as", "className", "class", "style", "image", "loading", "imgClassName", "imgStyle", "backgroundColor", "objectFit", "objectPosition"],
-  V = ["style", "className"],
-  U = function (e) {
-    return e.replace(/\n/g, "");
-  },
-  X = function (t) {
-    var a = t.as,
-      i = void 0 === a ? "div" : a,
-      r = t.className,
-      s = t.class,
-      l = t.style,
-      u = t.image,
-      d = t.loading,
-      c = void 0 === d ? "lazy" : d,
-      h = t.imgClassName,
-      g = t.imgStyle,
-      p = t.backgroundColor,
-      m = t.objectFit,
-      f = t.objectPosition,
-      v = o(t, G);
-    if (!u) return console.warn("[gatsby-plugin-image] Missing image prop"), null;
-    s && (r = s), g = n({
-      objectFit: m,
-      objectPosition: f,
-      backgroundColor: p
-    }, g);
-    var w = u.width,
-      y = u.height,
-      b = u.layout,
-      k = u.images,
-      E = u.placeholder,
-      M = u.backgroundColor,
-      S = function (e, t, a) {
-        var i = {},
-          r = "gatsby-image-wrapper";
-        return x() || (i.position = "relative", i.overflow = "hidden"), "fixed" === a ? (i.width = e, i.height = t) : "constrained" === a && (x() || (i.display = "inline-block", i.verticalAlign = "top"), r = "gatsby-image-wrapper gatsby-image-wrapper-constrained"), {
-          className: r,
-          "data-gatsby-image-wrapper": "",
-          style: i
-        };
-      }(w, y, b),
-      N = S.style,
-      I = S.className,
-      W = o(S, V),
-      j = {
-        fallback: void 0,
-        sources: []
-      };
-    return k.fallback && (j.fallback = n({}, k.fallback, {
-      srcSet: k.fallback.srcSet ? U(k.fallback.srcSet) : void 0
-    })), k.sources && (j.sources = k.sources.map(function (e) {
-      return n({}, e, {
-        srcSet: U(e.srcSet)
-      });
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(i, n({}, W, {
-      style: n({}, N, l, {
-        backgroundColor: p
-      }),
-      className: I + (r ? " " + r : "")
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(B, {
-      layout: b,
-      width: w,
-      height: y
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(C, n({}, function (e, t, a, i, r, o, s, l) {
-      var u = {};
-      o && (u.backgroundColor = o, "fixed" === a ? (u.width = i, u.height = r, u.backgroundColor = o, u.position = "relative") : ("constrained" === a || "fullWidth" === a) && (u.position = "absolute", u.top = 0, u.left = 0, u.bottom = 0, u.right = 0)), s && (u.objectFit = s), l && (u.objectPosition = l);
-      var d = n({}, e, {
-        "aria-hidden": !0,
-        "data-placeholder-image": "",
-        style: n({
-          opacity: 1,
-          transition: "opacity 500ms linear"
-        }, u)
-      });
-      return x() || (d.style = {
-        height: "100%",
-        left: 0,
-        position: "absolute",
-        top: 0,
-        width: "100%"
-      }), d;
-    }(E, 0, b, w, y, M, m, f))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(D, n({
-      "data-gatsby-image-ssr": "",
-      className: h
-    }, v, function (e, t, a, i, r) {
-      return void 0 === r && (r = {}), x() || (r = n({
-        height: "100%",
-        left: 0,
-        position: "absolute",
-        top: 0,
-        transform: "translateZ(0)",
-        transition: "opacity 250ms linear",
-        width: "100%",
-        willChange: "opacity"
-      }, r)), n({}, a, {
-        loading: i,
-        shouldLoad: e,
-        "data-main-image": "",
-        style: n({}, r, {
-          opacity: 0
-        })
-      });
-    }("eager" === c, 0, j, c, g)))));
-  },
-  Y = ["src", "__imageData", "__error", "width", "height", "aspectRatio", "tracedSVGOptions", "placeholder", "formats", "quality", "transformOptions", "jpgOptions", "pngOptions", "webpOptions", "avifOptions", "blurredOptions", "breakpoints", "outputPixelDensities"],
-  Z = function (t) {
-    return function (a) {
-      var i = a.src,
-        r = a.__imageData,
-        s = a.__error,
-        l = o(a, Y);
-      return s && console.warn(s), r ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(t, n({
-        image: r
-      }, l)) : (console.warn("Image not loaded", i), s || "development" !== "development" || console.warn('Please ensure that "gatsby-plugin-image" is included in the plugins array in gatsby-config.js, and that your version of gatsby is at least 2.24.78'), null);
-    };
-  }(X),
-  J = function (e, t) {
-    return "fullWidth" !== e.layout || "width" !== t && "height" !== t || !e[t] ? prop_types__WEBPACK_IMPORTED_MODULE_2___default().number.apply((prop_types__WEBPACK_IMPORTED_MODULE_2___default()), [e, t].concat([].slice.call(arguments, 2))) : new Error('"' + t + '" ' + e[t] + " may not be passed when layout is fullWidth.");
-  },
-  K = new Set(["fixed", "fullWidth", "constrained"]),
-  Q = {
-    src: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string).isRequired,
-    alt: function (e, t, a) {
-      return e.alt || "" === e.alt ? prop_types__WEBPACK_IMPORTED_MODULE_2___default().string.apply((prop_types__WEBPACK_IMPORTED_MODULE_2___default()), [e, t, a].concat([].slice.call(arguments, 3))) : new Error('The "alt" prop is required in ' + a + '. If the image is purely presentational then pass an empty string: e.g. alt="". Learn more: https://a11y-style-guide.com/style-guide/section-media.html');
-    },
-    width: J,
-    height: J,
-    sizes: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
-    layout: function (e) {
-      if (void 0 !== e.layout && !K.has(e.layout)) return new Error("Invalid value " + e.layout + '" provided for prop "layout". Defaulting to "constrained". Valid values are "fixed", "fullWidth" or "constrained".');
-    }
-  };
-Z.displayName = "StaticImage", Z.propTypes = Q;
-
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Footer);
 
 /***/ }),
 
-/***/ "./src/components/header.js":
-/*!**********************************!*\
-  !*** ./src/components/header.js ***!
-  \**********************************/
+/***/ "./src/components/header/hamburger.js":
+/*!********************************************!*\
+  !*** ./src/components/header/hamburger.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _images_hamburger_icon_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../images/hamburger_icon.svg */ "./src/images/hamburger_icon.svg");
+/* harmony import */ var _images_hamburger_icon_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_images_hamburger_icon_svg__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _images_close_icon_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../images/close_icon.svg */ "./src/images/close_icon.svg");
+/* harmony import */ var _images_close_icon_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_images_close_icon_svg__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/value/use-scroll.mjs");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/value/use-transform.mjs");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
+
+
+
+
+const Hamburger = ({
+  toggleMenu,
+  isOpen
+}) => {
+  const {
+    scrollY
+  } = (0,framer_motion__WEBPACK_IMPORTED_MODULE_3__.useScroll)();
+  const width = (0,framer_motion__WEBPACK_IMPORTED_MODULE_4__.useTransform)(scrollY, [0, 100], [30, 25.2]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_5__.motion.button, {
+    className: "stroke-black w-9 h-8 self-center hover:fill-orange-600 hover:stroke-orange-600",
+    style: {
+      width
+    },
+    onClick: toggleMenu
+  }, isOpen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_close_icon_svg__WEBPACK_IMPORTED_MODULE_2___default()), null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_hamburger_icon_svg__WEBPACK_IMPORTED_MODULE_1___default()), null));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Hamburger);
+
+/***/ }),
+
+/***/ "./src/components/header/header.js":
+/*!*****************************************!*\
+  !*** ./src/components/header/header.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./menu */ "./src/components/header/menu.js");
+/* harmony import */ var _mobileMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mobileMenu */ "./src/components/header/mobileMenu.js");
+
+
+
+const Header = () => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fixed top-0 w-full"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "max-md:hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_menu__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "md:hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mobileMenu__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Header);
+
+/***/ }),
+
+/***/ "./src/components/header/menu.js":
+/*!***************************************!*\
+  !*** ./src/components/header/menu.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -833,116 +114,291 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
-/* harmony import */ var gatsby_plugin_image__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gatsby-plugin-image */ "./node_modules/gatsby-plugin-image/dist/gatsby-image.module.js");
-/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/value/use-scroll.mjs");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/value/use-transform.mjs");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
+/* harmony import */ var _navItem_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navItem.js */ "./src/components/header/navItem.js");
+/* harmony import */ var _images_quit_your_addiction_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../images/quit-your-addiction-logo.svg */ "./src/images/quit-your-addiction-logo.svg");
+/* harmony import */ var _images_quit_your_addiction_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_images_quit_your_addiction_logo_svg__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _images_search_icon_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../images/search_icon.svg */ "./src/images/search_icon.svg");
+/* harmony import */ var _images_search_icon_svg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_images_search_icon_svg__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _images_email_icon_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../images/email_icon.svg */ "./src/images/email_icon.svg");
+/* harmony import */ var _images_email_icon_svg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_images_email_icon_svg__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
-const Header = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-    className: "md:flex md:flex-col md:items-center p-10"
-  }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "flex justify-between items-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "mb-10"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby_plugin_image__WEBPACK_IMPORTED_MODULE_2__.StaticImage, {
-    src: "../images/quityouraddiction_logo.png",
-    alt: "logo",
-    __imageData: __webpack_require__(/*! ./.cache/caches/gatsby-plugin-image/2642326661.json */ "./.cache/caches/gatsby-plugin-image/2642326661.json")
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "mb-10 md:hidden lg:hidden"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby_plugin_image__WEBPACK_IMPORTED_MODULE_2__.StaticImage, {
-    src: "../images/hamburger_icon.png",
-    alt: "hamburger",
-    __imageData: __webpack_require__(/*! ./.cache/caches/gatsby-plugin-image/1921112257.json */ "./.cache/caches/gatsby-plugin-image/1921112257.json")
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-    className: "hidden whitespace-nowrap md:flex list-none font-semibold items-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+
+
+
+const Menu = () => {
+  const {
+    scrollY
+  } = (0,framer_motion__WEBPACK_IMPORTED_MODULE_6__.useScroll)();
+  const marginTop = (0,framer_motion__WEBPACK_IMPORTED_MODULE_7__.useTransform)(scrollY, [0, 100], [0, -40]);
+  const width = (0,framer_motion__WEBPACK_IMPORTED_MODULE_7__.useTransform)(scrollY, [0, 100], [100, 0]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex flex-col items-center justify-center p-5 bg-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_8__.motion.div, {
+    style: {
+      width
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/"
-  }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_quit_your_addiction_logo_svg__WEBPACK_IMPORTED_MODULE_3___default()), null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_8__.motion.div, {
+    style: {
+      marginTop
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+    className: "flex whitespace-nowrap items-center gap-7 mt-10"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
     to: "/"
-  }, "Resources")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
     to: "/"
-  }, "Addiction 101")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, "Resources"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
     to: "/"
-  }, "Recovery Process")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, "Addiction 101"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
     to: "/"
-  }, "Inspiration")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: "/about"
-  }, "About")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "bg-orange-500 p-2 rounded-xl"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    className: "mx-3 my-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby_plugin_image__WEBPACK_IMPORTED_MODULE_2__.StaticImage, {
-    src: "../images/search_icon.png",
-    __imageData: __webpack_require__(/*! ./.cache/caches/gatsby-plugin-image/3736608665.json */ "./.cache/caches/gatsby-plugin-image/3736608665.json")
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    className: "mx-1 my-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby_plugin_image__WEBPACK_IMPORTED_MODULE_2__.StaticImage, {
-    src: "../images/email_icon.png",
-    __imageData: __webpack_require__(/*! ./.cache/caches/gatsby-plugin-image/1157632170.json */ "./.cache/caches/gatsby-plugin-image/1157632170.json")
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "md:hidden bg-mobile-menu-bg bg-cover h-screen w-screen fixed top-0 left-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-    className: "flex flex-col list-none font-semibold items-center gap-4 text-white justify-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_3__.motion.li, {
+  }, "Recovery Process"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    to: "/"
+  }, "Inspiration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    to: "/"
+  }, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-orange-500 p-2 shadow-md rounded-xl flex gap-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_8__.motion.button, {
+    whileHover: {
+      scale: 1.1
+    },
+    className: "fill-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_search_icon_svg__WEBPACK_IMPORTED_MODULE_4___default()), null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_8__.motion.button, {
+    whileHover: {
+      scale: 1.1
+    },
+    className: "fill-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_email_icon_svg__WEBPACK_IMPORTED_MODULE_5___default()), null))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Menu);
+
+/***/ }),
+
+/***/ "./src/components/header/mobileMenu.js":
+/*!*********************************************!*\
+  !*** ./src/components/header/mobileMenu.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+/* harmony import */ var _hamburger_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hamburger.js */ "./src/components/header/hamburger.js");
+/* harmony import */ var _navItem_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./navItem.js */ "./src/components/header/navItem.js");
+/* harmony import */ var _socialmedial_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./socialmedial.js */ "./src/components/header/socialmedial.js");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/value/use-scroll.mjs");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/value/use-transform.mjs");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs");
+/* harmony import */ var _images_search_icon_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../images/search_icon.svg */ "./src/images/search_icon.svg");
+/* harmony import */ var _images_search_icon_svg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_images_search_icon_svg__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _images_email_icon_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../images/email_icon.svg */ "./src/images/email_icon.svg");
+/* harmony import */ var _images_email_icon_svg__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_images_email_icon_svg__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _images_quit_your_addiction_logo_svg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../images/quit-your-addiction-logo.svg */ "./src/images/quit-your-addiction-logo.svg");
+/* harmony import */ var _images_quit_your_addiction_logo_svg__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_images_quit_your_addiction_logo_svg__WEBPACK_IMPORTED_MODULE_7__);
+
+// import Logo from "./logo.js";
+
+
+
+
+
+
+
+
+const MobileMenu = () => {
+  const {
+    0: isOpen,
+    1: setIsOpen
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const menuRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+    console.log(isOpen);
+  };
+  const {
+    scrollY
+  } = (0,framer_motion__WEBPACK_IMPORTED_MODULE_8__.useScroll)();
+  const width = (0,framer_motion__WEBPACK_IMPORTED_MODULE_9__.useTransform)(scrollY, [0, 100], [112, 78.4]);
+  const padding = (0,framer_motion__WEBPACK_IMPORTED_MODULE_9__.useTransform)(scrollY, [0, 100], [40, 28]);
+  const handleClickOutside = event => {
+    if (isOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsOpen(false);
+      console.log(isOpen);
+    }
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    window.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fixed w-full"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_10__.motion.div, {
+    className: "bg-white flex justify-between p-10",
+    style: {
+      padding
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_10__.motion.div, {
+    style: {
+      width
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_quit_your_addiction_logo_svg__WEBPACK_IMPORTED_MODULE_7___default()), {
+    key: "mobile"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_hamburger_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    toggleMenu: toggleMenu,
+    isOpen: isOpen
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_11__.AnimatePresence, null, isOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_10__.motion.div, {
     initial: {
       opacity: 0,
-      x: -200
+      y: -20
     },
     animate: {
       opacity: 1,
-      x: 0
+      y: 0
     },
     exit: {
       opacity: 0,
-      x: 200
+      y: -20
     },
     transition: {
-      type: "spring",
-      mass: 0.35,
-      stiffness: 75,
       duration: 0.3
     },
-    className: "border-b-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    ref: menuRef,
+    className: "flex justify-between bg-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "self-center p-7"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_socialmedial_js__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_10__.motion.nav, {
+    className: "flex justify-end text-right "
+
+    // style={{ padding }}
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_10__.motion.ul, {
+    className: "flex flex-col gap-5 p-7"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
     to: "/"
-  }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
     to: "/"
-  }, "Resources")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, "Resources"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
     to: "/"
-  }, "Addiction 101")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, "Addiction 101"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
     to: "/"
-  }, "Recovery Process")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, "Recovery Process"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
     to: "/"
-  }, "Inspiration")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+  }, "Inspiration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navItem_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
     to: "/about"
-  }, "About")))));
+  }, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex justify-end gap-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_search_icon_svg__WEBPACK_IMPORTED_MODULE_5___default()), {
+    className: "fill-orange-500"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_email_icon_svg__WEBPACK_IMPORTED_MODULE_6___default()), {
+    className: "fill-orange-500"
+  }))))))));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Header);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MobileMenu);
+
+/***/ }),
+
+/***/ "./src/components/header/navItem.js":
+/*!******************************************!*\
+  !*** ./src/components/header/navItem.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
+
+
+
+const NavItem = ({
+  to,
+  children
+}) => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_2__.motion.li, {
+    className: "text-sm font-semibold ",
+    whileHover: {
+      scale: 1.1
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: to
+  }, children));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavItem);
+
+/***/ }),
+
+/***/ "./src/components/header/socialmedial.js":
+/*!***********************************************!*\
+  !*** ./src/components/header/socialmedial.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
+/* harmony import */ var _images_facebook_icon_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../images/facebook_icon.svg */ "./src/images/facebook_icon.svg");
+/* harmony import */ var _images_facebook_icon_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_images_facebook_icon_svg__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _images_insta_icon_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../images/insta_icon.svg */ "./src/images/insta_icon.svg");
+/* harmony import */ var _images_insta_icon_svg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_images_insta_icon_svg__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _images_x_icon_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../images/x_icon.svg */ "./src/images/x_icon.svg");
+/* harmony import */ var _images_x_icon_svg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_images_x_icon_svg__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const ScocialMediaIcons = () => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+    className: "flex flex-col gap-10 self-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_5__.motion.li, {
+    whileHover: {
+      scale: 1.2
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_facebook_icon_svg__WEBPACK_IMPORTED_MODULE_2___default()), null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_5__.motion.li, {
+    whileHover: {
+      scale: 1.2
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_insta_icon_svg__WEBPACK_IMPORTED_MODULE_3___default()), null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(framer_motion__WEBPACK_IMPORTED_MODULE_5__.motion.li, {
+    whileHover: {
+      scale: 1.2
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_images_x_icon_svg__WEBPACK_IMPORTED_MODULE_4___default()), null))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScocialMediaIcons);
 
 /***/ }),
 
@@ -952,26 +408,30 @@ const Header = () => {
   \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header */ "./src/components/header.js");
+/* harmony import */ var _header_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header/header */ "./src/components/header/header.js");
+/* harmony import */ var _footer_footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./footer/footer */ "./src/components/footer/footer.js");
 
 
-// import { container, body } from "./layout.module.css";
 
 const Layout = ({
-  pageTitle,
   children
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "bg-[#FBFBFB]"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_header__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    className: "grid text-center content-center h-screen"
-  }, pageTitle));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: ""
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: ""
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_header_header__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "mt-52"
+  }, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_footer_footer__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "h-16"
+  }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Layout);
 
@@ -983,6 +443,7 @@ const Layout = ({
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Head: () => (/* binding */ Head),
@@ -991,15 +452,185 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layout */ "./src/components/layout.js");
+/* harmony import */ var _components_header_socialmedial__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/header/socialmedial */ "./src/components/header/socialmedial.js");
+
 
 
 const AboutPage = () => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_layout__WEBPACK_IMPORTED_MODULE_1__["default"], {
     pageTitle: "About Us"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "This is our about page."));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "This is our about page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_header_socialmedial__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 const Head = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("title", null, "About Us");
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AboutPage);
+
+/***/ }),
+
+/***/ "./src/images/close_icon.svg":
+/*!***********************************!*\
+  !*** ./src/images/close_icon.svg ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "react");
+
+function CloseIcon (props) {
+    return React.createElement("svg",props,React.createElement("path",{"d":"M15.0171 19.0598L25.12 29.1628C25.6561 29.6989 26.3832 30 27.1414 30C27.8995 30 28.6266 29.6989 29.1627 29.1628C29.6988 28.6267 30 27.8996 30 27.1414C30 26.3833 29.6988 25.6562 29.1627 25.1201L19.056 15.0171L29.1608 4.91418C29.4261 4.64873 29.6366 4.33362 29.7801 3.98685C29.9237 3.64007 29.9975 3.26842 29.9974 2.8931C29.9973 2.51779 29.9233 2.14617 29.7796 1.79947C29.6359 1.45276 29.4253 1.13775 29.1599 0.872428C28.8944 0.607105 28.5793 0.396665 28.2325 0.253121C27.8858 0.109578 27.5141 0.0357422 27.1388 0.0358306C26.7635 0.0359191 26.3919 0.109929 26.0452 0.253636C25.6985 0.397343 25.3834 0.607933 25.1181 0.873381L15.0171 10.9763L4.91414 0.873381C4.65066 0.600319 4.33543 0.382467 3.98685 0.232535C3.63827 0.0826036 3.26332 0.00359478 2.88388 0.00011984C2.50443 -0.0033551 2.1281 0.0687728 1.77683 0.212295C1.42557 0.355817 1.1064 0.56786 0.837955 0.83605C0.569512 1.10424 0.357169 1.42321 0.213316 1.77434C0.069462 2.12547 -0.00302071 2.50174 9.64319e-05 2.88118C0.00321357 3.26063 0.0818679 3.63565 0.231471 3.98437C0.381074 4.33309 0.598628 4.64853 0.871441 4.91227L10.9782 15.0171L0.873347 25.122C0.600534 25.3857 0.382979 25.7011 0.233377 26.0499C0.0837738 26.3986 0.00511857 26.7736 0.00200143 27.1531C-0.00111571 27.5325 0.071367 27.9088 0.215221 28.2599C0.359074 28.611 0.571417 28.93 0.83986 29.1982C1.1083 29.4664 1.42747 29.6784 1.77874 29.8219C2.13001 29.9655 2.50634 30.0376 2.88578 30.0341C3.26522 30.0306 3.64017 29.9516 3.98875 29.8017C4.33733 29.6518 4.65256 29.4339 4.91605 29.1609L15.0171 19.0617V19.0598Z","strokeWidth":"0"}));
+}
+
+CloseIcon.defaultProps = {"viewBox":"0 0 30 31"};
+
+module.exports = CloseIcon;
+
+CloseIcon.default = CloseIcon;
+
+
+/***/ }),
+
+/***/ "./src/images/email_icon.svg":
+/*!***********************************!*\
+  !*** ./src/images/email_icon.svg ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "react");
+
+function EmailIcon (props) {
+    return React.createElement("svg",props,React.createElement("g",{"id":"email_icon"},React.createElement("path",{"id":"Vector","d":"M0 5.91361V12.5939C0 13.774 0.395088 14.9058 1.09835 15.7402C1.80161 16.5747 2.75544 17.0435 3.75 17.0435H16.25C17.2446 17.0435 18.1984 16.5747 18.9017 15.7402C19.6049 14.9058 20 13.774 20 12.5939V5.91361L10.5125 10.9802C10.3514 11.0662 10.1767 11.1106 10 11.1106C9.82332 11.1106 9.64865 11.0662 9.4875 10.9802L0 5.91361ZM0.092428 4.42129L5.04618 7.0673L9.99993 9.71332L19.9074 4.42129C19.7192 3.43726 19.2547 2.55836 18.5901 1.9288C17.9255 1.29924 17.1003 0.956407 16.2499 0.956543H3.74993C2.89952 0.956407 2.07433 1.29924 1.40975 1.9288C0.745162 2.55836 0.280651 3.43726 0.092428 4.42129Z"})));
+}
+
+EmailIcon.defaultProps = {"width":"20","height":"18","viewBox":"0 0 20 18"};
+
+module.exports = EmailIcon;
+
+EmailIcon.default = EmailIcon;
+
+
+/***/ }),
+
+/***/ "./src/images/facebook_icon.svg":
+/*!**************************************!*\
+  !*** ./src/images/facebook_icon.svg ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "react");
+
+function FacebookIcon (props) {
+    return React.createElement("svg",props,[React.createElement("path",{"d":"M17.7787 0H2.22125C1.63267 0.00172018 1.06868 0.236289 0.65249 0.652483C0.236296 1.06868 0.00172018 1.63266 0 2.22125V17.7787C0.00172018 18.3673 0.236296 18.9313 0.65249 19.3475C1.06868 19.7637 1.63267 19.9983 2.22125 20H10V12.2213H7.77874V9.47184H10V7.19408C10 4.79026 11.3475 3.10149 14.1839 3.10149H16.1878V5.99651H14.8576C13.7535 5.99651 13.3362 6.8246 13.3362 7.594V9.47184H16.19L15.5488 12.2213H13.3341V20H17.7787C18.3673 19.9983 18.9313 19.7637 19.3475 19.3475C19.7637 18.9313 19.9983 18.3673 20 17.7787V2.22125C19.9983 1.63266 19.7637 1.06868 19.3475 0.652483C18.9313 0.236289 18.3673 0.00172018 17.7787 0ZM19.348 17.7787C19.3474 18.1947 19.1819 18.5935 18.8877 18.8877C18.5936 19.1819 18.1948 19.3474 17.7787 19.348H13.9861V12.8733H16.0748L16.19 12.3669L16.8224 9.61964L17.0072 8.82199H13.9861V7.59616C13.9861 7.24189 14.0991 6.65072 14.8555 6.65072H16.8376V2.45163H14.1839C11.1563 2.45163 9.34797 4.22516 9.34797 7.19626V8.82199H7.12671V12.8755H9.34797V19.3501H2.22125C1.80525 19.3496 1.40644 19.184 1.11228 18.8899C0.818118 18.5957 0.652607 18.1969 0.652032 17.7809V2.22125C0.652607 1.80524 0.818118 1.40643 1.11228 1.11227C1.40644 0.818108 1.80525 0.652607 2.22125 0.652032H17.7787C18.1948 0.652607 18.5936 0.818108 18.8877 1.11227C19.1819 1.40643 19.3474 1.80524 19.348 2.22125V17.7787Z","fill":"#E27023","key":0}),React.createElement("path",{"d":"M17.7787 0H2.22125C1.63267 0.00172018 1.06868 0.236289 0.65249 0.652483C0.236296 1.06868 0.00172018 1.63266 0 2.22125V17.7787C0.00172018 18.3673 0.236296 18.9313 0.65249 19.3475C1.06868 19.7637 1.63267 19.9983 2.22125 20H10V12.2213H7.77874V9.47184H10V7.19408C10 4.79026 11.3475 3.10149 14.1839 3.10149H16.1878V5.99651H14.8576C13.7535 5.99651 13.3362 6.8246 13.3362 7.594V9.47184H16.19L15.5488 12.2213H13.3341V20H17.7787C18.3673 19.9983 18.9313 19.7637 19.3475 19.3475C19.7637 18.9313 19.9983 18.3673 20 17.7787V2.22125C19.9983 1.63266 19.7637 1.06868 19.3475 0.652483C18.9313 0.236289 18.3673 0.00172018 17.7787 0ZM19.348 17.7787C19.3474 18.1947 19.1819 18.5935 18.8877 18.8877C18.5936 19.1819 18.1948 19.3474 17.7787 19.348H13.9861V12.8733H16.0748L16.19 12.3669L16.8224 9.61964L17.0072 8.82199H13.9861V7.59616C13.9861 7.24189 14.0991 6.65072 14.8555 6.65072H16.8376V2.45163H14.1839C11.1563 2.45163 9.34797 4.22516 9.34797 7.19626V8.82199H7.12671V12.8755H9.34797V19.3501H2.22125C1.80525 19.3496 1.40644 19.184 1.11228 18.8899C0.818118 18.5957 0.652607 18.1969 0.652032 17.7809V2.22125C0.652607 1.80524 0.818118 1.40643 1.11228 1.11227C1.40644 0.818108 1.80525 0.652607 2.22125 0.652032H17.7787C18.1948 0.652607 18.5936 0.818108 18.8877 1.11227C19.1819 1.40643 19.3474 1.80524 19.348 2.22125V17.7787Z","fill":"black","key":1}),React.createElement("path",{"d":"M19.348 2.2212V17.7787C19.3474 18.1947 19.1819 18.5935 18.8877 18.8877C18.5936 19.1818 18.1948 19.3473 17.7788 19.3479H13.9861V12.8732H16.0748L16.19 12.3668L16.8224 9.61958L17.0072 8.82193H13.9861V7.59611C13.9861 7.24184 14.0991 6.65067 14.8555 6.65067H16.8376V2.45158H14.1839C11.1563 2.45158 9.34797 4.22511 9.34797 7.1962V8.82193H7.12672V12.8754H9.34797V19.3501H2.22126C1.80525 19.3495 1.40645 19.184 1.11229 18.8898C0.818124 18.5957 0.652614 18.1969 0.652039 17.7809V2.2212C0.652614 1.80519 0.818124 1.40638 1.11229 1.11222C1.40645 0.818053 1.80525 0.652553 2.22126 0.651978H17.7788C18.1948 0.652553 18.5936 0.818053 18.8877 1.11222C19.1819 1.40638 19.3474 1.80519 19.348 2.2212Z","fill":"#E27023","key":2})]);
+}
+
+FacebookIcon.defaultProps = {"width":"30","height":"30","viewBox":"0 0 20 20","fill":"none"};
+
+module.exports = FacebookIcon;
+
+FacebookIcon.default = FacebookIcon;
+
+
+/***/ }),
+
+/***/ "./src/images/hamburger_icon.svg":
+/*!***************************************!*\
+  !*** ./src/images/hamburger_icon.svg ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "react");
+
+function HamburgerIcon (props) {
+    return React.createElement("svg",props,React.createElement("path",{"d":"M3 3H8.625M33 3H16.125M33 21H27.375M3 21H19.875M3 12H33","strokeWidth":"5","strokeLinecap":"round"}));
+}
+
+HamburgerIcon.defaultProps = {"viewBox":"0 0 36 24"};
+
+module.exports = HamburgerIcon;
+
+HamburgerIcon.default = HamburgerIcon;
+
+
+/***/ }),
+
+/***/ "./src/images/insta_icon.svg":
+/*!***********************************!*\
+  !*** ./src/images/insta_icon.svg ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "react");
+
+function InstaIcon (props) {
+    return React.createElement("svg",props,[React.createElement("path",{"d":"M12.4538 8.9838C12.2522 8.49891 11.9116 8.08454 11.4749 7.79289C11.0383 7.50124 10.5251 7.34535 10 7.34485C9.60686 7.34421 9.21849 7.43085 8.8629 7.59854C8.50732 7.76623 8.19339 8.01078 7.94377 8.31454C7.69416 8.61829 7.51508 8.97368 7.41947 9.35505C7.32385 9.73642 7.31408 10.1343 7.39087 10.5199C7.46765 10.9055 7.62907 11.2692 7.86348 11.5849C8.09789 11.9005 8.39944 12.1602 8.74637 12.3451C9.0933 12.5301 9.47695 12.6357 9.86965 12.6543C10.2623 12.673 10.6543 12.6042 11.0172 12.453C11.3428 12.3215 11.6385 12.1255 11.8865 11.877C12.258 11.5058 12.5109 11.0328 12.6135 10.5178C12.716 10.0028 12.6635 9.46893 12.4625 8.9838H12.4538ZM11.8518 10.7662C11.7508 11.0099 11.6032 11.2314 11.4171 11.4183C11.2306 11.6049 11.009 11.7527 10.7651 11.8531C10.4002 12.0025 9.99936 12.0409 9.61276 11.9636C9.22616 11.8862 8.87095 11.6966 8.59161 11.4183C8.21786 11.0431 8.00802 10.5351 8.00802 10.0054C8.00802 9.4758 8.21786 8.96775 8.59161 8.59254C8.96762 8.22033 9.4753 8.01154 10.0043 8.01154C10.5334 8.01154 11.0411 8.22033 11.4171 8.59254C11.6953 8.87191 11.885 9.22715 11.9623 9.6138C12.0396 10.0004 12.0012 10.4013 11.8518 10.7662ZM12.4538 8.9838C12.2522 8.49891 11.9116 8.08454 11.4749 7.79289C11.0383 7.50124 10.5251 7.34535 10 7.34485C9.60686 7.34421 9.21849 7.43085 8.8629 7.59854C8.50732 7.76623 8.19339 8.01078 7.94377 8.31454C7.69416 8.61829 7.51508 8.97368 7.41947 9.35505C7.32385 9.73642 7.31408 10.1343 7.39087 10.5199C7.46765 10.9055 7.62907 11.2692 7.86348 11.5849C8.09789 11.9005 8.39944 12.1602 8.74637 12.3451C9.0933 12.5301 9.47695 12.6357 9.86965 12.6543C10.2623 12.673 10.6543 12.6042 11.0172 12.453C11.3428 12.3215 11.6385 12.1255 11.8865 11.877C12.258 11.5058 12.5109 11.0328 12.6135 10.5178C12.716 10.0028 12.6635 9.46893 12.4625 8.9838H12.4538ZM11.8518 10.7662C11.7508 11.0099 11.6032 11.2314 11.4171 11.4183C11.2306 11.6049 11.009 11.7527 10.7651 11.8531C10.4002 12.0025 9.99936 12.0409 9.61276 11.9636C9.22616 11.8862 8.87095 11.6966 8.59161 11.4183C8.21786 11.0431 8.00802 10.5351 8.00802 10.0054C8.00802 9.4758 8.21786 8.96775 8.59161 8.59254C8.96762 8.22033 9.4753 8.01154 10.0043 8.01154C10.5334 8.01154 11.0411 8.22033 11.4171 8.59254C11.6953 8.87191 11.885 9.22715 11.9623 9.6138C12.0396 10.0004 12.0012 10.4013 11.8518 10.7662ZM15.89 6.5971C16.2197 6.26733 16.4049 5.82008 16.4049 5.35375C16.4049 4.88742 16.2197 4.44019 15.89 4.11042C15.5603 3.7807 15.1131 3.59547 14.6468 3.59547C14.1805 3.59547 13.7333 3.7807 13.4036 4.11042C13.0747 4.44069 12.8895 4.88758 12.8885 5.35375C12.8886 5.53303 12.9165 5.71121 12.9711 5.88197C12.1075 5.25534 11.067 4.91962 10 4.92337C9.33318 4.92308 8.67283 5.05423 8.05672 5.30931C7.4406 5.56439 6.88078 5.93839 6.40927 6.40996C5.93776 6.88152 5.56378 7.4414 5.30874 8.05758C5.05369 8.67377 4.92256 9.33418 4.92284 10.0011C4.92099 10.6679 5.05143 11.3284 5.30662 11.9444C5.5618 12.5604 5.93666 13.1197 6.40948 13.5898C7.36231 14.5426 8.65262 15.0808 10 15.0875C11.3464 15.0869 12.6374 14.5518 13.5895 13.5996C14.5415 12.6475 15.0766 11.3563 15.0772 10.0098C15.0743 8.94406 14.7385 7.90588 14.1165 7.04053C14.2883 7.09365 14.467 7.12076 14.6468 7.12095C14.8785 7.12087 15.1078 7.07449 15.3213 6.98453C15.5348 6.89457 15.7281 6.76285 15.89 6.5971ZM14.4251 10.0011C14.4266 11.0242 14.0734 12.0162 13.4256 12.8081C12.7779 13.6001 11.8757 14.143 10.8727 14.3443C9.86968 14.5457 8.82789 14.3931 7.92473 13.9126C7.02158 13.432 6.31292 12.6532 5.91945 11.7087C5.52598 10.7643 5.47203 9.71266 5.76679 8.73292C6.06155 7.75317 6.68678 6.90592 7.53602 6.33544C8.38525 5.76496 9.40596 5.50653 10.4243 5.60418C11.4427 5.70183 12.3957 6.14952 13.1211 6.87099C13.5335 7.28137 13.861 7.76907 14.0847 8.30617C14.3085 8.84327 14.4242 9.41922 14.4251 10.0011ZM13.8644 6.13628C13.7096 5.98155 13.6042 5.78437 13.5615 5.5697C13.5187 5.35503 13.5406 5.13252 13.6244 4.93031C13.7082 4.7281 13.85 4.55528 14.032 4.43371C14.214 4.31214 14.428 4.24729 14.6468 4.24736C14.7921 4.24736 14.936 4.27598 15.0702 4.33158C15.2044 4.38718 15.3263 4.46868 15.4291 4.57142C15.5318 4.67416 15.6133 4.79613 15.6689 4.93036C15.7245 5.0646 15.7531 5.20846 15.7531 5.35375C15.7531 5.49905 15.7245 5.64292 15.6689 5.77716C15.6133 5.91139 15.5318 6.03336 15.4291 6.1361C15.3263 6.23884 15.2044 6.32034 15.0702 6.37594C14.936 6.43154 14.7921 6.46016 14.6468 6.46016C14.3535 6.45954 14.0723 6.34315 13.8644 6.13628ZM11.8779 8.13172C11.3796 7.63396 10.7043 7.35411 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.1333 11.6393 12.3291 11.3468 12.4627 11.0247C12.5962 10.7026 12.665 10.3574 12.665 10.0087C12.665 9.66001 12.5962 9.31475 12.4627 8.99267C12.3291 8.6706 12.1333 8.37803 11.8865 8.13172H11.8779ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM15.89 6.60579C16.2197 6.27602 16.4049 5.82879 16.4049 5.36246C16.4049 4.89612 16.2197 4.44888 15.89 4.11911C15.5603 3.78939 15.1131 3.60416 14.6468 3.60416C14.1805 3.60416 13.7333 3.78939 13.4036 4.11911C13.0747 4.44938 12.8895 4.89628 12.8885 5.36246C12.8886 5.54173 12.9165 5.7199 12.9711 5.89066C12.1075 5.26403 11.067 4.92832 10 4.93207C9.33318 4.93179 8.67283 5.06292 8.05672 5.318C7.4406 5.57308 6.88078 5.9471 6.40927 6.41866C5.93776 6.89023 5.56378 7.4501 5.30874 8.06628C5.05369 8.68247 4.92256 9.34288 4.92284 10.0098C4.92099 10.6766 5.05143 11.3371 5.30662 11.9531C5.5618 12.5691 5.93666 13.1284 6.40948 13.5985C7.36373 14.5481 8.65386 15.0831 10 15.0875C11.3464 15.0869 12.6374 14.5518 13.5895 13.5996C14.5415 12.6475 15.0766 11.3563 15.0772 10.0098C15.0743 8.94406 14.7385 7.90588 14.1165 7.04053C14.2883 7.09365 14.467 7.12076 14.6468 7.12095C14.8785 7.12087 15.1078 7.07449 15.3213 6.98453C15.5348 6.89457 15.7281 6.76285 15.89 6.5971V6.60579ZM14.4251 10.0098C14.4266 11.0329 14.0734 12.0249 13.4256 12.8168C12.7779 13.6088 11.8757 14.1516 10.8727 14.353C9.86968 14.5544 8.82789 14.4018 7.92473 13.9212C7.02158 13.4407 6.31292 12.6619 5.91945 11.7174C5.52598 10.773 5.47203 9.72136 5.76679 8.74162C6.06155 7.76187 6.68678 6.91461 7.53602 6.34413C8.38525 5.77365 9.40596 5.51522 10.4243 5.61287C11.4427 5.71052 12.3957 6.15821 13.1211 6.87968C13.9519 7.70638 14.4209 8.82895 14.4251 10.0011V10.0098ZM13.8644 6.14497C13.7096 5.99024 13.6042 5.79307 13.5615 5.5784C13.5187 5.36374 13.5406 5.14121 13.6244 4.939C13.7082 4.73679 13.85 4.56397 14.032 4.4424C14.214 4.32083 14.428 4.25598 14.6468 4.25605C14.9402 4.25605 15.2216 4.37262 15.4291 4.58011C15.6365 4.7876 15.7531 5.06902 15.7531 5.36246C15.7531 5.65589 15.6365 5.93731 15.4291 6.1448C15.2216 6.35229 14.9402 6.46885 14.6468 6.46885C14.3523 6.46593 14.0709 6.34634 13.8644 6.13628V6.14497ZM11.8779 8.13172C11.3796 7.63396 10.7043 7.35411 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.1333 11.6393 12.3291 11.3468 12.4627 11.0247C12.5962 10.7026 12.665 10.3574 12.665 10.0087C12.665 9.66001 12.5962 9.31475 12.4627 8.99267C12.3291 8.6706 12.1333 8.37803 11.8865 8.13172H11.8779ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM15.6792 0.00868993H4.3208C3.17636 0.00868761 2.07866 0.462761 1.2686 1.27128C0.458544 2.07979 0.0023027 3.17669 0 4.32126V15.6809C0.000576243 16.8266 0.456056 17.9252 1.2663 18.7351C2.07654 19.545 3.17523 20 4.3208 20H15.6792C16.8248 20 17.9235 19.545 18.7337 18.7351C19.5439 17.9252 19.9994 16.8266 20 15.6809V4.32126C19.9994 3.17536 19.544 2.07657 18.7338 1.2663C17.9236 0.456032 16.825 0.000575972 15.6792 0V0.00868993ZM19.348 15.6896C19.3462 16.662 18.9591 17.594 18.2714 18.2814C17.5837 18.9688 16.6515 19.3554 15.6792 19.3566H4.3208C3.83854 19.3563 3.36107 19.261 2.91565 19.0761C2.47024 18.8912 2.06562 18.6203 1.72492 18.279C1.38421 17.9376 1.1141 17.5325 0.930008 17.0867C0.745918 16.6409 0.651461 16.1632 0.652032 15.6809V4.32126C0.653183 3.34849 1.04008 2.41589 1.72786 1.72804C2.41564 1.04018 3.34813 0.653253 4.3208 0.652103H15.6792C16.6519 0.653253 17.5844 1.04018 18.2721 1.72804C18.9599 2.41589 19.3468 3.34849 19.348 4.32126V15.6896ZM14.6468 3.60416C14.4158 3.60311 14.1868 3.64791 13.9734 3.73636C13.7599 3.82482 13.5662 3.95493 13.4036 4.11911C13.0747 4.44938 12.8895 4.89628 12.8885 5.36246C12.8886 5.54173 12.9165 5.7199 12.9711 5.89066C12.1075 5.26403 11.067 4.92832 10 4.93207C9.33318 4.93179 8.67283 5.06292 8.05672 5.318C7.4406 5.57308 6.88078 5.9471 6.40927 6.41866C5.93776 6.89023 5.56378 7.4501 5.30874 8.06628C5.05369 8.68247 4.92256 9.34288 4.92284 10.0098C4.92099 10.6766 5.05143 11.3371 5.30662 11.9531C5.5618 12.5691 5.93666 13.1284 6.40948 13.5985C7.36373 14.5481 8.65386 15.0831 10 15.0875C11.3464 15.0869 12.6374 14.5518 13.5895 13.5996C14.5415 12.6475 15.0766 11.3563 15.0772 10.0098C15.0743 8.94406 14.7385 7.90588 14.1165 7.04053C14.2883 7.09365 14.467 7.12076 14.6468 7.12095C14.8779 7.122 15.1068 7.07699 15.3203 6.98853C15.5337 6.90008 15.7274 6.76997 15.89 6.60579C16.2197 6.27602 16.4049 5.82879 16.4049 5.36246C16.4049 4.89612 16.2197 4.44888 15.89 4.11911C15.7281 3.95336 15.5348 3.82164 15.3213 3.73168C15.1078 3.64172 14.8785 3.59555 14.6468 3.59547V3.60416ZM14.4295 10.0098C14.4309 11.0329 14.0777 12.0249 13.43 12.8168C12.7823 13.6088 11.8801 14.1516 10.877 14.353C9.87403 14.5544 8.83223 14.4018 7.92908 13.9212C7.02593 13.4407 6.31727 12.6619 5.9238 11.7174C5.53033 10.773 5.47638 9.72136 5.77114 8.74162C6.06589 7.76187 6.69113 6.91461 7.54037 6.34413C8.3896 5.77365 9.41031 5.51522 10.4287 5.61287C11.447 5.71052 12.4 6.15821 13.1254 6.87968C13.9547 7.70709 14.422 8.82958 14.4251 10.0011L14.4295 10.0098ZM15.4336 6.14497C15.2527 6.32601 15.0146 6.43871 14.7599 6.46386C14.5052 6.48901 14.2496 6.42507 14.0368 6.28291C13.8239 6.14076 13.667 5.92919 13.5926 5.68426C13.5182 5.43934 13.5311 5.17621 13.629 4.9397C13.7269 4.70319 13.9037 4.50793 14.1294 4.38721C14.3551 4.26648 14.6156 4.22775 14.8667 4.27761C15.1177 4.32747 15.3437 4.46284 15.5061 4.66065C15.6685 4.85847 15.7574 5.10649 15.7574 5.36246C15.7539 5.65348 15.636 5.93143 15.4293 6.13628L15.4336 6.14497ZM11.8779 8.13172C11.3796 7.63396 10.7043 7.35411 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.1333 11.6393 12.3291 11.3468 12.4627 11.0247C12.5962 10.7026 12.665 10.3574 12.665 10.0087C12.665 9.66001 12.5962 9.31475 12.4627 8.99267C12.3291 8.6706 12.1333 8.37803 11.8865 8.13172H11.8779ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM12.4538 8.9925C12.2522 8.50761 11.9116 8.09325 11.4749 7.80159C11.0383 7.50994 10.5251 7.35404 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.258 11.5145 12.5109 11.0415 12.6135 10.5265C12.716 10.0115 12.6635 9.47763 12.4625 8.9925H12.4538ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM12.4538 8.9925C12.2522 8.50761 11.9116 8.09325 11.4749 7.80159C11.0383 7.50994 10.5251 7.35404 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.258 11.5145 12.5109 11.0415 12.6135 10.5265C12.716 10.0115 12.6635 9.47763 12.4625 8.9925H12.4538ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749Z","fill":"#E27023","key":0}),React.createElement("path",{"d":"M12.4538 8.9838C12.2522 8.49891 11.9116 8.08454 11.4749 7.79289C11.0383 7.50124 10.5251 7.34535 10 7.34485C9.60686 7.34421 9.21849 7.43085 8.8629 7.59854C8.50732 7.76623 8.19339 8.01078 7.94377 8.31454C7.69416 8.61829 7.51508 8.97368 7.41947 9.35505C7.32385 9.73642 7.31408 10.1343 7.39087 10.5199C7.46765 10.9055 7.62907 11.2692 7.86348 11.5849C8.09789 11.9005 8.39944 12.1602 8.74637 12.3451C9.0933 12.5301 9.47695 12.6357 9.86965 12.6543C10.2623 12.673 10.6543 12.6042 11.0172 12.453C11.3428 12.3215 11.6385 12.1255 11.8865 11.877C12.258 11.5058 12.5109 11.0328 12.6135 10.5178C12.716 10.0028 12.6635 9.46893 12.4625 8.9838H12.4538ZM11.8518 10.7662C11.7508 11.0099 11.6032 11.2314 11.4171 11.4183C11.2306 11.6049 11.009 11.7527 10.7651 11.8531C10.4002 12.0025 9.99936 12.0409 9.61276 11.9636C9.22616 11.8862 8.87095 11.6966 8.59161 11.4183C8.21786 11.0431 8.00802 10.5351 8.00802 10.0054C8.00802 9.4758 8.21786 8.96775 8.59161 8.59254C8.96762 8.22033 9.4753 8.01154 10.0043 8.01154C10.5334 8.01154 11.0411 8.22033 11.4171 8.59254C11.6953 8.87191 11.885 9.22715 11.9623 9.6138C12.0396 10.0004 12.0012 10.4013 11.8518 10.7662ZM12.4538 8.9838C12.2522 8.49891 11.9116 8.08454 11.4749 7.79289C11.0383 7.50124 10.5251 7.34535 10 7.34485C9.60686 7.34421 9.21849 7.43085 8.8629 7.59854C8.50732 7.76623 8.19339 8.01078 7.94377 8.31454C7.69416 8.61829 7.51508 8.97368 7.41947 9.35505C7.32385 9.73642 7.31408 10.1343 7.39087 10.5199C7.46765 10.9055 7.62907 11.2692 7.86348 11.5849C8.09789 11.9005 8.39944 12.1602 8.74637 12.3451C9.0933 12.5301 9.47695 12.6357 9.86965 12.6543C10.2623 12.673 10.6543 12.6042 11.0172 12.453C11.3428 12.3215 11.6385 12.1255 11.8865 11.877C12.258 11.5058 12.5109 11.0328 12.6135 10.5178C12.716 10.0028 12.6635 9.46893 12.4625 8.9838H12.4538ZM11.8518 10.7662C11.7508 11.0099 11.6032 11.2314 11.4171 11.4183C11.2306 11.6049 11.009 11.7527 10.7651 11.8531C10.4002 12.0025 9.99936 12.0409 9.61276 11.9636C9.22616 11.8862 8.87095 11.6966 8.59161 11.4183C8.21786 11.0431 8.00802 10.5351 8.00802 10.0054C8.00802 9.4758 8.21786 8.96775 8.59161 8.59254C8.96762 8.22033 9.4753 8.01154 10.0043 8.01154C10.5334 8.01154 11.0411 8.22033 11.4171 8.59254C11.6953 8.87191 11.885 9.22715 11.9623 9.6138C12.0396 10.0004 12.0012 10.4013 11.8518 10.7662ZM15.89 6.5971C16.2197 6.26733 16.4049 5.82008 16.4049 5.35375C16.4049 4.88742 16.2197 4.44019 15.89 4.11042C15.5603 3.7807 15.1131 3.59547 14.6468 3.59547C14.1805 3.59547 13.7333 3.7807 13.4036 4.11042C13.0747 4.44069 12.8895 4.88758 12.8885 5.35375C12.8886 5.53303 12.9165 5.71121 12.9711 5.88197C12.1075 5.25534 11.067 4.91962 10 4.92337C9.33318 4.92308 8.67283 5.05423 8.05672 5.30931C7.4406 5.56439 6.88078 5.93839 6.40927 6.40996C5.93776 6.88152 5.56378 7.4414 5.30874 8.05758C5.05369 8.67377 4.92256 9.33418 4.92284 10.0011C4.92099 10.6679 5.05143 11.3284 5.30662 11.9444C5.5618 12.5604 5.93666 13.1197 6.40948 13.5898C7.36231 14.5426 8.65262 15.0808 10 15.0875C11.3464 15.0869 12.6374 14.5518 13.5895 13.5996C14.5415 12.6475 15.0766 11.3563 15.0772 10.0098C15.0743 8.94406 14.7385 7.90588 14.1165 7.04053C14.2883 7.09365 14.467 7.12076 14.6468 7.12095C14.8785 7.12087 15.1078 7.07449 15.3213 6.98453C15.5348 6.89457 15.7281 6.76285 15.89 6.5971ZM14.4251 10.0011C14.4266 11.0242 14.0734 12.0162 13.4256 12.8081C12.7779 13.6001 11.8757 14.143 10.8727 14.3443C9.86968 14.5457 8.82789 14.3931 7.92473 13.9126C7.02158 13.432 6.31292 12.6532 5.91945 11.7087C5.52598 10.7643 5.47203 9.71266 5.76679 8.73292C6.06155 7.75317 6.68678 6.90592 7.53602 6.33544C8.38525 5.76496 9.40596 5.50653 10.4243 5.60418C11.4427 5.70183 12.3957 6.14952 13.1211 6.87099C13.5335 7.28137 13.861 7.76907 14.0847 8.30617C14.3085 8.84327 14.4242 9.41922 14.4251 10.0011ZM13.8644 6.13628C13.7096 5.98155 13.6042 5.78437 13.5615 5.5697C13.5187 5.35503 13.5406 5.13252 13.6244 4.93031C13.7082 4.7281 13.85 4.55528 14.032 4.43371C14.214 4.31214 14.428 4.24729 14.6468 4.24736C14.7921 4.24736 14.936 4.27598 15.0702 4.33158C15.2044 4.38718 15.3263 4.46868 15.4291 4.57142C15.5318 4.67416 15.6133 4.79613 15.6689 4.93036C15.7245 5.0646 15.7531 5.20846 15.7531 5.35375C15.7531 5.49905 15.7245 5.64292 15.6689 5.77716C15.6133 5.91139 15.5318 6.03336 15.4291 6.1361C15.3263 6.23884 15.2044 6.32034 15.0702 6.37594C14.936 6.43154 14.7921 6.46016 14.6468 6.46016C14.3535 6.45954 14.0723 6.34315 13.8644 6.13628ZM11.8779 8.13172C11.3796 7.63396 10.7043 7.35411 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.1333 11.6393 12.3291 11.3468 12.4627 11.0247C12.5962 10.7026 12.665 10.3574 12.665 10.0087C12.665 9.66001 12.5962 9.31475 12.4627 8.99267C12.3291 8.6706 12.1333 8.37803 11.8865 8.13172H11.8779ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM12.4538 8.9925C12.2522 8.50761 11.9116 8.09325 11.4749 7.80159C11.0383 7.50994 10.5251 7.35404 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.258 11.5145 12.5109 11.0415 12.6135 10.5265C12.716 10.0115 12.6635 9.47763 12.4625 8.9925H12.4538ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM12.4538 8.9925C12.2522 8.50761 11.9116 8.09325 11.4749 7.80159C11.0383 7.50994 10.5251 7.35404 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.258 11.5145 12.5109 11.0415 12.6135 10.5265C12.716 10.0115 12.6635 9.47763 12.4625 8.9925H12.4538ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM15.89 6.60579C16.2197 6.27602 16.4049 5.82879 16.4049 5.36246C16.4049 4.89612 16.2197 4.44888 15.89 4.11911C15.5603 3.78939 15.1131 3.60416 14.6468 3.60416C14.1805 3.60416 13.7333 3.78939 13.4036 4.11911C13.0747 4.44938 12.8895 4.89628 12.8885 5.36246C12.8886 5.54173 12.9165 5.7199 12.9711 5.89066C12.1075 5.26403 11.067 4.92832 10 4.93207C9.33318 4.93179 8.67283 5.06292 8.05672 5.318C7.4406 5.57308 6.88078 5.9471 6.40927 6.41866C5.93776 6.89023 5.56378 7.4501 5.30874 8.06628C5.05369 8.68247 4.92256 9.34288 4.92284 10.0098C4.92099 10.6766 5.05143 11.3371 5.30662 11.9531C5.5618 12.5691 5.93666 13.1284 6.40948 13.5985C7.36373 14.5481 8.65386 15.0831 10 15.0875C11.3464 15.0869 12.6374 14.5518 13.5895 13.5996C14.5415 12.6475 15.0766 11.3563 15.0772 10.0098C15.0743 8.94406 14.7385 7.90588 14.1165 7.04053C14.2883 7.09365 14.467 7.12076 14.6468 7.12095C14.8785 7.12087 15.1078 7.07449 15.3213 6.98453C15.5348 6.89457 15.7281 6.76285 15.89 6.5971V6.60579ZM14.4251 10.0098C14.4266 11.0329 14.0734 12.0249 13.4256 12.8168C12.7779 13.6088 11.8757 14.1516 10.8727 14.353C9.86968 14.5544 8.82789 14.4018 7.92473 13.9212C7.02158 13.4407 6.31292 12.6619 5.91945 11.7174C5.52598 10.773 5.47203 9.72136 5.76679 8.74162C6.06155 7.76187 6.68678 6.91461 7.53602 6.34413C8.38525 5.77365 9.40596 5.51522 10.4243 5.61287C11.4427 5.71052 12.3957 6.15821 13.1211 6.87968C13.9519 7.70638 14.4209 8.82895 14.4251 10.0011V10.0098ZM13.8644 6.14497C13.7096 5.99024 13.6042 5.79307 13.5615 5.5784C13.5187 5.36374 13.5406 5.14121 13.6244 4.939C13.7082 4.73679 13.85 4.56397 14.032 4.4424C14.214 4.32083 14.428 4.25598 14.6468 4.25605C14.9402 4.25605 15.2216 4.37262 15.4291 4.58011C15.6365 4.7876 15.7531 5.06902 15.7531 5.36246C15.7531 5.65589 15.6365 5.93731 15.4291 6.1448C15.2216 6.35229 14.9402 6.46885 14.6468 6.46885C14.3523 6.46593 14.0709 6.34634 13.8644 6.13628V6.14497ZM11.8779 8.13172C11.3796 7.63396 10.7043 7.35411 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.1333 11.6393 12.3291 11.3468 12.4627 11.0247C12.5962 10.7026 12.665 10.3574 12.665 10.0087C12.665 9.66001 12.5962 9.31475 12.4627 8.99267C12.3291 8.6706 12.1333 8.37803 11.8865 8.13172H11.8779ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM12.4538 8.9925C12.2522 8.50761 11.9116 8.09325 11.4749 7.80159C11.0383 7.50994 10.5251 7.35404 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.258 11.5145 12.5109 11.0415 12.6135 10.5265C12.716 10.0115 12.6635 9.47763 12.4625 8.9925H12.4538ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM12.4538 8.9925C12.2522 8.50761 11.9116 8.09325 11.4749 7.80159C11.0383 7.50994 10.5251 7.35404 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.258 11.5145 12.5109 11.0415 12.6135 10.5265C12.716 10.0115 12.6635 9.47763 12.4625 8.9925H12.4538ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM15.89 6.60579C16.2197 6.27602 16.4049 5.82879 16.4049 5.36246C16.4049 4.89612 16.2197 4.44888 15.89 4.11911C15.5603 3.78939 15.1131 3.60416 14.6468 3.60416C14.1805 3.60416 13.7333 3.78939 13.4036 4.11911C13.0747 4.44938 12.8895 4.89628 12.8885 5.36246C12.8886 5.54173 12.9165 5.7199 12.9711 5.89066C12.1075 5.26403 11.067 4.92832 10 4.93207C9.33318 4.93179 8.67283 5.06292 8.05672 5.318C7.4406 5.57308 6.88078 5.9471 6.40927 6.41866C5.93776 6.89023 5.56378 7.4501 5.30874 8.06628C5.05369 8.68247 4.92256 9.34288 4.92284 10.0098C4.92099 10.6766 5.05143 11.3371 5.30662 11.9531C5.5618 12.5691 5.93666 13.1284 6.40948 13.5985C7.36373 14.5481 8.65386 15.0831 10 15.0875C11.3464 15.0869 12.6374 14.5518 13.5895 13.5996C14.5415 12.6475 15.0766 11.3563 15.0772 10.0098C15.0743 8.94406 14.7385 7.90588 14.1165 7.04053C14.2883 7.09365 14.467 7.12076 14.6468 7.12095C14.8785 7.12087 15.1078 7.07449 15.3213 6.98453C15.5348 6.89457 15.7281 6.76285 15.89 6.5971V6.60579ZM14.4251 10.0098C14.4266 11.0329 14.0734 12.0249 13.4256 12.8168C12.7779 13.6088 11.8757 14.1516 10.8727 14.353C9.86968 14.5544 8.82789 14.4018 7.92473 13.9212C7.02158 13.4407 6.31292 12.6619 5.91945 11.7174C5.52598 10.773 5.47203 9.72136 5.76679 8.74162C6.06155 7.76187 6.68678 6.91461 7.53602 6.34413C8.38525 5.77365 9.40596 5.51522 10.4243 5.61287C11.4427 5.71052 12.3957 6.15821 13.1211 6.87968C13.9519 7.70638 14.4209 8.82895 14.4251 10.0011V10.0098ZM13.8644 6.14497C13.7096 5.99024 13.6042 5.79307 13.5615 5.5784C13.5187 5.36374 13.5406 5.14121 13.6244 4.939C13.7082 4.73679 13.85 4.56397 14.032 4.4424C14.214 4.32083 14.428 4.25598 14.6468 4.25605C14.9402 4.25605 15.2216 4.37262 15.4291 4.58011C15.6365 4.7876 15.7531 5.06902 15.7531 5.36246C15.7531 5.65589 15.6365 5.93731 15.4291 6.1448C15.2216 6.35229 14.9402 6.46885 14.6468 6.46885C14.3523 6.46593 14.0709 6.34634 13.8644 6.13628V6.14497ZM11.8779 8.13172C11.3796 7.63396 10.7043 7.35411 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.1333 11.6393 12.3291 11.3468 12.4627 11.0247C12.5962 10.7026 12.665 10.3574 12.665 10.0087C12.665 9.66001 12.5962 9.31475 12.4627 8.99267C12.3291 8.6706 12.1333 8.37803 11.8865 8.13172H11.8779ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM15.89 6.60579C16.2197 6.27602 16.4049 5.82879 16.4049 5.36246C16.4049 4.89612 16.2197 4.44888 15.89 4.11911C15.5603 3.78939 15.1131 3.60416 14.6468 3.60416C14.1805 3.60416 13.7333 3.78939 13.4036 4.11911C13.0747 4.44938 12.8895 4.89628 12.8885 5.36246C12.8886 5.54173 12.9165 5.7199 12.9711 5.89066C12.1075 5.26403 11.067 4.92832 10 4.93207C9.33318 4.93179 8.67283 5.06292 8.05672 5.318C7.4406 5.57308 6.88078 5.9471 6.40927 6.41866C5.93776 6.89023 5.56378 7.4501 5.30874 8.06628C5.05369 8.68247 4.92256 9.34288 4.92284 10.0098C4.92099 10.6766 5.05143 11.3371 5.30662 11.9531C5.5618 12.5691 5.93666 13.1284 6.40948 13.5985C7.36373 14.5481 8.65386 15.0831 10 15.0875C11.3464 15.0869 12.6374 14.5518 13.5895 13.5996C14.5415 12.6475 15.0766 11.3563 15.0772 10.0098C15.0743 8.94406 14.7385 7.90588 14.1165 7.04053C14.2883 7.09365 14.467 7.12076 14.6468 7.12095C14.8785 7.12087 15.1078 7.07449 15.3213 6.98453C15.5348 6.89457 15.7281 6.76285 15.89 6.5971V6.60579ZM14.4251 10.0098C14.4266 11.0329 14.0734 12.0249 13.4256 12.8168C12.7779 13.6088 11.8757 14.1516 10.8727 14.353C9.86968 14.5544 8.82789 14.4018 7.92473 13.9212C7.02158 13.4407 6.31292 12.6619 5.91945 11.7174C5.52598 10.773 5.47203 9.72136 5.76679 8.74162C6.06155 7.76187 6.68678 6.91461 7.53602 6.34413C8.38525 5.77365 9.40596 5.51522 10.4243 5.61287C11.4427 5.71052 12.3957 6.15821 13.1211 6.87968C13.9519 7.70638 14.4209 8.82895 14.4251 10.0011V10.0098ZM13.8644 6.14497C13.7096 5.99024 13.6042 5.79307 13.5615 5.5784C13.5187 5.36374 13.5406 5.14121 13.6244 4.939C13.7082 4.73679 13.85 4.56397 14.032 4.4424C14.214 4.32083 14.428 4.25598 14.6468 4.25605C14.9402 4.25605 15.2216 4.37262 15.4291 4.58011C15.6365 4.7876 15.7531 5.06902 15.7531 5.36246C15.7531 5.65589 15.6365 5.93731 15.4291 6.1448C15.2216 6.35229 14.9402 6.46885 14.6468 6.46885C14.3523 6.46593 14.0709 6.34634 13.8644 6.13628V6.14497ZM11.8779 8.13172C11.3796 7.63396 10.7043 7.35411 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.1333 11.6393 12.3291 11.3468 12.4627 11.0247C12.5962 10.7026 12.665 10.3574 12.665 10.0087C12.665 9.66001 12.5962 9.31475 12.4627 8.99267C12.3291 8.6706 12.1333 8.37803 11.8865 8.13172H11.8779ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM15.6792 0.00868993H4.3208C3.17636 0.00868761 2.07866 0.462761 1.2686 1.27128C0.458544 2.07979 0.0023027 3.17669 0 4.32126V15.6809C0.000576243 16.8266 0.456056 17.9252 1.2663 18.7351C2.07654 19.545 3.17523 20 4.3208 20H15.6792C16.8248 20 17.9235 19.545 18.7337 18.7351C19.5439 17.9252 19.9994 16.8266 20 15.6809V4.32126C19.9994 3.17536 19.544 2.07657 18.7338 1.2663C17.9236 0.456032 16.825 0.000575972 15.6792 0V0.00868993ZM19.348 15.6896C19.3462 16.662 18.9591 17.594 18.2714 18.2814C17.5837 18.9688 16.6515 19.3554 15.6792 19.3566H4.3208C3.83854 19.3563 3.36107 19.261 2.91565 19.0761C2.47024 18.8912 2.06562 18.6203 1.72492 18.279C1.38421 17.9376 1.1141 17.5325 0.930008 17.0867C0.745918 16.6409 0.651461 16.1632 0.652032 15.6809V4.32126C0.653183 3.34849 1.04008 2.41589 1.72786 1.72804C2.41564 1.04018 3.34813 0.653253 4.3208 0.652103H15.6792C16.6519 0.653253 17.5844 1.04018 18.2721 1.72804C18.9599 2.41589 19.3468 3.34849 19.348 4.32126V15.6896ZM14.6468 3.60416C14.4158 3.60311 14.1868 3.64791 13.9734 3.73636C13.7599 3.82482 13.5662 3.95493 13.4036 4.11911C13.0747 4.44938 12.8895 4.89628 12.8885 5.36246C12.8886 5.54173 12.9165 5.7199 12.9711 5.89066C12.1075 5.26403 11.067 4.92832 10 4.93207C9.33318 4.93179 8.67283 5.06292 8.05672 5.318C7.4406 5.57308 6.88078 5.9471 6.40927 6.41866C5.93776 6.89023 5.56378 7.4501 5.30874 8.06628C5.05369 8.68247 4.92256 9.34288 4.92284 10.0098C4.92099 10.6766 5.05143 11.3371 5.30662 11.9531C5.5618 12.5691 5.93666 13.1284 6.40948 13.5985C7.36373 14.5481 8.65386 15.0831 10 15.0875C11.3464 15.0869 12.6374 14.5518 13.5895 13.5996C14.5415 12.6475 15.0766 11.3563 15.0772 10.0098C15.0743 8.94406 14.7385 7.90588 14.1165 7.04053C14.2883 7.09365 14.467 7.12076 14.6468 7.12095C14.8779 7.122 15.1068 7.07699 15.3203 6.98853C15.5337 6.90008 15.7274 6.76997 15.89 6.60579C16.2197 6.27602 16.4049 5.82879 16.4049 5.36246C16.4049 4.89612 16.2197 4.44888 15.89 4.11911C15.7281 3.95336 15.5348 3.82164 15.3213 3.73168C15.1078 3.64172 14.8785 3.59555 14.6468 3.59547V3.60416ZM14.4295 10.0098C14.4309 11.0329 14.0777 12.0249 13.43 12.8168C12.7823 13.6088 11.8801 14.1516 10.877 14.353C9.87403 14.5544 8.83223 14.4018 7.92908 13.9212C7.02593 13.4407 6.31727 12.6619 5.9238 11.7174C5.53033 10.773 5.47638 9.72136 5.77114 8.74162C6.06589 7.76187 6.69113 6.91461 7.54037 6.34413C8.3896 5.77365 9.41031 5.51522 10.4287 5.61287C11.447 5.71052 12.4 6.15821 13.1254 6.87968C13.9547 7.70709 14.422 8.82958 14.4251 10.0011L14.4295 10.0098ZM15.4336 6.14497C15.2527 6.32601 15.0146 6.43871 14.7599 6.46386C14.5052 6.48901 14.2496 6.42507 14.0368 6.28291C13.8239 6.14076 13.667 5.92919 13.5926 5.68426C13.5182 5.43934 13.5311 5.17621 13.629 4.9397C13.7269 4.70319 13.9037 4.50793 14.1294 4.38721C14.3551 4.26648 14.6156 4.22775 14.8667 4.27761C15.1177 4.32747 15.3437 4.46284 15.5061 4.66065C15.6685 4.85847 15.7574 5.10649 15.7574 5.36246C15.7539 5.65348 15.636 5.93143 15.4293 6.13628L15.4336 6.14497ZM11.8779 8.13172C11.3796 7.63396 10.7043 7.35411 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.1333 11.6393 12.3291 11.3468 12.4627 11.0247C12.5962 10.7026 12.665 10.3574 12.665 10.0087C12.665 9.66001 12.5962 9.31475 12.4627 8.99267C12.3291 8.6706 12.1333 8.37803 11.8865 8.13172H11.8779ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM12.4538 8.9925C12.2522 8.50761 11.9116 8.09325 11.4749 7.80159C11.0383 7.50994 10.5251 7.35404 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.258 11.5145 12.5109 11.0415 12.6135 10.5265C12.716 10.0115 12.6635 9.47763 12.4625 8.9925H12.4538ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749ZM12.4538 8.9925C12.2522 8.50761 11.9116 8.09325 11.4749 7.80159C11.0383 7.50994 10.5251 7.35404 10 7.35354C9.60686 7.3529 9.21849 7.43955 8.8629 7.60724C8.50732 7.77493 8.19339 8.01947 7.94377 8.32323C7.69416 8.62698 7.51508 8.98238 7.41947 9.36375C7.32385 9.74512 7.31408 10.143 7.39087 10.5286C7.46765 10.9142 7.62907 11.2779 7.86348 11.5936C8.09789 11.9092 8.39944 12.1689 8.74637 12.3538C9.0933 12.5387 9.47695 12.6444 9.86965 12.663C10.2623 12.6817 10.6543 12.6129 11.0172 12.4617C11.3428 12.3302 11.6385 12.1342 11.8865 11.8857C12.258 11.5145 12.5109 11.0415 12.6135 10.5265C12.716 10.0115 12.6635 9.47763 12.4625 8.9925H12.4538ZM11.8518 10.7749C11.7508 11.0186 11.6032 11.2401 11.4171 11.427C11.2306 11.6136 11.009 11.7614 10.7651 11.8617C10.4002 12.0111 9.99936 12.0496 9.61276 11.9723C9.22616 11.8949 8.87095 11.7053 8.59161 11.427C8.21786 11.0518 8.00802 10.5437 8.00802 10.0141C8.00802 9.48449 8.21786 8.97644 8.59161 8.60123C8.96762 8.22902 9.4753 8.02025 10.0043 8.02025C10.5334 8.02025 11.0411 8.22902 11.4171 8.60123C11.6953 8.8806 11.885 9.23585 11.9623 9.6225C12.0396 10.0091 12.0012 10.41 11.8518 10.7749Z","fill":"black","key":1}),React.createElement("path",{"d":"M15.6792 0.652069H4.32079C3.34813 0.65322 2.41563 1.04015 1.72785 1.728C1.04007 2.41585 0.653174 3.34845 0.652023 4.32122V15.6809C0.653175 16.6534 1.04014 17.5858 1.72798 18.2733C2.41582 18.9608 3.34833 19.3473 4.32079 19.3478H15.6792C16.6515 19.3467 17.5836 18.9601 18.2714 18.2727C18.9591 17.5853 19.3462 16.6533 19.348 15.6809V4.32122C19.3468 3.34845 18.9599 2.41585 18.2721 1.728C17.5844 1.04015 16.6519 0.65322 15.6792 0.652069ZM15.8965 6.59707C15.7339 6.76124 15.5402 6.89136 15.3268 6.97981C15.1133 7.06826 14.8844 7.11328 14.6533 7.11223C14.4735 7.11203 14.2948 7.08493 14.123 7.0318C14.745 7.89716 15.0809 8.93533 15.0837 10.001C15.0845 10.6691 14.9536 11.3307 14.6985 11.948C14.4433 12.5654 14.0689 13.1264 13.5967 13.5988C13.1245 14.0713 12.5638 14.446 11.9466 14.7014C11.3294 14.9568 10.6679 15.088 9.99999 15.0874C8.65385 15.0831 7.36372 14.5481 6.40947 13.5985C5.93665 13.1284 5.5618 12.5691 5.30661 11.9531C5.05142 11.3371 4.92098 10.6765 4.92283 10.0097C4.92255 9.34285 5.05368 8.68244 5.30873 8.06625C5.56378 7.45007 5.93775 6.89019 6.40926 6.41863C6.88078 5.94706 7.44059 5.57304 8.05671 5.31796C8.67283 5.06289 9.33317 4.93175 9.99999 4.93204C11.067 4.92829 12.1075 5.26399 12.9711 5.89062C12.9165 5.71987 12.8886 5.5417 12.8885 5.36242C12.8895 4.89625 13.0746 4.44935 13.4036 4.11907C13.7333 3.78935 14.1805 3.60412 14.6468 3.60412C15.1131 3.60412 15.5603 3.78935 15.89 4.11907C16.2197 4.44885 16.4049 4.89609 16.4049 5.36242C16.4049 5.82875 16.2197 6.27598 15.89 6.60576L15.8965 6.59707Z","fill":"#E27023","key":2}),React.createElement("path",{"d":"M11.9974 10.001C11.9968 10.397 11.879 10.784 11.659 11.1131C11.4389 11.4423 11.1264 11.699 10.7607 11.8508C10.3958 12.0002 9.99503 12.0387 9.60842 11.9614C9.22182 11.884 8.86661 11.6944 8.58727 11.4161C8.21352 11.0409 8.00368 10.5328 8.00368 10.0032C8.00368 9.47359 8.21352 8.96555 8.58727 8.59033C8.96328 8.21812 9.47096 8.00934 10 8.00934C10.5291 8.00934 11.0367 8.21812 11.4127 8.59033C11.599 8.77631 11.7467 8.99724 11.8474 9.24044C11.9481 9.48365 11.9998 9.74434 11.9996 10.0076L11.9974 10.001Z","fill":"#E27023","key":3})]);
+}
+
+InstaIcon.defaultProps = {"width":"30","height":"30","viewBox":"0 0 20 20","fill":"none"};
+
+module.exports = InstaIcon;
+
+InstaIcon.default = InstaIcon;
+
+
+/***/ }),
+
+/***/ "./src/images/quit-your-addiction-logo.svg":
+/*!*************************************************!*\
+  !*** ./src/images/quit-your-addiction-logo.svg ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "react");
+
+function QuitYourAddictionLogo (props) {
+    return React.createElement("svg",props,[React.createElement("path",{"d":"M58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95ZM58.24 22.95C58.33 22.78 58.43 22.6 58.51 22.42C58.44 22.57 58.33 22.78 58.24 22.95Z","fill":"#332E2B","key":0}),React.createElement("path",{"d":"M58.52 22.42C58.44 22.6 58.34 22.78 58.25 22.95C58.33 22.78 58.44 22.57 58.52 22.42Z","fill":"url(#paint0_linear_97_203)","key":1}),React.createElement("path",{"d":"M47.2 7.85C47.1613 7.91633 47.1178 7.97983 47.07 8.04C46.9 8.28 46.74 8.53 46.58 8.8V8.85999C46.48 9.01999 46.37 9.18999 46.28 9.35999C46.36 9.18999 46.47 9.02 46.56 8.85C46.5629 8.8301 46.5629 8.8099 46.56 8.79C46.73 8.52 46.88 8.27001 47.06 8.03001L47.2 7.85Z","fill":"url(#paint1_linear_97_203)","key":2}),React.createElement("path",{"d":"M73.56 39.13C74.3799 38.8792 75.0975 38.3716 75.6071 37.682C76.1166 36.9925 76.3911 36.1574 76.39 35.3V30.95C76.39 29.8891 75.9686 28.8717 75.2184 28.1216C74.4683 27.3714 73.4509 26.95 72.39 26.95H68.26C70.1528 25.5789 71.7486 23.8392 72.9516 21.8354C74.1545 19.8315 74.9398 17.6051 75.26 15.29V14.7L74.59 14.58L74.23 14.45C72.3149 13.7326 70.2721 13.4194 68.23 13.53C69.2531 10.5471 69.0883 7.28473 67.77 4.42001L67.57 4.04L67.13 4.21999L66.87 4.28001C65.94 4.48001 63.45 5.01 60.3 8.18C59.4735 5.34445 57.8531 2.80452 55.63 0.859993L55.31 0.57L54.87 -0.0100021L54.19 0.260002C50.9215 1.67708 48.0783 3.92065 45.94 6.77C42.38 2.77 39.55 2.18999 38.54 1.96999L38.26 1.91L37.82 1.73L37.63 2.10999C36.7303 4.05245 36.3611 6.19855 36.56 8.32999C34.8322 7.61347 32.9805 7.24314 31.11 7.24H30.71L30.06 7.10999L29.89 7.68C29.185 10.7444 29.3222 13.9425 30.2869 16.9353C31.2517 19.9281 33.0081 22.6042 35.37 24.68C36.2643 25.5061 37.2131 26.2712 38.21 26.97H30.92C29.8591 26.97 28.8417 27.3914 28.0916 28.1416C27.3414 28.8917 26.92 29.9091 26.92 30.97V35.32C26.9168 36.1791 27.1903 37.0164 27.7 37.708C28.2097 38.3996 28.9285 38.9087 29.75 39.16C29.7892 41.642 30.3602 44.0868 31.4246 46.3294C32.489 48.572 34.0219 50.5602 35.92 52.16H30.92C29.17 52.16 27.79 54.03 27.79 56.43V57.29H75.45V56.43C75.45 54.03 74.08 52.16 72.32 52.16H67.32C69.2352 50.5639 70.7839 48.5739 71.8607 46.3254C72.9375 44.0769 73.5171 41.6227 73.56 39.13ZM60.64 9.13C60.76 9 60.89 8.88 61.01 8.76L61.36 8.42001C62.5695 7.23365 64.0282 6.33178 65.63 5.78001L66.03 5.65C66.3063 5.55624 66.5909 5.48927 66.88 5.45C67.5775 6.9307 67.92 8.55372 67.88 10.19C67.88 10.36 67.88 10.53 67.88 10.7C67.8853 10.7565 67.8853 10.8135 67.88 10.87C67.88 11.06 67.88 11.26 67.8 11.47C67.7051 12.1871 67.5307 12.8915 67.28 13.57L66.46 13.65C64.7652 13.854 63.0919 14.2088 61.46 14.71C61.3721 13.0256 61.1345 11.3523 60.75 9.71C60.7127 9.52769 60.666 9.34745 60.61 9.17001L60.64 9.13ZM60.82 20.93C60.8838 20.7499 60.9372 20.5662 60.98 20.38C61.1859 19.654 61.3265 18.911 61.4 18.16C61.4781 17.5834 61.5148 17.0019 61.51 16.42C61.51 16.27 61.51 16.12 61.51 15.97L62.62 15.66L63.23 15.51L63.62 15.42C64.3884 15.2372 65.1662 15.097 65.95 15L66.7 14.92L67.7 14.86C69.1588 14.7945 70.6184 14.9702 72.02 15.38H72.09C72.5283 15.4862 72.9565 15.6301 73.37 15.81C73.3723 15.8266 73.3723 15.8434 73.37 15.86C73.0756 17.9962 72.3216 20.0432 71.16 21.86C71.1177 21.9128 71.0808 21.9697 71.05 22.03L70.7 22.54C70.6234 22.6669 70.5364 22.7873 70.44 22.9C70.4261 22.9279 70.4055 22.9519 70.38 22.97C70.3661 22.9979 70.3455 23.0219 70.32 23.04C70.2267 23.1686 70.1266 23.2921 70.02 23.41L69.82 23.64L69.61 23.89C69.5 24 69.41 24.1 69.31 24.22C68.9934 24.5538 68.6596 24.8709 68.31 25.17C68.14 25.32 67.95 25.46 67.76 25.61C67.5759 25.7685 67.3822 25.9154 67.18 26.05L66.84 26.29L66.55 26.5L65.94 26.87H60.14C61.19 26.32 61.89 25.87 62.01 25.81C60.5065 26.2592 58.9563 26.5344 57.39 26.63C58.6117 25.3428 59.5908 23.8454 60.28 22.21C60.4853 21.8013 60.6656 21.3805 60.82 20.95V20.93ZM45.65 10.6C45.65 10.49 45.74 10.39 45.8 10.28L46.01 9.82C46.0688 9.66782 46.1461 9.52342 46.24 9.39001C46.32 9.22001 46.43 9.05 46.52 8.88C46.5229 8.8601 46.5229 8.8399 46.52 8.82C46.69 8.55 46.84 8.30001 47.02 8.06001L47.15 7.88C47.23 7.76 47.33 7.64001 47.4 7.53001C47.4948 7.39659 47.5983 7.26963 47.71 7.15C47.7412 7.10229 47.7781 7.05862 47.82 7.02C47.845 6.9765 47.8753 6.93621 47.91 6.9C48.0287 6.75616 48.1556 6.61926 48.29 6.49L48.79 5.96C49.4131 5.33176 50.0816 4.75019 50.79 4.21999L51.27 3.88C51.834 3.48735 52.4218 3.13001 53.03 2.81001L53.37 2.63C53.71 2.46 53.97 2.34 54.14 2.27H54.22H54.29C54.7055 2.59049 55.0904 2.94869 55.44 3.34C55.44 3.34 55.51 3.41 55.54 3.45L55.74 3.67001C56.2748 4.22472 56.7445 4.83868 57.14 5.49999C57.2365 5.61912 57.3171 5.75022 57.38 5.89001C57.46 6.03001 57.55 6.17 57.63 6.32C57.71 6.47 57.79 6.61 57.86 6.77C57.93 6.93 58.01 7.06 58.07 7.21C58.13 7.36 58.24 7.58 58.31 7.77C58.38 7.96 58.4 8.01001 58.45 8.14001C58.4989 8.25003 58.539 8.3637 58.57 8.48C58.64 8.66 58.7 8.85 58.76 9.04L58.94 9.63C59.0433 9.95878 59.1301 10.2925 59.2 10.63C59.2259 10.6982 59.246 10.7684 59.26 10.84C59.32 11.1 59.37 11.36 59.42 11.63C59.47 11.9 59.48 12 59.51 12.19C59.54 12.38 59.56 12.57 59.58 12.77C59.6 12.97 59.64 13.29 59.68 13.56V14.19C59.6892 14.2193 59.6892 14.2507 59.68 14.28V14.34C59.68 14.52 59.68 14.68 59.68 14.86C59.68 15.04 59.68 15.12 59.68 15.26C59.68 15.4 59.68 15.57 59.68 15.73C59.6951 15.9898 59.6951 16.2502 59.68 16.51C59.69 16.5595 59.69 16.6105 59.68 16.66V16.74C59.6704 16.8899 59.6704 17.0401 59.68 17.19C59.6721 17.4047 59.6487 17.6186 59.61 17.83C59.5937 18.1057 59.5569 18.3798 59.5 18.65C59.4736 18.8869 59.4268 19.1211 59.36 19.35C59.3657 19.3764 59.3657 19.4036 59.36 19.43C59.3067 19.6833 59.2467 19.9233 59.18 20.15C59.1 20.42 59.01 20.68 58.92 20.94C58.83 21.2 58.77 21.31 58.69 21.49C58.6846 21.5555 58.6603 21.618 58.62 21.67C58.55 21.88 58.44 22.08 58.36 22.28C58.36 22.28 58.36 22.33 58.31 22.35C58.3007 22.3806 58.2835 22.4082 58.26 22.43C58.18 22.61 58.08 22.79 57.99 22.96C57.87 23.17 57.74 23.38 57.61 23.57C57.48 23.76 57.37 23.94 57.24 24.11C57.2235 24.1422 57.2034 24.1724 57.18 24.2L56.8 24.68C56.7 24.8 56.61 24.92 56.51 25.03L56.26 25.29C56.1377 25.4338 56.0075 25.5707 55.87 25.7C55.45 26.11 55.03 26.48 54.63 26.8L54.4 26.97H52.43C52.3467 26.8648 52.2699 26.7546 52.2 26.64C51.95 26.28 51.69 25.88 51.41 25.45C51.15 25.05 50.89 24.62 50.64 24.16C50.39 23.7 50.08 23.16 49.82 22.59C49.5249 22.0045 49.2612 21.4036 49.03 20.79C48.89 20.4 48.75 19.99 48.63 19.58C48.5963 19.5069 48.5727 19.4295 48.56 19.35C48.45 18.99 48.35 18.63 48.27 18.26C48.1608 17.7849 48.0773 17.3042 48.02 16.82C48.02 16.69 48.02 16.56 48.02 16.43C48.0068 16.5181 47.9868 16.605 47.96 16.69C47.96 16.95 47.82 17.4 47.74 17.99C47.7054 18.1279 47.682 18.2683 47.67 18.41C47.67 18.74 47.57 19.12 47.54 19.51C47.5092 19.7188 47.4891 19.9291 47.48 20.14C47.4648 20.3163 47.4648 20.4937 47.48 20.67C47.3424 22.3198 47.4707 23.9809 47.86 25.59L47.47 25.05C47.35 24.89 47.23 24.73 47.13 24.57C46.8864 24.1851 46.6628 23.7879 46.46 23.38C46.35 23.14 46.23 22.89 46.12 22.63C46.01 22.37 45.88 22.09 45.77 21.8C45.66 21.51 45.6 21.27 45.5 20.99C45.4 20.71 45.32 20.32 45.24 19.99C45.1861 19.7857 45.1427 19.5787 45.11 19.37L45.01 18.89C45.0046 18.8435 45.0046 18.7965 45.01 18.75L44.95 18.43C44.95 18.15 44.89 17.87 44.87 17.58C44.8548 17.4137 44.8548 17.2463 44.87 17.08C44.87 16.83 44.87 16.58 44.87 16.32C44.86 16.1602 44.86 15.9998 44.87 15.84C44.87 15.58 44.87 15.33 44.87 15.08C44.8597 14.8968 44.8597 14.7132 44.87 14.53C44.8596 14.4269 44.8596 14.3231 44.87 14.22C44.8796 14.0456 44.8996 13.872 44.93 13.7C44.9246 13.6669 44.9246 13.6331 44.93 13.6C44.93 13.6 44.93 13.6 44.93 13.52C44.93 13.44 44.99 13.2 45.03 13.05C45.1401 12.4737 45.3007 11.9082 45.51 11.36C45.5274 11.2707 45.5543 11.1836 45.59 11.1C45.6156 11.0184 45.6457 10.9383 45.68 10.86C45.695 10.7788 45.6845 10.695 45.65 10.62V10.6ZM37.73 5.9C37.73 5.77 37.73 5.65001 37.8 5.53001C37.8324 5.29982 37.8826 5.07247 37.95 4.85C37.95 4.74 38.01 4.64 38.03 4.54C38.0709 4.39038 38.121 4.24343 38.18 4.1C38.18 4.01 38.24 3.93 38.26 3.85C38.3388 3.60655 38.4427 3.37196 38.57 3.15H38.63C38.8502 3.18309 39.0676 3.23324 39.28 3.3C39.46 3.3 39.67 3.41 39.88 3.48C40.1842 3.57257 40.4816 3.68618 40.77 3.82H40.88L41.2 3.98C41.7838 4.25995 42.3396 4.59479 42.86 4.98L43.31 5.32C43.45 5.44 43.62 5.57 43.76 5.71L44.54 6.42001C44.6201 6.47916 44.6909 6.54994 44.75 6.63L44.85 6.73L45.18 7.07C45.1967 7.07765 45.2115 7.08873 45.2236 7.10252C45.2356 7.1163 45.2446 7.13249 45.25 7.15L45.48 7.39001C45.42 7.49001 45.35 7.59 45.29 7.7C44.4264 9.1066 43.8044 10.6479 43.45 12.26C41.9512 11.0584 40.3405 10.0036 38.64 9.10999C38.29 8.92999 37.95 8.76 37.64 8.62C37.635 8.56011 37.635 8.49989 37.64 8.43999C37.64 8.21999 37.64 7.99 37.64 7.76C37.6144 7.14521 37.6445 6.52936 37.73 5.92001V5.9ZM38.26 25.39L37.4 24.73C37.21 24.58 37.01 24.42 36.82 24.25C36.63 24.08 36.44 23.92 36.25 23.74C36.06 23.56 35.95 23.46 35.81 23.32C35.3897 22.9159 34.9924 22.4886 34.62 22.04C34.45 21.85 34.31 21.65 34.15 21.46C34.0534 21.3382 33.9633 21.2113 33.88 21.08C33.5925 20.6965 33.3287 20.2957 33.09 19.88C32.96 19.65 32.83 19.42 32.71 19.19C32.59 18.96 32.58 18.91 32.52 18.78C32.4169 18.5979 32.3299 18.4072 32.26 18.21C32.26 18.13 32.19 18.05 32.15 17.98C32.11 17.91 31.99 17.57 31.93 17.36C31.8967 17.3017 31.8762 17.2369 31.87 17.17C31.79 16.9633 31.72 16.7633 31.66 16.57C31.58 16.27 31.5 15.95 31.43 15.63C31.43 15.49 31.37 15.34 31.33 15.2C31.29 15.06 31.27 14.91 31.26 14.78C31.25 14.65 31.19 14.32 31.16 14.1C31.1145 13.7282 31.0878 13.3544 31.08 12.98C31.08 12.73 31.08 12.49 31.08 12.26C31.064 11.1108 31.1984 9.96434 31.48 8.85C32.0011 8.82443 32.5234 8.84788 33.04 8.92001H33.28H33.48L33.86 8.96999L34.36 9.06001L34.74 9.14001C35.08 9.22001 35.45 9.30999 35.84 9.43999L36.21 9.56001L36.89 9.81001L37.95 10.27C38.26 10.42 38.58 10.59 38.95 10.78C39.32 10.97 39.7 11.19 40.1 11.45C40.2311 11.5228 40.3579 11.6029 40.48 11.69C41.4521 12.2959 42.384 12.964 43.27 13.69V13.99C43.27 14.32 43.21 14.65 43.2 14.99C43.19 15.33 43.2 15.46 43.2 15.7C43.2 15.94 43.2 15.98 43.2 16.11C43.1944 16.5741 43.2144 17.0381 43.26 17.5V17.55C43.2649 17.5765 43.2649 17.6036 43.26 17.63C43.26 18.06 43.34 18.47 43.4 18.88C43.7339 21.4108 44.6476 23.8303 46.07 25.95C43.3715 25.1347 40.8342 23.8593 38.57 22.18C39.8873 23.8803 41.3677 25.4478 42.99 26.86H40.75L40.48 26.71L39.95 26.41C39.65 26.23 39.34 26.04 39.04 25.82C38.74 25.6 38.64 25.55 38.44 25.41L38.26 25.39ZM29.82 37.24C29.478 37.031 29.1959 36.7368 29.0014 36.3863C28.8069 36.0358 28.7065 35.6409 28.71 35.24V30.89C28.7051 30.7934 28.7051 30.6966 28.71 30.6V30.42C28.7174 30.3642 28.7343 30.3101 28.76 30.26C28.7901 30.0997 28.8512 29.9468 28.94 29.81C28.9914 29.7212 29.0554 29.6404 29.13 29.57L29.22 29.44L29.34 29.32C29.7685 28.8949 30.3464 28.6544 30.95 28.65H72.35C72.953 28.65 73.5314 28.8888 73.9587 29.3143C74.386 29.7397 74.6274 30.317 74.63 30.92V35.27C74.6313 35.5698 74.5733 35.8669 74.4592 36.1441C74.345 36.4213 74.1771 36.6732 73.9652 36.8852C73.7532 37.0971 73.5013 37.265 73.2241 37.3791C72.9469 37.4933 72.6498 37.5513 72.35 37.55H30.95C30.555 37.5494 30.1665 37.4497 29.82 37.26V37.24ZM72.39 53.88C72.93 53.88 73.51 54.54 73.73 55.57H29.67C29.88 54.57 30.45 53.88 30.99 53.88H72.39ZM67.44 49.76C67.21 49.99 67 50.21 66.76 50.43C66.2921 50.8573 65.7978 51.2547 65.28 51.62L64.5 52.16H38.88L38.09 51.62C37.5768 51.2571 37.089 50.8595 36.63 50.43C36.3888 50.2219 36.1616 49.9981 35.95 49.76C35.7461 49.5565 35.5525 49.3429 35.37 49.12L35.21 48.95C35.0325 48.7489 34.8656 48.5386 34.71 48.32C34.5744 48.1499 34.4476 47.973 34.33 47.79C34.336 47.7637 34.336 47.7363 34.33 47.71C34.26 47.62 34.2 47.52 34.14 47.43C34.1233 47.401 34.1031 47.3742 34.08 47.35V47.29C33.9592 47.1168 33.849 46.9365 33.75 46.75C33.63 46.55 33.52 46.36 33.41 46.15C33.417 46.117 33.417 46.083 33.41 46.05C33.36 45.92 33.28 45.79 33.22 45.66C33.16 45.53 33.22 45.6 33.22 45.57C33.1857 45.5185 33.1619 45.4607 33.15 45.4C33.0525 45.22 32.9689 45.0328 32.9 44.84C32.83 44.66 32.76 44.47 32.7 44.28C32.64 44.09 32.64 44.11 32.6 44.03V43.98V43.89C32.5912 43.837 32.5912 43.783 32.6 43.73C32.5297 43.5444 32.4728 43.3539 32.43 43.16C32.3695 42.9729 32.3194 42.7826 32.28 42.59C32.22 42.33 32.16 42.07 32.12 41.81C32.0654 41.5457 32.0253 41.2787 32 41.01C31.9552 40.762 31.9252 40.5116 31.91 40.26V40.21C31.8948 39.9336 31.8948 39.6565 31.91 39.38H72.16C72.1752 39.6565 72.1752 39.9336 72.16 40.21V40.26C72.16 40.51 72.16 40.76 72.08 41.01C72.0513 41.2788 72.0079 41.5459 71.95 41.81C71.91 42.07 71.86 42.33 71.8 42.59C71.8 42.78 71.7 42.98 71.64 43.16C71.6065 43.3562 71.5494 43.5475 71.47 43.73C71.4788 43.783 71.4788 43.837 71.47 43.89V43.98V44.03C71.47 44.11 71.41 44.2 71.37 44.28C71.33 44.36 71.24 44.66 71.17 44.84C71.09 45.03 71.01 45.22 70.92 45.4C70.894 45.4439 70.8739 45.4909 70.86 45.54C70.76 45.76 70.65 45.97 70.53 46.18C70.4209 46.416 70.2939 46.6434 70.15 46.86C69.9 47.28 69.63 47.7 69.34 48.1C69.34 48.1 69.34 48.1 69.28 48.17C69.101 48.4308 68.9074 48.6812 68.7 48.92C67.95 49.22 67.7 49.51 67.44 49.78V49.76Z","fill":"#332E2B","key":3}),React.createElement("path",{"d":"M45.32 7.84C44.4564 9.2466 43.8344 10.7879 43.48 12.4C41.9812 11.1984 40.3705 10.1436 38.67 9.24999C38.5409 7.57565 38.6555 5.89144 39.01 4.24999C39.01 4.24999 40.94 4.28 45.32 7.84Z","fill":"#63B22F","key":4}),React.createElement("path",{"d":"M66.49 13.67C64.7951 13.874 63.1218 14.2288 61.49 14.73C61.4021 13.0456 61.1645 11.3723 60.78 9.73C64.78 6.62 66.53 6.55 66.53 6.55C67.0516 8.89621 67.0379 11.3298 66.49 13.67Z","fill":"#63B22F","key":5}),React.createElement("path",{"d":"M72.13 16.79C72.13 16.79 70.13 22.89 65.8 25.95C65.26 26.33 64.75 26.66 64.24 26.95H60.19C61.24 26.4 61.94 25.95 62.06 25.89C60.5565 26.3393 59.0063 26.6144 57.44 26.71C58.6617 25.4228 59.6408 23.9254 60.33 22.29C60.5183 21.8506 60.6787 21.3997 60.81 20.94C60.8738 20.7599 60.9272 20.5762 60.97 20.39C61.1759 19.664 61.3164 18.921 61.39 18.17C61.468 17.5934 61.5048 17.0119 61.5 16.43C62.25 16.33 62.95 16.25 63.61 16.2H63.75C64.35 16.2 64.89 16.11 65.42 16.09H66.01C66.38 16.09 66.74 16.09 67.06 16.09C70.88 16.07 72.13 16.79 72.13 16.79Z","fill":"#63B22F","key":6}),React.createElement("path",{"d":"M59.99 15.68C60.0051 15.9398 60.0051 16.2002 59.99 16.46C59.9999 16.5095 59.9999 16.5605 59.99 16.61V16.69C59.9804 16.8398 59.9804 16.9902 59.99 17.14C59.982 17.3547 59.9586 17.5686 59.92 17.78C59.8995 18.0553 59.8628 18.3291 59.81 18.6C59.7836 18.8369 59.7368 19.0712 59.67 19.3C59.6757 19.3264 59.6757 19.3536 59.67 19.38C59.6166 19.6333 59.5566 19.8733 59.49 20.1C59.41 20.37 59.32 20.63 59.23 20.89C59.14 21.15 59.08 21.26 59 21.44C58.9945 21.5055 58.9702 21.568 58.93 21.62C58.86 21.83 58.75 22.03 58.67 22.23C58.6667 22.2532 58.6667 22.2768 58.67 22.3C58.6607 22.3306 58.6435 22.3583 58.62 22.38C58.54 22.56 58.43 22.74 58.34 22.91C58.25 23.08 58.09 23.33 57.96 23.52C57.83 23.71 57.72 23.89 57.59 24.06C57.5735 24.0922 57.5534 24.1224 57.53 24.15L57.15 24.63C57.05 24.75 56.96 24.87 56.86 24.98L56.61 25.24C56.4877 25.3838 56.3575 25.5207 56.22 25.65C55.8 26.06 55.38 26.43 54.98 26.75L54.75 26.92H52.43C52.3467 26.8148 52.2699 26.7046 52.2 26.59C51.95 26.23 51.69 25.83 51.41 25.4C51.15 25 50.89 24.57 50.64 24.11C50.39 23.65 50.08 23.11 49.82 22.54C49.5248 21.9545 49.2611 21.3536 49.03 20.74C48.89 20.35 48.75 19.94 48.63 19.53C48.5962 19.4569 48.5727 19.3795 48.56 19.3C48.45 18.94 48.35 18.58 48.27 18.21C48.1607 17.7349 48.0773 17.2542 48.02 16.77C48.02 16.64 48.02 16.51 48.02 16.38C48.0068 16.4681 47.9867 16.555 47.96 16.64C47.96 16.9 47.82 17.35 47.74 17.94C47.7053 18.0779 47.6819 18.2183 47.67 18.36C47.67 18.69 47.57 19.07 47.54 19.46C47.5091 19.6688 47.4891 19.8791 47.48 20.09C47.4647 20.2663 47.4647 20.4436 47.48 20.62C47.3424 22.2698 47.4707 23.9309 47.86 25.54L47.47 25C47.35 24.84 47.23 24.68 47.13 24.52C46.8864 24.1351 46.6627 23.7379 46.46 23.33C46.4647 23.2935 46.4647 23.2565 46.46 23.22C46.37 22.92 46.23 22.51 46.1 22.04C46.1 21.95 46.04 21.85 46.02 21.74C46 21.63 45.92 21.32 45.88 21.1C45.84 20.88 45.75 20.46 45.7 20.1C45.65 19.74 45.6 19.34 45.58 18.93C45.5199 18.1945 45.5199 17.4554 45.58 16.72C45.58 16.42 45.58 16.11 45.67 15.79C45.7336 15.3021 45.8237 14.8181 45.94 14.34C46.0342 13.8661 46.1577 13.3985 46.31 12.94C46.6345 11.9386 47.0884 10.9839 47.66 10.1C47.84 9.84 48.01 9.57999 48.2 9.32999C49.8549 7.14665 51.8425 5.23674 54.09 3.67001C54.09 3.67001 56.17 4.98 58.41 10.55C58.54 10.85 58.66 11.17 58.78 11.55C59.2 12.64 59.6 13.87 60.01 15.27C59.9 15.39 59.95 15.57 59.99 15.68Z","fill":"#63B22F","key":7}),React.createElement("path",{"d":"M42.93 26.96H41.13C38.6786 25.428 36.5903 23.3806 35.01 20.96C32.08 16.58 32.33 10.15 32.33 10.15C32.33 10.15 33.76 9.91999 37.26 11.22C37.6 11.36 37.99 11.5 38.39 11.67L39.32 12.07C40.45 12.58 41.75 13.22 43.2 14.07C43.2 14.4 43.14 14.73 43.13 15.07C43.12 15.41 43.13 15.54 43.13 15.78C43.13 16.02 43.13 16.06 43.13 16.19C43.1244 16.6541 43.1444 17.1181 43.19 17.58V17.63C43.1949 17.6564 43.1949 17.6836 43.19 17.71C43.19 18.14 43.27 18.55 43.33 18.96C43.6639 21.4908 44.5776 23.9103 46 26.03C43.3015 25.2147 40.7642 23.9393 38.5 22.26C39.8195 23.9677 41.3032 25.542 42.93 26.96Z","fill":"#63B22F","key":8}),React.createElement("path",{"d":"M71.82 39.3C71.8352 39.5765 71.8352 39.8535 71.82 40.13V40.18C71.82 40.43 71.82 40.68 71.74 40.93C71.7113 41.1988 71.6679 41.4659 71.61 41.73C71.56 41.99 71.52 42.25 71.46 42.51C71.4 42.77 71.36 42.9 71.3 43.08C71.24 43.26 71.19 43.46 71.13 43.65C71.1388 43.703 71.1388 43.757 71.13 43.81V43.9V43.95C71.13 44.03 71.07 44.12 71.03 44.2C70.99 44.28 70.9 44.58 70.83 44.76C70.75 44.95 70.67 45.14 70.58 45.32C70.5541 45.3639 70.5339 45.411 70.52 45.46C70.42 45.68 70.3 45.89 70.19 46.1C70.0809 46.336 69.9539 46.5634 69.81 46.78C69.56 47.2 69.29 47.62 69 48.02C69 48.02 69 48.02 68.94 48.09C68.7611 48.3508 68.5674 48.6012 68.36 48.84C68.11 49.13 67.86 49.42 67.6 49.69C67.34 49.96 67.16 50.14 66.92 50.36C66.4511 50.7861 65.9569 51.1835 65.44 51.55L64.66 52.08H38.88L38.09 51.55C37.5796 51.1834 37.092 50.786 36.63 50.36C36.39 50.14 36.17 49.92 35.95 49.69C35.7461 49.4865 35.5525 49.2729 35.37 49.05L35.21 48.88L34.71 48.25C34.58 48.08 34.45 47.9 34.33 47.72C34.336 47.6937 34.336 47.6663 34.33 47.64C34.26 47.55 34.2 47.45 34.14 47.36C34.1233 47.331 34.1031 47.3042 34.08 47.28V47.22C33.9592 47.0468 33.849 46.8665 33.75 46.68C33.63 46.48 33.52 46.29 33.41 46.08C33.417 46.047 33.417 46.013 33.41 45.98C33.36 45.85 33.28 45.72 33.22 45.59C33.16 45.46 33.22 45.53 33.22 45.5C33.1857 45.4485 33.1619 45.3907 33.15 45.33C33.0525 45.15 32.9689 44.9628 32.9 44.77C32.83 44.59 32.76 44.4 32.7 44.21C32.64 44.02 32.64 44.04 32.6 43.96V43.91V43.82C32.5913 43.767 32.5913 43.713 32.6 43.66C32.54 43.47 32.49 43.28 32.43 43.09C32.3695 42.9029 32.3194 42.7127 32.28 42.52C32.22 42.26 32.17 42 32.12 41.74C32.0654 41.4757 32.0253 41.2087 32 40.94C31.9553 40.692 31.9252 40.4416 31.91 40.19V40.14C31.8948 39.8635 31.8948 39.5864 31.91 39.31L71.82 39.3Z","fill":"#E27022","key":9}),React.createElement("path",{"d":"M74.67 30.95V35.3C74.6713 35.5998 74.6132 35.8969 74.4991 36.1741C74.385 36.4513 74.2171 36.7032 74.0051 36.9151C73.7932 37.1271 73.5413 37.295 73.2641 37.4091C72.9868 37.5232 72.6898 37.5813 72.39 37.58H30.99C30.5788 37.5771 30.1754 37.4668 29.82 37.26C29.4779 37.0509 29.1959 36.7568 29.0014 36.4063C28.8068 36.0558 28.7065 35.6608 28.71 35.26V30.91C28.7051 30.8134 28.7051 30.7166 28.71 30.62V30.44C28.7173 30.3842 28.7343 30.33 28.76 30.28C28.7901 30.1197 28.8512 29.9668 28.94 29.83C28.9897 29.7342 29.0538 29.6465 29.13 29.57L29.22 29.44L29.34 29.32C29.7685 28.8949 30.3464 28.6544 30.95 28.65H72.35C72.6544 28.6446 72.9569 28.7003 73.2395 28.8138C73.5221 28.9272 73.779 29.0961 73.9953 29.3105C74.2115 29.5248 74.3826 29.7804 74.4985 30.062C74.6144 30.3435 74.6727 30.6455 74.67 30.95Z","fill":"#E27022","key":10}),React.createElement("path",{"d":"M73.73 55.57H29.67C29.88 54.57 30.45 53.88 30.99 53.88H72.39C72.93 53.9 73.51 54.57 73.73 55.57Z","fill":"#E27022","key":11}),React.createElement("path",{"d":"M16.23 81.57C15.9194 81.9355 15.5333 82.2293 15.0983 82.4313C14.6632 82.6333 14.1896 82.7386 13.71 82.74C13.3662 82.7358 13.0265 82.6645 12.71 82.53C12.3441 82.3553 12.0069 82.126 11.71 81.85C11.5826 81.7412 11.4624 81.6243 11.35 81.5C11.6015 81.4317 11.8486 81.3482 12.09 81.25C13.0177 80.8993 13.8672 80.3692 14.59 79.69C15.266 78.9954 15.7904 78.1679 16.13 77.26C16.9011 75.3343 16.9011 73.1857 16.13 71.26C15.7516 70.358 15.1858 69.5467 14.47 68.88C13.7476 68.1979 12.8982 67.6644 11.97 67.31C9.94902 66.5503 7.72097 66.5503 5.7 67.31C4.76516 67.6616 3.91129 68.1991 3.19 68.89C2.4765 69.5587 1.91102 70.3695 1.53 71.27C0.767018 73.1973 0.767018 75.3428 1.53 77.27C1.90981 78.1742 2.47535 78.9884 3.19 79.66C3.91436 80.3445 4.76756 80.8782 5.7 81.23C6.43337 81.5175 7.20489 81.6961 7.99 81.76C8.45 82.22 8.85 82.62 9.24 82.96C9.68993 83.3614 10.1791 83.7165 10.7 84.02C11.1466 84.2735 11.6286 84.4589 12.13 84.57C12.6138 84.6919 13.1111 84.7524 13.61 84.75C14.3391 84.7736 15.0639 84.6289 15.7281 84.3271C16.3923 84.0254 16.9781 83.5747 17.44 83.01L16.23 81.57ZM5.23 77.98C4.75349 77.5002 4.37928 76.9286 4.13 76.3C3.62337 74.9803 3.62337 73.5197 4.13 72.2C4.37624 71.5917 4.73982 71.0379 5.2 70.57C5.65695 70.0988 6.20927 69.7306 6.82 69.49C8.14208 68.9963 9.59792 68.9963 10.92 69.49C11.5325 69.7328 12.0876 70.1006 12.55 70.57C13.0138 71.037 13.3808 71.5909 13.63 72.2C14.1366 73.5197 14.1366 74.9803 13.63 76.3C13.3819 76.9127 13.0149 77.4701 12.55 77.94C12.0876 78.4094 11.5325 78.7772 10.92 79.02C9.60028 79.5267 8.13972 79.5267 6.82 79.02C6.20927 78.7795 5.65695 78.4112 5.2 77.94L5.23 77.98Z","fill":"#332E2B","key":12}),React.createElement("path",{"d":"M30.19 70.41V81.57H27.7V80.13C27.3719 80.5452 26.9595 80.886 26.49 81.13C25.7555 81.5138 24.9387 81.7129 24.11 81.71C23.2394 81.7284 22.3766 81.5435 21.59 81.17C20.8769 80.8211 20.2873 80.2629 19.9 79.57C19.4704 78.7118 19.264 77.7591 19.3 76.8V70.43H21.9V76.43C21.8386 77.2354 22.0812 78.0346 22.58 78.67C22.829 78.9262 23.1303 79.1257 23.4633 79.2551C23.7963 79.3845 24.1533 79.4408 24.51 79.42C25.0703 79.433 25.6246 79.3021 26.12 79.04C26.5813 78.7784 26.9539 78.3849 27.19 77.91C27.4641 77.3295 27.5944 76.6915 27.57 76.05V70.41H30.19Z","fill":"#332E2B","key":13}),React.createElement("path",{"d":"M34.92 68.57C34.6994 68.5775 34.4795 68.5406 34.2734 68.4616C34.0673 68.3826 33.8791 68.263 33.72 68.11C33.5691 67.9675 33.4495 67.7954 33.3686 67.6043C33.2877 67.4132 33.2473 67.2074 33.25 67C33.2467 66.7924 33.2868 66.5865 33.3677 66.3953C33.4487 66.2042 33.5687 66.0321 33.72 65.89C34.0454 65.5883 34.4764 65.4266 34.92 65.44C35.3637 65.4217 35.7973 65.5758 36.13 65.87C36.2813 66.0035 36.4018 66.1684 36.4829 66.3532C36.5641 66.538 36.604 66.7382 36.6 66.94C36.6038 67.1541 36.5651 67.3669 36.4862 67.5661C36.4072 67.7652 36.2896 67.9466 36.14 68.1C35.9797 68.2578 35.7887 68.3809 35.5789 68.4618C35.369 68.5427 35.1447 68.5795 34.92 68.57ZM33.61 81.57V70.41H36.22V81.57H33.61Z","fill":"#332E2B","key":14}),React.createElement("path",{"d":"M46.36 80.96C46.0256 81.2243 45.6413 81.4181 45.23 81.53C44.777 81.6539 44.3097 81.7178 43.84 81.72C42.8017 81.7731 41.7844 81.4137 41.01 80.72C40.6543 80.3488 40.3813 79.9065 40.209 79.4221C40.0366 78.9378 39.9688 78.4224 40.01 77.91V72.57H38.13V70.48H39.97V67.94H42.58V70.48H45.58V72.57H42.58V77.88C42.5503 78.3262 42.6936 78.7666 42.98 79.11C43.1275 79.2647 43.3065 79.3858 43.5049 79.4651C43.7034 79.5445 43.9165 79.5803 44.13 79.57C44.6551 79.5895 45.1709 79.427 45.59 79.11L46.36 80.96Z","fill":"#332E2B","key":15}),React.createElement("path",{"d":"M66.56 66.94L60.84 76.41V81.57H58.12V76.44L52.38 66.94H55.28L59.57 74.05L63.89 66.94H66.56Z","fill":"#332E2B","key":16}),React.createElement("path",{"d":"M71.85 81.71C70.7831 81.7326 69.7287 81.4775 68.79 80.97C67.9217 80.5023 67.1935 79.812 66.68 78.97C66.1756 78.0668 65.9107 77.0495 65.9107 76.015C65.9107 74.9805 66.1756 73.9632 66.68 73.06C67.1916 72.2164 67.9203 71.5257 68.79 71.06C69.7305 70.5571 70.7837 70.3024 71.85 70.32C72.9227 70.3025 73.9823 70.5571 74.93 71.06C75.8045 71.5191 76.5348 72.2113 77.04 73.06C77.539 73.9668 77.8006 74.985 77.8006 76.02C77.8006 77.055 77.539 78.0732 77.04 78.98C76.5319 79.8264 75.8024 80.5179 74.93 80.98C73.9831 81.484 72.9224 81.7354 71.85 81.71ZM71.85 79.48C72.4468 79.4907 73.0361 79.346 73.56 79.06C74.0612 78.7781 74.4708 78.3581 74.74 77.85C75.034 77.2748 75.1817 76.6359 75.17 75.99C75.1855 75.3405 75.0376 74.6975 74.74 74.12C74.4692 73.6156 74.0598 73.1992 73.56 72.92C73.0358 72.6441 72.4524 72.4999 71.86 72.4999C71.2676 72.4999 70.6842 72.6441 70.16 72.92C69.6632 73.2031 69.2547 73.6185 68.98 74.12C68.6743 74.6949 68.5227 75.3391 68.54 75.99C68.5267 76.6373 68.6781 77.2773 68.98 77.85C69.2519 78.3561 69.6609 78.7754 70.16 79.06C70.6772 79.3448 71.2597 79.4895 71.85 79.48Z","fill":"#332E2B","key":17}),React.createElement("path",{"d":"M91.13 70.41V81.57H88.63V80.13C88.2998 80.5431 87.8879 80.8835 87.42 81.13C86.6791 81.5158 85.8553 81.715 85.02 81.71C84.156 81.7264 83.3001 81.5415 82.52 81.17C81.8 80.8132 81.2067 80.2443 80.82 79.54C80.3986 78.6792 80.196 77.7278 80.23 76.77V70.4H82.83V76.4C82.7734 77.2049 83.0155 78.0024 83.51 78.64C83.7602 78.8975 84.0631 79.0978 84.3979 79.2273C84.7328 79.3567 85.0917 79.4122 85.45 79.39C86.0069 79.4008 86.5574 79.2701 87.05 79.01C87.5113 78.7484 87.8839 78.3549 88.12 77.88C88.3894 77.2979 88.5195 76.6611 88.5 76.02V70.38L91.13 70.41Z","fill":"#332E2B","key":18}),React.createElement("path",{"d":"M101 70.29V72.77C100.895 72.7459 100.788 72.7291 100.68 72.72H100.38C99.9484 72.6998 99.5172 72.7664 99.1118 72.9159C98.7064 73.0653 98.3352 73.2945 98.02 73.59C97.7096 73.9402 97.472 74.3487 97.3209 74.7916C97.1698 75.2346 97.1083 75.7031 97.14 76.17V81.57H94.53V70.41H97.02V72.04C97.3435 71.5467 97.7875 71.144 98.31 70.87C99.1437 70.4539 100.069 70.2545 101 70.29Z","fill":"#332E2B","key":19}),React.createElement("path",{"d":"M16.13 87.92H13.93L8.62 99.73H10.88L12.05 97H17.95L19.13 99.73H21.42L16.13 87.92ZM12.82 95.28L15.05 90.11L17.26 95.28H12.82Z","fill":"#332E2B","key":20}),React.createElement("path",{"d":"M29.34 87.22V91.85C29.1015 91.5473 28.8016 91.2985 28.46 91.12C27.8485 90.7814 27.1589 90.609 26.46 90.62C25.6425 90.6038 24.8353 90.8039 24.12 91.2C23.4395 91.5692 22.8777 92.1241 22.5 92.8C22.0767 93.5384 21.8656 94.3793 21.89 95.23C21.8682 96.0804 22.0791 96.9207 22.5 97.66C22.8857 98.3358 23.4495 98.8927 24.13 99.27C24.8472 99.6614 25.6531 99.8611 26.47 99.85C27.1892 99.8605 27.8988 99.6848 28.53 99.34C28.8888 99.1442 29.2022 98.875 29.45 98.55V99.73H31.45V87.22H29.34ZM29.01 96.73C28.7908 97.144 28.4622 97.4899 28.06 97.73C27.6416 97.9525 27.1739 98.066 26.7 98.06C26.223 98.066 25.752 97.9525 25.33 97.73C24.9094 97.4972 24.5628 97.1506 24.33 96.73C24.0747 96.2721 23.9469 95.7541 23.96 95.23C23.9431 94.7023 24.0711 94.1801 24.33 93.72C24.5615 93.2984 24.9084 92.9515 25.33 92.72C25.7495 92.4898 26.2216 92.3727 26.7 92.38C27.1753 92.3726 27.6442 92.4898 28.06 92.72C28.4632 92.9589 28.7921 93.3051 29.01 93.72C29.269 94.1801 29.3969 94.7023 29.38 95.23C29.3931 95.7541 29.2653 96.2721 29.01 96.73Z","fill":"#332E2B","key":21}),React.createElement("path",{"d":"M40.94 87.22V91.85C40.6947 91.554 40.3962 91.3065 40.06 91.12C39.4456 90.789 38.758 90.6171 38.06 90.62C37.2459 90.6051 36.4422 90.8051 35.73 91.2C35.0464 91.5686 34.4813 92.1234 34.1 92.8C33.6926 93.5438 33.489 94.3822 33.51 95.23C33.4914 96.0776 33.6948 96.9153 34.1 97.66C34.4866 98.3351 35.0502 98.8918 35.73 99.27C36.444 99.6601 37.2465 99.8598 38.06 99.85C38.7598 99.8579 39.4495 99.682 40.06 99.34C40.4236 99.1472 40.7409 98.8776 40.99 98.55V99.73H42.99V87.22H40.94ZM40.61 96.73C40.3813 97.1537 40.0337 97.5013 39.61 97.73C39.1924 97.9546 38.7241 98.0682 38.25 98.06C37.7789 98.0697 37.3135 97.9559 36.9 97.73C36.4763 97.5013 36.1288 97.1537 35.9 96.73C35.6602 96.267 35.5399 95.7514 35.55 95.23C35.5365 94.7051 35.657 94.1854 35.9 93.72C36.1278 93.2956 36.4756 92.9478 36.9 92.72C37.3107 92.4861 37.7775 92.3685 38.25 92.38C38.7256 92.3702 39.1951 92.4875 39.61 92.72C40.0344 92.9478 40.3822 93.2956 40.61 93.72C40.8531 94.1854 40.9735 94.7051 40.96 95.23C40.9701 95.7514 40.8498 96.267 40.61 96.73Z","fill":"#332E2B","key":22}),React.createElement("path",{"d":"M46.87 89.24C46.6868 89.2501 46.5036 89.2224 46.3316 89.1588C46.1596 89.0951 46.0025 88.9968 45.87 88.87C45.7485 88.7539 45.6522 88.6141 45.5868 88.4594C45.5214 88.3046 45.4885 88.138 45.49 87.97C45.4867 87.8017 45.5188 87.6346 45.5842 87.4796C45.6497 87.3245 45.7471 87.185 45.87 87.07C46.0033 86.945 46.1608 86.8485 46.3328 86.7866C46.5047 86.7247 46.6876 86.6987 46.87 86.71C47.0508 86.6983 47.2322 86.7222 47.4038 86.7806C47.5754 86.8389 47.7338 86.9305 47.87 87.05C47.9921 87.1592 48.0893 87.2934 48.1549 87.4436C48.2204 87.5937 48.2529 87.7562 48.25 87.92C48.2558 88.0975 48.2246 88.2742 48.1584 88.439C48.0923 88.6038 47.9925 88.753 47.8655 88.8772C47.7386 89.0013 47.5872 89.0977 47.4209 89.1602C47.2547 89.2226 47.0773 89.2498 46.9 89.24H46.87ZM45.81 99.73V90.73H47.91V99.73H45.81Z","fill":"#332E2B","key":23}),React.createElement("path",{"d":"M54.81 99.85C53.9329 99.8653 53.0661 99.659 52.29 99.25C51.5731 98.8689 50.9746 98.2981 50.56 97.6C50.1537 96.8726 49.9403 96.0532 49.9403 95.22C49.9403 94.3868 50.1537 93.5674 50.56 92.84C50.9754 92.1476 51.5741 91.5835 52.29 91.21C53.0687 90.8089 53.9343 90.6062 54.81 90.62C55.615 90.6045 56.4116 90.7865 57.13 91.15C57.7893 91.4989 58.324 92.044 58.66 92.71L57.04 93.66C56.7999 93.2578 56.454 92.9292 56.04 92.71C55.6539 92.5101 55.2249 92.4071 54.79 92.41C54.3018 92.4002 53.8194 92.5173 53.39 92.75C52.9595 92.9695 52.6095 93.3195 52.39 93.75C52.1396 94.213 52.0155 94.7338 52.03 95.26C52.0155 95.7862 52.1396 96.307 52.39 96.77C52.6117 97.1989 52.9611 97.5483 53.39 97.77C53.8194 98.0026 54.3018 98.1198 54.79 98.11C55.2249 98.1129 55.6539 98.0099 56.04 97.81C56.454 97.5908 56.7999 97.2622 57.04 96.86L58.66 97.81C58.3182 98.4718 57.7851 99.0154 57.13 99.37C56.4087 99.7205 55.6112 99.8855 54.81 99.85Z","fill":"#332E2B","key":24}),React.createElement("path",{"d":"M66.01 99.24C65.7437 99.4519 65.4377 99.6083 65.11 99.7C64.7453 99.8008 64.3684 99.8513 63.99 99.85C63.1554 99.9024 62.3334 99.626 61.7 99.08C61.4136 98.779 61.1928 98.4218 61.0517 98.0311C60.9105 97.6403 60.8521 97.2245 60.88 96.81V92.48H59.4V90.79H60.88V88.73H63V90.79H65.4V92.48H63V96.76C62.979 97.1215 63.093 97.4779 63.32 97.76C63.4422 97.8798 63.588 97.9728 63.7481 98.0331C63.9082 98.0934 64.0792 98.1196 64.25 98.11C64.6739 98.1241 65.09 97.9936 65.43 97.74L66.01 99.24Z","fill":"#332E2B","key":25}),React.createElement("path",{"d":"M68.81 89.24C68.627 89.2489 68.444 89.2207 68.2722 89.1571C68.1004 89.0935 67.9431 88.9959 67.81 88.87C67.6885 88.7539 67.5922 88.6141 67.5268 88.4594C67.4614 88.3046 67.4285 88.138 67.43 87.97C67.4267 87.8017 67.4588 87.6346 67.5243 87.4796C67.5897 87.3245 67.6871 87.185 67.81 87.07C67.9436 86.9455 68.1012 86.8493 68.2731 86.7875C68.4449 86.7256 68.6276 86.6992 68.81 86.71C68.9908 86.6983 69.1722 86.7222 69.3438 86.7806C69.5154 86.8389 69.6738 86.9305 69.81 87.05C69.9321 87.1592 70.0293 87.2934 70.0949 87.4436C70.1604 87.5937 70.1929 87.7562 70.19 87.92C70.1953 88.0936 70.1652 88.2664 70.1016 88.428C70.038 88.5896 69.9422 88.7366 69.82 88.86C69.6879 88.9909 69.5296 89.0924 69.3556 89.1579C69.1815 89.2234 68.9956 89.2514 68.81 89.24ZM67.75 99.73V90.73H69.86V99.73H67.75Z","fill":"#332E2B","key":26}),React.createElement("path",{"d":"M76.67 99.85C75.8121 99.8644 74.965 99.6578 74.21 99.25C73.5038 98.8649 72.916 98.2944 72.51 97.6C72.0971 96.8748 71.8799 96.0546 71.8799 95.22C71.8799 94.3854 72.0971 93.5652 72.51 92.84C72.9168 92.1513 73.5049 91.5875 74.21 91.21C74.9672 90.8091 75.8134 90.6061 76.67 90.62C77.5362 90.6062 78.3921 90.809 79.16 91.21C79.8645 91.584 80.4526 92.1444 80.86 92.83C81.2663 93.5592 81.4796 94.3802 81.4796 95.215C81.4796 96.0498 81.2663 96.8708 80.86 97.6C80.454 98.2944 79.8663 98.8649 79.16 99.25C78.3946 99.6585 77.5375 99.8651 76.67 99.85ZM76.67 98.04C77.152 98.051 77.6283 97.9336 78.05 97.7C78.4777 97.4767 78.8267 97.1277 79.05 96.7C79.2863 96.2361 79.4032 95.7205 79.39 95.2C79.4066 94.676 79.2896 94.1563 79.05 93.69C78.83 93.2599 78.4801 92.91 78.05 92.69C77.6279 92.4667 77.1576 92.35 76.68 92.35C76.2025 92.35 75.7321 92.4667 75.31 92.69C74.8838 92.9153 74.5353 93.2638 74.31 93.69C74.0631 94.154 73.9424 94.6747 73.96 95.2C73.9442 95.7219 74.0648 96.239 74.31 96.7C74.5383 97.124 74.886 97.4717 75.31 97.7C75.7253 97.9315 76.1946 98.0489 76.67 98.04Z","fill":"#332E2B","key":27}),React.createElement("path",{"d":"M92.38 94.57V99.73H90.26V94.84C90.3085 94.1937 90.1082 93.5534 89.7 93.05C89.4933 92.8486 89.247 92.6921 88.9768 92.5906C88.7066 92.4891 88.4183 92.4446 88.13 92.46C87.6707 92.4485 87.2162 92.5552 86.81 92.77C86.4274 92.9675 86.1188 93.2831 85.93 93.67C85.7012 94.1392 85.5946 94.6586 85.62 95.18V99.73H83.51V90.73H85.51V91.92C85.7798 91.5772 86.121 91.2974 86.51 91.1C87.1622 90.7773 87.8824 90.6161 88.61 90.63C89.2771 90.6198 89.9375 90.7635 90.54 91.05C91.1063 91.3365 91.5707 91.7904 91.87 92.35C92.2259 93.0346 92.4014 93.7987 92.38 94.57Z","fill":"#332E2B","key":28}),React.createElement("defs",{"key":29},[React.createElement("linearGradient",{"id":"paint0_linear_97_203","x1":"58.31","y1":"22.5","x2":"58.45","y2":"22.87","gradientUnits":"userSpaceOnUse","key":0},[React.createElement("stop",{"stopColor":"#63B22F","key":0}),React.createElement("stop",{"offset":"0.68","stopColor":"#046C5B","key":1}),React.createElement("stop",{"offset":"1","stopColor":"#13302C","key":2})]),React.createElement("linearGradient",{"id":"paint1_linear_97_203","x1":"46.54","y1":"8.09","x2":"46.91","y2":"9.11999","gradientUnits":"userSpaceOnUse","key":1},[React.createElement("stop",{"stopColor":"#63B22F","key":0}),React.createElement("stop",{"offset":"0.68","stopColor":"#046C5B","key":1}),React.createElement("stop",{"offset":"1","stopColor":"#13302C","key":2})])])]);
+}
+
+QuitYourAddictionLogo.defaultProps = {"viewBox":"0 0 101 100","fill":"none"};
+
+module.exports = QuitYourAddictionLogo;
+
+QuitYourAddictionLogo.default = QuitYourAddictionLogo;
+
+
+/***/ }),
+
+/***/ "./src/images/search_icon.svg":
+/*!************************************!*\
+  !*** ./src/images/search_icon.svg ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "react");
+
+function SearchIcon (props) {
+    return React.createElement("svg",props,React.createElement("g",{"id":"search_icon"},React.createElement("path",{"id":"search_icon_2","d":"M8.89605 2.00628e-08C10.5665 -0.000112141 12.2033 0.470054 13.619 1.35669C15.0347 2.24333 16.1722 3.51061 16.9013 5.01352C17.6304 6.51642 17.9216 8.19422 17.7417 9.8549C17.5617 11.5156 16.9178 13.0921 15.8837 14.4039L19.7062 18.2262C19.8968 18.4236 20.0023 18.688 20 18.9625C19.9976 19.2369 19.8875 19.4994 19.6934 19.6934C19.4994 19.8875 19.2368 19.9976 18.9624 20C18.688 20.0023 18.4236 19.8968 18.2262 19.7062L14.4037 15.8839C13.2894 16.7619 11.9813 17.3609 10.5886 17.6306C9.19575 17.9004 7.75864 17.8331 6.3971 17.4346C5.03557 17.036 3.7891 16.3176 2.76169 15.3393C1.73427 14.361 0.955709 13.1513 0.490952 11.8109C0.0261946 10.4706 -0.111279 9.03854 0.0899992 7.63426C0.291278 6.22998 0.825473 4.8942 1.64802 3.73835C2.47056 2.5825 3.5576 1.64011 4.81844 0.989804C6.07928 0.339494 7.47736 0.000120879 8.89605 2.00628e-08ZM8.89605 2.09329C7.09166 2.09329 5.36118 2.81005 4.08529 4.08589C2.8094 5.36173 2.09261 7.09215 2.09261 8.89647C2.09261 10.7008 2.8094 12.4312 4.08529 13.707C5.36118 14.9829 7.09166 15.6996 8.89605 15.6996C10.7004 15.6996 12.4309 14.9829 13.7068 13.707C14.9827 12.4312 15.6995 10.7008 15.6995 8.89647C15.6995 7.09215 14.9827 5.36173 13.7068 4.08589C12.4309 2.81005 10.7004 2.09329 8.89605 2.09329ZM8.89605 3.13993C10.4228 3.13993 11.8871 3.74642 12.9667 4.82598C14.0463 5.90554 14.6528 7.36974 14.6528 8.89647C14.6528 10.4232 14.0463 11.8874 12.9667 12.967C11.8871 14.0465 10.4228 14.653 8.89605 14.653C7.36926 14.653 5.90501 14.0465 4.82541 12.967C3.7458 11.8874 3.13929 10.4232 3.13929 8.89647C3.13929 7.36974 3.7458 5.90554 4.82541 4.82598C5.90501 3.74642 7.36926 3.13993 8.89605 3.13993Z"})));
+}
+
+SearchIcon.defaultProps = {"width":"20","height":"20","viewBox":"0 0 20 20"};
+
+module.exports = SearchIcon;
+
+SearchIcon.default = SearchIcon;
+
+
+/***/ }),
+
+/***/ "./src/images/x_icon.svg":
+/*!*******************************!*\
+  !*** ./src/images/x_icon.svg ***!
+  \*******************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "react");
+
+function XIcon (props) {
+    return React.createElement("svg",props,[React.createElement("path",{"d":"M6.84653 4.95123L14.432 14.9819H13.254L5.58372 4.95123H6.84653Z","fill":"#E27023","key":0}),React.createElement("path",{"d":"M6.84653 4.95123H5.58372L13.254 14.9819H14.432L6.84653 4.95123Z","fill":"black","key":1}),React.createElement("path",{"d":"M19.9984 4.24702C19.979 3.11427 19.5155 2.03445 18.7077 1.24009C17.9 0.445737 16.8125 0.000404177 15.6796 0H4.32092C3.17494 0 2.0759 0.45524 1.26557 1.26557C0.455238 2.0759 0 3.17494 0 4.32092V15.6775C0 16.8234 0.455238 17.9225 1.26557 18.7328C2.0759 19.5431 3.17494 19.9984 4.32092 19.9984H15.6796C16.8125 19.998 17.9 19.5526 18.7077 18.7583C19.5155 17.9639 19.979 16.8841 19.9984 15.7514C19.9984 15.7275 19.9984 15.7014 19.9984 15.6775V4.32092C20.0005 4.29701 20.0005 4.27093 19.9984 4.24702ZM19.3463 15.6927V15.7427C19.3232 16.7022 18.9276 17.6151 18.2432 18.2881C17.5588 18.9611 16.6394 19.3414 15.6796 19.3485H4.32092C3.34785 19.3473 2.415 18.9601 1.72714 18.2719C1.03928 17.5836 0.652625 16.6505 0.65205 15.6775V4.32092C0.6532 3.34823 1.04011 2.41571 1.72791 1.72791C2.4157 1.04011 3.34823 0.6532 4.32092 0.65205H15.6796C16.6394 0.659111 17.5588 1.0394 18.2432 1.71241C18.9276 2.38542 19.3232 3.29832 19.3463 4.25789V15.6927ZM12.3237 9.07219L16.6099 4.17747L17.5554 3.09072H13.7039L13.5083 3.30807L10.5458 6.7009L8.005 3.34502L7.80938 3.08637H1.78227L2.58429 4.134L7.48553 10.5458L2.89293 15.8187L1.94746 16.9055H5.7989L5.99451 16.6881L9.29388 12.9193L12.152 16.6555L12.3477 16.912H18.2465L17.4554 15.8665L12.3237 9.07219ZM12.6693 16.2447L9.32866 11.876L5.5033 16.2447H3.38414L8.33755 10.5806L3.12115 3.74494H7.4964L10.5197 7.74201L14.0104 3.74494H16.1274L11.4935 9.03959L16.9446 16.2447H12.6693Z","fill":"#E27023","key":2}),React.createElement("path",{"d":"M19.9984 4.24702C19.979 3.11427 19.5155 2.03445 18.7077 1.24009C17.9 0.445737 16.8125 0.000404177 15.6796 0H4.32092C3.17494 0 2.0759 0.45524 1.26557 1.26557C0.455238 2.0759 0 3.17494 0 4.32092V15.6775C0 16.8234 0.455238 17.9225 1.26557 18.7328C2.0759 19.5431 3.17494 19.9984 4.32092 19.9984H15.6796C16.8125 19.998 17.9 19.5526 18.7077 18.7583C19.5155 17.9639 19.979 16.8841 19.9984 15.7514C19.9984 15.7275 19.9984 15.7014 19.9984 15.6775V4.32092C20.0005 4.29701 20.0005 4.27093 19.9984 4.24702ZM19.3463 15.6927V15.7427C19.3232 16.7022 18.9276 17.6151 18.2432 18.2881C17.5588 18.9611 16.6394 19.3414 15.6796 19.3485H4.32092C3.34785 19.3473 2.415 18.9601 1.72714 18.2719C1.03928 17.5836 0.652625 16.6505 0.65205 15.6775V4.32092C0.6532 3.34823 1.04011 2.41571 1.72791 1.72791C2.4157 1.04011 3.34823 0.6532 4.32092 0.65205H15.6796C16.6394 0.659111 17.5588 1.0394 18.2432 1.71241C18.9276 2.38542 19.3232 3.29832 19.3463 4.25789V15.6927ZM12.3237 9.07219L16.6099 4.17747L17.5554 3.09072H13.7039L13.5083 3.30807L10.5458 6.7009L8.005 3.34502L7.80938 3.08637H1.78227L2.58429 4.134L7.48553 10.5458L2.89293 15.8187L1.94746 16.9055H5.7989L5.99451 16.6881L9.29388 12.9193L12.152 16.6555L12.3477 16.912H18.2465L17.4554 15.8665L12.3237 9.07219ZM12.6693 16.2447L9.32866 11.876L5.5033 16.2447H3.38414L8.33755 10.5806L3.12115 3.74494H7.4964L10.5197 7.74201L14.0104 3.74494H16.1274L11.4935 9.03959L16.9446 16.2447H12.6693ZM17.451 15.8513L12.3237 9.07219L16.6099 4.17747L17.5554 3.09072H13.7039L13.5083 3.30807L10.5458 6.7009L8.005 3.34502L7.80938 3.08637H1.78227L2.58429 4.134L7.48553 10.5458L2.89293 15.8187L1.94746 16.9055H5.7989L5.99451 16.6881L9.29388 12.9193L12.152 16.6555L12.3477 16.912H18.2465L17.451 15.8513ZM12.6693 16.2447L9.32866 11.876L5.5033 16.2447H3.38414L8.33755 10.5806L3.12115 3.74494H7.4964L10.5197 7.74201L14.0104 3.74494H16.1274L11.4935 9.03959L16.9446 16.2447H12.6693ZM17.451 15.8513L12.3237 9.07219L16.6099 4.17747L17.5554 3.09072H13.7039L13.5083 3.30807L10.5458 6.7009L8.005 3.34502L7.80938 3.08637H1.78227L2.58429 4.134L7.48553 10.5458L2.89293 15.8187L1.94746 16.9055H5.7989L5.99451 16.6881L9.29388 12.9193L12.152 16.6555L12.3477 16.912H18.2465L17.451 15.8513ZM12.6693 16.2447L9.32866 11.876L5.5033 16.2447H3.38414L8.33755 10.5806L3.12115 3.74494H7.4964L10.5197 7.74201L14.0104 3.74494H16.1274L11.4935 9.03959L16.9446 16.2447H12.6693Z","fill":"black","key":3}),React.createElement("path",{"d":"M19.3463 4.27091V4.25787C19.3232 3.29831 18.9276 2.3854 18.2432 1.7124C17.5588 1.03939 16.6394 0.6591 15.6796 0.652039H4.32092C3.34823 0.653189 2.41571 1.0401 1.72791 1.7279C1.04011 2.41569 0.653204 3.34822 0.652054 4.32091V15.6774C0.653204 16.6501 1.04011 17.5827 1.72791 18.2705C2.41571 18.9583 3.34823 19.3452 4.32092 19.3463H15.6796C16.6394 19.3393 17.5588 18.959 18.2432 18.286C18.9276 17.613 19.3232 16.7 19.3463 15.7405V4.27091ZM12.3477 16.9011L12.152 16.6447L9.29389 12.9084L5.99451 16.6772L5.7989 16.8946H1.94746L2.89293 15.8078L7.49423 10.5458L2.59299 4.13399L1.78227 3.09723H7.80069L7.99631 3.35587L10.5371 6.71176L13.5192 3.31893L13.7148 3.10158H17.5662L16.6208 4.18833L12.3237 9.07218L17.4554 15.8557L18.2465 16.9011H12.3477Z","fill":"#E27023","key":4})]);
+}
+
+XIcon.defaultProps = {"width":"30","height":"30","viewBox":"0 0 20 20","fill":"none"};
+
+module.exports = XIcon;
+
+XIcon.default = XIcon;
+
 
 /***/ }),
 
@@ -1009,6 +640,7 @@ const Head = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createInstantAnimation: () => (/* binding */ createInstantAnimation)
@@ -1065,6 +697,7 @@ function createInstantAnimation({ keyframes, delay, onUpdate, onComplete, }) {
   \****************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   frameloopDriver: () => (/* binding */ frameloopDriver)
@@ -1096,6 +729,7 @@ const frameloopDriver = (update) => {
   \*****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   animateValue: () => (/* binding */ animateValue)
@@ -1421,6 +1055,7 @@ function animateValue({ autoplay = true, delay = 0, driver = _driver_frameloop_m
   \*******************************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createAcceleratedAnimation: () => (/* binding */ createAcceleratedAnimation)
@@ -1629,6 +1264,7 @@ function createAcceleratedAnimation(value, valueName, { onUpdate, onComplete, ..
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   cubicBezierAsString: () => (/* binding */ cubicBezierAsString),
@@ -1678,6 +1314,7 @@ function mapEasingToNativeEasing(easing) {
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   animateStyle: () => (/* binding */ animateStyle)
@@ -1716,6 +1353,7 @@ function animateStyle(element, valueName, keyframes, { delay = 0, duration, repe
   \***************************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getFinalKeyframe: () => (/* binding */ getFinalKeyframe)
@@ -1738,6 +1376,7 @@ function getFinalKeyframe(keyframes, { repeat, repeatType = "loop" }) {
   \*****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   inertia: () => (/* binding */ inertia)
@@ -1841,6 +1480,7 @@ function inertia({ keyframes, velocity = 0.0, power = 0.8, timeConstant = 325, b
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   defaultEasing: () => (/* binding */ defaultEasing),
@@ -1913,6 +1553,7 @@ function keyframes({ duration = 300, keyframes: keyframeValues, times, ease = "e
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   calcAngularFreq: () => (/* binding */ calcAngularFreq),
@@ -2024,6 +1665,7 @@ function calcAngularFreq(undampedFreq, dampingRatio) {
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   spring: () => (/* binding */ spring)
@@ -2170,6 +1812,7 @@ function spring({ keyframes, restDelta, restSpeed, ...options }) {
   \*****************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   calcGeneratorDuration: () => (/* binding */ calcGeneratorDuration),
@@ -2202,6 +1845,7 @@ function calcGeneratorDuration(generator) {
   \************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   calcGeneratorVelocity: () => (/* binding */ calcGeneratorVelocity)
@@ -2226,6 +1870,7 @@ function calcGeneratorVelocity(resolveValue, t, current) {
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   animateMotionValue: () => (/* binding */ animateMotionValue)
@@ -2364,6 +2009,7 @@ const animateMotionValue = (valueName, value, target, transition = {}) => {
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   animateSingleValue: () => (/* binding */ animateSingleValue)
@@ -2392,6 +2038,7 @@ function animateSingleValue(value, keyframes, options) {
   \*******************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   animateTarget: () => (/* binding */ animateTarget)
@@ -2516,6 +2163,7 @@ function animateTarget(visualElement, definition, { delay = 0, transitionOverrid
   \********************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   animateVariant: () => (/* binding */ animateVariant),
@@ -2596,6 +2244,7 @@ function sortByTreeOrder(a, b) {
   \************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   animateVisualElement: () => (/* binding */ animateVisualElement)
@@ -2637,6 +2286,7 @@ function animateVisualElement(visualElement, definition, options = {}) {
   \***********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   optimizedAppearDataAttribute: () => (/* binding */ optimizedAppearDataAttribute),
@@ -2659,6 +2309,7 @@ const optimizedAppearDataAttribute = "data-" + (0,_render_dom_utils_camel_to_das
   \************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getDefaultTransition: () => (/* binding */ getDefaultTransition)
@@ -2714,6 +2365,7 @@ const getDefaultTransition = (valueKey, { keyframes }) => {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isAnimatable: () => (/* binding */ isAnimatable)
@@ -2759,6 +2411,7 @@ const isAnimatable = (key, value) => {
   \**************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isAnimationControls: () => (/* binding */ isAnimationControls)
@@ -2778,6 +2431,7 @@ function isAnimationControls(v) {
   \************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isKeyframesTarget: () => (/* binding */ isKeyframesTarget)
@@ -2797,6 +2451,7 @@ const isKeyframesTarget = (v) => {
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isNone: () => (/* binding */ isNone)
@@ -2824,6 +2479,7 @@ function isNone(value) {
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getKeyframes: () => (/* binding */ getKeyframes)
@@ -2886,6 +2542,7 @@ function getKeyframes(value, valueName, target, transition) {
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getValueTransition: () => (/* binding */ getValueTransition),
@@ -2908,12 +2565,367 @@ function getValueTransition(transition, key) {
 
 /***/ }),
 
+/***/ "./node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs":
+/*!************************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PopChild: () => (/* binding */ PopChild)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+
+
+
+/**
+ * Measurement functionality has to be within a separate component
+ * to leverage snapshot lifecycle.
+ */
+class PopChildMeasure extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+    getSnapshotBeforeUpdate(prevProps) {
+        const element = this.props.childRef.current;
+        if (element && prevProps.isPresent && !this.props.isPresent) {
+            const size = this.props.sizeRef.current;
+            size.height = element.offsetHeight || 0;
+            size.width = element.offsetWidth || 0;
+            size.top = element.offsetTop;
+            size.left = element.offsetLeft;
+        }
+        return null;
+    }
+    /**
+     * Required with getSnapshotBeforeUpdate to stop React complaining.
+     */
+    componentDidUpdate() { }
+    render() {
+        return this.props.children;
+    }
+}
+function PopChild({ children, isPresent }) {
+    const id = (0,react__WEBPACK_IMPORTED_MODULE_0__.useId)();
+    const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+    const size = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+        width: 0,
+        height: 0,
+        top: 0,
+        left: 0,
+    });
+    /**
+     * We create and inject a style block so we can apply this explicit
+     * sizing in a non-destructive manner by just deleting the style block.
+     *
+     * We can't apply size via render as the measurement happens
+     * in getSnapshotBeforeUpdate (post-render), likewise if we apply the
+     * styles directly on the DOM node, we might be overwriting
+     * styles set via the style prop.
+     */
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useInsertionEffect)(() => {
+        const { width, height, top, left } = size.current;
+        if (isPresent || !ref.current || !width || !height)
+            return;
+        ref.current.dataset.motionPopId = id;
+        const style = document.createElement("style");
+        document.head.appendChild(style);
+        if (style.sheet) {
+            style.sheet.insertRule(`
+          [data-motion-pop-id="${id}"] {
+            position: absolute !important;
+            width: ${width}px !important;
+            height: ${height}px !important;
+            top: ${top}px !important;
+            left: ${left}px !important;
+          }
+        `);
+        }
+        return () => {
+            document.head.removeChild(style);
+        };
+    }, [isPresent]);
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(PopChildMeasure, { isPresent: isPresent, childRef: ref, sizeRef: size }, react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(children, { ref })));
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PresenceChild: () => (/* binding */ PresenceChild)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _context_PresenceContext_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../context/PresenceContext.mjs */ "./node_modules/framer-motion/dist/es/context/PresenceContext.mjs");
+/* harmony import */ var _utils_use_constant_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/use-constant.mjs */ "./node_modules/framer-motion/dist/es/utils/use-constant.mjs");
+/* harmony import */ var _PopChild_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PopChild.mjs */ "./node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs");
+
+
+
+
+
+
+const PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, presenceAffectsLayout, mode, }) => {
+    const presenceChildren = (0,_utils_use_constant_mjs__WEBPACK_IMPORTED_MODULE_1__.useConstant)(newChildrenMap);
+    const id = (0,react__WEBPACK_IMPORTED_MODULE_0__.useId)();
+    const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+        id,
+        initial,
+        isPresent,
+        custom,
+        onExitComplete: (childId) => {
+            presenceChildren.set(childId, true);
+            for (const isComplete of presenceChildren.values()) {
+                if (!isComplete)
+                    return; // can stop searching when any is incomplete
+            }
+            onExitComplete && onExitComplete();
+        },
+        register: (childId) => {
+            presenceChildren.set(childId, false);
+            return () => presenceChildren.delete(childId);
+        },
+    }), 
+    /**
+     * If the presence of a child affects the layout of the components around it,
+     * we want to make a new context value to ensure they get re-rendered
+     * so they can detect that layout change.
+     */
+    presenceAffectsLayout ? undefined : [isPresent]);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+        presenceChildren.forEach((_, key) => presenceChildren.set(key, false));
+    }, [isPresent]);
+    /**
+     * If there's no `motion` components to fire exit animations, we want to remove this
+     * component immediately.
+     */
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
+        !isPresent &&
+            !presenceChildren.size &&
+            onExitComplete &&
+            onExitComplete();
+    }, [isPresent]);
+    if (mode === "popLayout") {
+        children = react__WEBPACK_IMPORTED_MODULE_0__.createElement(_PopChild_mjs__WEBPACK_IMPORTED_MODULE_2__.PopChild, { isPresent: isPresent }, children);
+    }
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_context_PresenceContext_mjs__WEBPACK_IMPORTED_MODULE_3__.PresenceContext.Provider, { value: context }, children));
+};
+function newChildrenMap() {
+    return new Map();
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AnimatePresence: () => (/* binding */ AnimatePresence)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _utils_use_force_update_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/use-force-update.mjs */ "./node_modules/framer-motion/dist/es/utils/use-force-update.mjs");
+/* harmony import */ var _utils_use_is_mounted_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/use-is-mounted.mjs */ "./node_modules/framer-motion/dist/es/utils/use-is-mounted.mjs");
+/* harmony import */ var _PresenceChild_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./PresenceChild.mjs */ "./node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs");
+/* harmony import */ var _context_LayoutGroupContext_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../context/LayoutGroupContext.mjs */ "./node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs");
+/* harmony import */ var _utils_use_isomorphic_effect_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/use-isomorphic-effect.mjs */ "./node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs");
+/* harmony import */ var _utils_use_unmount_effect_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/use-unmount-effect.mjs */ "./node_modules/framer-motion/dist/es/utils/use-unmount-effect.mjs");
+/* harmony import */ var _utils_errors_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/errors.mjs */ "./node_modules/framer-motion/dist/es/utils/errors.mjs");
+
+
+
+
+
+
+
+
+
+
+const getChildKey = (child) => child.key || "";
+function updateChildLookup(children, allChildren) {
+    children.forEach((child) => {
+        const key = getChildKey(child);
+        allChildren.set(key, child);
+    });
+}
+function onlyElements(children) {
+    const filtered = [];
+    // We use forEach here instead of map as map mutates the component key by preprending `.$`
+    react__WEBPACK_IMPORTED_MODULE_0__.Children.forEach(children, (child) => {
+        if ((0,react__WEBPACK_IMPORTED_MODULE_0__.isValidElement)(child))
+            filtered.push(child);
+    });
+    return filtered;
+}
+/**
+ * `AnimatePresence` enables the animation of components that have been removed from the tree.
+ *
+ * When adding/removing more than a single child, every child **must** be given a unique `key` prop.
+ *
+ * Any `motion` components that have an `exit` property defined will animate out when removed from
+ * the tree.
+ *
+ * ```jsx
+ * import { motion, AnimatePresence } from 'framer-motion'
+ *
+ * export const Items = ({ items }) => (
+ *   <AnimatePresence>
+ *     {items.map(item => (
+ *       <motion.div
+ *         key={item.id}
+ *         initial={{ opacity: 0 }}
+ *         animate={{ opacity: 1 }}
+ *         exit={{ opacity: 0 }}
+ *       />
+ *     ))}
+ *   </AnimatePresence>
+ * )
+ * ```
+ *
+ * You can sequence exit animations throughout a tree using variants.
+ *
+ * If a child contains multiple `motion` components with `exit` props, it will only unmount the child
+ * once all `motion` components have finished animating out. Likewise, any components using
+ * `usePresence` all need to call `safeToRemove`.
+ *
+ * @public
+ */
+const AnimatePresence = ({ children, custom, initial = true, onExitComplete, exitBeforeEnter, presenceAffectsLayout = true, mode = "sync", }) => {
+    (0,_utils_errors_mjs__WEBPACK_IMPORTED_MODULE_1__.invariant)(!exitBeforeEnter, "Replace exitBeforeEnter with mode='wait'");
+    // We want to force a re-render once all exiting animations have finished. We
+    // either use a local forceRender function, or one from a parent context if it exists.
+    const forceRender = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context_LayoutGroupContext_mjs__WEBPACK_IMPORTED_MODULE_2__.LayoutGroupContext).forceRender || (0,_utils_use_force_update_mjs__WEBPACK_IMPORTED_MODULE_3__.useForceUpdate)()[0];
+    const isMounted = (0,_utils_use_is_mounted_mjs__WEBPACK_IMPORTED_MODULE_4__.useIsMounted)();
+    // Filter out any children that aren't ReactElements. We can only track ReactElements with a props.key
+    const filteredChildren = onlyElements(children);
+    let childrenToRender = filteredChildren;
+    const exitingChildren = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(new Map()).current;
+    // Keep a living record of the children we're actually rendering so we
+    // can diff to figure out which are entering and exiting
+    const presentChildren = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(childrenToRender);
+    // A lookup table to quickly reference components by key
+    const allChildren = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(new Map()).current;
+    // If this is the initial component render, just deal with logic surrounding whether
+    // we play onMount animations or not.
+    const isInitialRender = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
+    (0,_utils_use_isomorphic_effect_mjs__WEBPACK_IMPORTED_MODULE_5__.useIsomorphicLayoutEffect)(() => {
+        isInitialRender.current = false;
+        updateChildLookup(filteredChildren, allChildren);
+        presentChildren.current = childrenToRender;
+    });
+    (0,_utils_use_unmount_effect_mjs__WEBPACK_IMPORTED_MODULE_6__.useUnmountEffect)(() => {
+        isInitialRender.current = true;
+        allChildren.clear();
+        exitingChildren.clear();
+    });
+    if (isInitialRender.current) {
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, childrenToRender.map((child) => (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_PresenceChild_mjs__WEBPACK_IMPORTED_MODULE_7__.PresenceChild, { key: getChildKey(child), isPresent: true, initial: initial ? undefined : false, presenceAffectsLayout: presenceAffectsLayout, mode: mode }, child)))));
+    }
+    // If this is a subsequent render, deal with entering and exiting children
+    childrenToRender = [...childrenToRender];
+    // Diff the keys of the currently-present and target children to update our
+    // exiting list.
+    const presentKeys = presentChildren.current.map(getChildKey);
+    const targetKeys = filteredChildren.map(getChildKey);
+    // Diff the present children with our target children and mark those that are exiting
+    const numPresent = presentKeys.length;
+    for (let i = 0; i < numPresent; i++) {
+        const key = presentKeys[i];
+        if (targetKeys.indexOf(key) === -1 && !exitingChildren.has(key)) {
+            exitingChildren.set(key, undefined);
+        }
+    }
+    // If we currently have exiting children, and we're deferring rendering incoming children
+    // until after all current children have exiting, empty the childrenToRender array
+    if (mode === "wait" && exitingChildren.size) {
+        childrenToRender = [];
+    }
+    // Loop through all currently exiting components and clone them to overwrite `animate`
+    // with any `exit` prop they might have defined.
+    exitingChildren.forEach((component, key) => {
+        // If this component is actually entering again, early return
+        if (targetKeys.indexOf(key) !== -1)
+            return;
+        const child = allChildren.get(key);
+        if (!child)
+            return;
+        const insertionIndex = presentKeys.indexOf(key);
+        let exitingComponent = component;
+        if (!exitingComponent) {
+            const onExit = () => {
+                // clean up the exiting children map
+                exitingChildren.delete(key);
+                // compute the keys of children that were rendered once but are no longer present
+                // this could happen in case of too many fast consequent renderings
+                // @link https://github.com/framer/motion/issues/2023
+                const leftOverKeys = Array.from(allChildren.keys()).filter((childKey) => !targetKeys.includes(childKey));
+                // clean up the all children map
+                leftOverKeys.forEach((leftOverKey) => allChildren.delete(leftOverKey));
+                // make sure to render only the children that are actually visible
+                presentChildren.current = filteredChildren.filter((presentChild) => {
+                    const presentChildKey = getChildKey(presentChild);
+                    return (
+                    // filter out the node exiting
+                    presentChildKey === key ||
+                        // filter out the leftover children
+                        leftOverKeys.includes(presentChildKey));
+                });
+                // Defer re-rendering until all exiting children have indeed left
+                if (!exitingChildren.size) {
+                    if (isMounted.current === false)
+                        return;
+                    forceRender();
+                    onExitComplete && onExitComplete();
+                }
+            };
+            exitingComponent = (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_PresenceChild_mjs__WEBPACK_IMPORTED_MODULE_7__.PresenceChild, { key: getChildKey(child), isPresent: false, onExitComplete: onExit, custom: custom, presenceAffectsLayout: presenceAffectsLayout, mode: mode }, child));
+            exitingChildren.set(key, exitingComponent);
+        }
+        childrenToRender.splice(insertionIndex, 0, exitingComponent);
+    });
+    // Add `MotionContext` even to children that don't need it to ensure we're rendering
+    // the same tree between renders
+    childrenToRender = childrenToRender.map((child) => {
+        const key = child.key;
+        return exitingChildren.has(key) ? (child) : (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_PresenceChild_mjs__WEBPACK_IMPORTED_MODULE_7__.PresenceChild, { key: getChildKey(child), isPresent: true, presenceAffectsLayout: presenceAffectsLayout, mode: mode }, child));
+    });
+    if ( true &&
+        mode === "wait" &&
+        childrenToRender.length > 1) {
+        console.warn(`You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`);
+    }
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, exitingChildren.size
+        ? childrenToRender
+        : childrenToRender.map((child) => (0,react__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(child))));
+};
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/framer-motion/dist/es/components/AnimatePresence/use-presence.mjs":
 /*!****************************************************************************************!*\
   !*** ./node_modules/framer-motion/dist/es/components/AnimatePresence/use-presence.mjs ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isPresent: () => (/* binding */ isPresent),
@@ -2998,6 +3010,7 @@ function isPresent(context) {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   LayoutGroupContext: () => (/* binding */ LayoutGroupContext)
@@ -3018,6 +3031,7 @@ const LayoutGroupContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(
   \********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   LazyContext: () => (/* binding */ LazyContext)
@@ -3038,6 +3052,7 @@ const LazyContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({ stric
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   MotionConfigContext: () => (/* binding */ MotionConfigContext)
@@ -3065,6 +3080,7 @@ const MotionConfigContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)
   \*****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   useCreateMotionContext: () => (/* binding */ useCreateMotionContext)
@@ -3095,6 +3111,7 @@ function variantLabelsAsDependency(prop) {
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   MotionContext: () => (/* binding */ MotionContext)
@@ -3115,6 +3132,7 @@ const MotionContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({});
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getCurrentTreeVariants: () => (/* binding */ getCurrentTreeVariants)
@@ -3148,6 +3166,7 @@ function getCurrentTreeVariants(props, context) {
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PresenceContext: () => (/* binding */ PresenceContext)
@@ -3171,6 +3190,7 @@ const PresenceContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(nul
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SwitchLayoutGroupContext: () => (/* binding */ SwitchLayoutGroupContext)
@@ -3194,6 +3214,7 @@ const SwitchLayoutGroupContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createCon
   \*************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   record: () => (/* binding */ record)
@@ -3215,6 +3236,7 @@ function record(data) {
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   anticipate: () => (/* binding */ anticipate)
@@ -3235,6 +3257,7 @@ const anticipate = (p) => (p *= 2) < 1 ? 0.5 * (0,_back_mjs__WEBPACK_IMPORTED_MO
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   backIn: () => (/* binding */ backIn),
@@ -3263,6 +3286,7 @@ const backInOut = (0,_modifiers_mirror_mjs__WEBPACK_IMPORTED_MODULE_2__.mirrorEa
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   circIn: () => (/* binding */ circIn),
@@ -3289,6 +3313,7 @@ const circInOut = (0,_modifiers_mirror_mjs__WEBPACK_IMPORTED_MODULE_1__.mirrorEa
   \********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   cubicBezier: () => (/* binding */ cubicBezier)
@@ -3355,6 +3380,7 @@ function cubicBezier(mX1, mY1, mX2, mY2) {
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   easeIn: () => (/* binding */ easeIn),
@@ -3379,6 +3405,7 @@ const easeInOut = (0,_cubic_bezier_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicBezier)
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   mirrorEasing: () => (/* binding */ mirrorEasing)
@@ -3398,6 +3425,7 @@ const mirrorEasing = (easing) => (p) => p <= 0.5 ? easing(2 * p) / 2 : (2 - easi
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   reverseEasing: () => (/* binding */ reverseEasing)
@@ -3417,6 +3445,7 @@ const reverseEasing = (easing) => (p) => 1 - easing(1 - p);
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isBezierDefinition: () => (/* binding */ isBezierDefinition)
@@ -3434,6 +3463,7 @@ const isBezierDefinition = (easing) => Array.isArray(easing) && typeof easing[0]
   \*****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isEasingArray: () => (/* binding */ isEasingArray)
@@ -3453,6 +3483,7 @@ const isEasingArray = (ease) => {
   \*****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   easingDefinitionToFunction: () => (/* binding */ easingDefinitionToFunction)
@@ -3511,6 +3542,7 @@ const easingDefinitionToFunction = (definition) => {
   \*********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addDomEvent: () => (/* binding */ addDomEvent)
@@ -3531,6 +3563,7 @@ function addDomEvent(target, eventName, handler, options = { passive: true }) {
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addPointerEvent: () => (/* binding */ addPointerEvent)
@@ -3555,6 +3588,7 @@ function addPointerEvent(target, eventName, handler, options) {
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addPointerInfo: () => (/* binding */ addPointerInfo),
@@ -3586,6 +3620,7 @@ const addPointerInfo = (handler) => {
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isPrimaryPointer: () => (/* binding */ isPrimaryPointer)
@@ -3618,6 +3653,7 @@ const isPrimaryPointer = (event) => {
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createRenderBatcher: () => (/* binding */ createRenderBatcher),
@@ -3694,6 +3730,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive) {
   \****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   cancelFrame: () => (/* binding */ cancelFrame),
@@ -3719,6 +3756,7 @@ const { schedule: frame, cancel: cancelFrame, state: frameData, steps, } = (0,_b
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createRenderStep: () => (/* binding */ createRenderStep)
@@ -3837,6 +3875,7 @@ function createRenderStep(runNextFrame) {
   \****************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VisualElementDragControls: () => (/* binding */ VisualElementDragControls),
@@ -4335,6 +4374,7 @@ function getCurrentDirection(offset, lockThreshold = 10) {
   \********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DragGesture: () => (/* binding */ DragGesture)
@@ -4379,6 +4419,7 @@ class DragGesture extends _motion_features_Feature_mjs__WEBPACK_IMPORTED_MODULE_
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   applyConstraints: () => (/* binding */ applyConstraints),
@@ -4532,6 +4573,7 @@ function resolvePointElastic(dragElastic, label) {
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createLock: () => (/* binding */ createLock),
@@ -4601,6 +4643,7 @@ function isDragActive() {
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   FocusGesture: () => (/* binding */ FocusGesture)
@@ -4659,6 +4702,7 @@ class FocusGesture extends _motion_features_Feature_mjs__WEBPACK_IMPORTED_MODULE
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HoverGesture: () => (/* binding */ HoverGesture)
@@ -4710,6 +4754,7 @@ class HoverGesture extends _motion_features_Feature_mjs__WEBPACK_IMPORTED_MODULE
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanSession: () => (/* binding */ PanSession)
@@ -4884,6 +4929,7 @@ function getVelocity(history, timeDelta) {
   \*******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanGesture: () => (/* binding */ PanGesture)
@@ -4954,6 +5000,7 @@ class PanGesture extends _motion_features_Feature_mjs__WEBPACK_IMPORTED_MODULE_1
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PressGesture: () => (/* binding */ PressGesture)
@@ -5097,6 +5144,7 @@ class PressGesture extends _motion_features_Feature_mjs__WEBPACK_IMPORTED_MODULE
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isNodeOrChild: () => (/* binding */ isNodeOrChild)
@@ -5131,6 +5179,7 @@ const isNodeOrChild = (parent, child) => {
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Feature: () => (/* binding */ Feature)
@@ -5154,6 +5203,7 @@ class Feature {
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ExitAnimationFeature: () => (/* binding */ ExitAnimationFeature)
@@ -5200,6 +5250,7 @@ class ExitAnimationFeature extends _Feature_mjs__WEBPACK_IMPORTED_MODULE_0__.Fea
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AnimationFeature: () => (/* binding */ AnimationFeature)
@@ -5255,6 +5306,7 @@ class AnimationFeature extends _Feature_mjs__WEBPACK_IMPORTED_MODULE_0__.Feature
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   animations: () => (/* binding */ animations)
@@ -5284,6 +5336,7 @@ const animations = {
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   featureDefinitions: () => (/* binding */ featureDefinitions)
@@ -5326,6 +5379,7 @@ for (const key in featureProps) {
   \*********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   drag: () => (/* binding */ drag)
@@ -5361,6 +5415,7 @@ const drag = {
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   gestureAnimations: () => (/* binding */ gestureAnimations)
@@ -5400,6 +5455,7 @@ const gestureAnimations = {
   \***********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   layout: () => (/* binding */ layout)
@@ -5427,6 +5483,7 @@ const layout = {
   \*************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   MeasureLayout: () => (/* binding */ MeasureLayout)
@@ -5581,6 +5638,7 @@ const defaultScaleCorrectors = {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   loadFeatures: () => (/* binding */ loadFeatures)
@@ -5608,6 +5666,7 @@ function loadFeatures(features) {
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   InViewFeature: () => (/* binding */ InViewFeature)
@@ -5696,6 +5755,7 @@ function hasViewportOptionChanged({ viewport = {} }, { viewport: prevViewport = 
   \***********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   observeIntersection: () => (/* binding */ observeIntersection)
@@ -5759,6 +5819,7 @@ function observeIntersection(element, options, callback) {
   \*************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createMotionComponent: () => (/* binding */ createMotionComponent)
@@ -5864,6 +5925,7 @@ function useLayoutId({ layoutId }) {
   \************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isForcedMotionValue: () => (/* binding */ isForcedMotionValue)
@@ -5891,6 +5953,7 @@ function isForcedMotionValue(key, { layout, layoutId }) {
   \********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   motionComponentSymbol: () => (/* binding */ motionComponentSymbol)
@@ -5908,6 +5971,7 @@ const motionComponentSymbol = Symbol.for("motionComponentSymbol");
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   useMotionRef: () => (/* binding */ useMotionRef)
@@ -5957,6 +6021,7 @@ function useMotionRef(visualState, visualElement, externalRef) {
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   useVisualElement: () => (/* binding */ useVisualElement)
@@ -6052,6 +6117,7 @@ function useVisualElement(Component, visualState, props, createVisualElement) {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   makeUseVisualState: () => (/* binding */ makeUseVisualState)
@@ -6155,6 +6221,7 @@ function makeLatestValues(props, context, presenceContext, scrapeMotionValues) {
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isValidMotionProp: () => (/* binding */ isValidMotionProp)
@@ -6228,6 +6295,7 @@ function isValidMotionProp(key) {
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   mixValues: () => (/* binding */ mixValues)
@@ -6340,6 +6408,7 @@ function compress(min, max, easing) {
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   convertBoundingBoxToBox: () => (/* binding */ convertBoundingBoxToBox),
@@ -6389,6 +6458,7 @@ function transformBoxPoints(point, transformPoint) {
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   copyAxisInto: () => (/* binding */ copyAxisInto),
@@ -6424,6 +6494,7 @@ function copyBoxInto(box, originBox) {
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   applyAxisDelta: () => (/* binding */ applyAxisDelta),
@@ -6569,6 +6640,7 @@ function transformBox(box, transform) {
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   calcAxisDelta: () => (/* binding */ calcAxisDelta),
@@ -6632,6 +6704,7 @@ function calcRelativePosition(target, layout, parent) {
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   removeAxisDelta: () => (/* binding */ removeAxisDelta),
@@ -6706,6 +6779,7 @@ function removeBoxTransforms(box, transforms, originBox, sourceBox) {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createAxis: () => (/* binding */ createAxis),
@@ -6740,6 +6814,7 @@ const createBox = () => ({
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   aspectRatio: () => (/* binding */ aspectRatio),
@@ -6783,6 +6858,7 @@ function aspectRatio(box) {
   \***************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DocumentProjectionNode: () => (/* binding */ DocumentProjectionNode)
@@ -6812,6 +6888,7 @@ const DocumentProjectionNode = (0,_create_projection_node_mjs__WEBPACK_IMPORTED_
   \***********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HTMLProjectionNode: () => (/* binding */ HTMLProjectionNode),
@@ -6856,6 +6933,7 @@ const HTMLProjectionNode = (0,_create_projection_node_mjs__WEBPACK_IMPORTED_MODU
   \***************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   cleanDirtyNodes: () => (/* binding */ cleanDirtyNodes),
@@ -8398,6 +8476,7 @@ function shouldAnimatePositionOnly(animationType, snapshot, layout) {
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   globalProjectionState: () => (/* binding */ globalProjectionState)
@@ -8431,6 +8510,7 @@ const globalProjectionState = {
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   NodeStack: () => (/* binding */ NodeStack)
@@ -8558,6 +8638,7 @@ class NodeStack {
   \**************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   correctBorderRadius: () => (/* binding */ correctBorderRadius),
@@ -8615,6 +8696,7 @@ const correctBorderRadius = {
   \***********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   correctBoxShadow: () => (/* binding */ correctBoxShadow)
@@ -8666,6 +8748,7 @@ const correctBoxShadow = {
   \***********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addScaleCorrector: () => (/* binding */ addScaleCorrector),
@@ -8687,6 +8770,7 @@ function addScaleCorrector(correctors) {
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   buildProjectionTransform: () => (/* binding */ buildProjectionTransform)
@@ -8743,6 +8827,7 @@ function buildProjectionTransform(delta, treeScale, latestTransform) {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   eachAxis: () => (/* binding */ eachAxis)
@@ -8762,6 +8847,7 @@ function eachAxis(callback) {
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   has2DTranslate: () => (/* binding */ has2DTranslate),
@@ -8802,6 +8888,7 @@ function is2DTranslate(value) {
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   measurePageBox: () => (/* binding */ measurePageBox),
@@ -8836,6 +8923,7 @@ function measurePageBox(element, rootProjectionNode, transformPagePoint) {
   \*********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VisualElement: () => (/* binding */ VisualElement)
@@ -9376,6 +9464,7 @@ class VisualElement {
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DOMVisualElement: () => (/* binding */ DOMVisualElement)
@@ -9441,6 +9530,7 @@ class DOMVisualElement extends _VisualElement_mjs__WEBPACK_IMPORTED_MODULE_0__.V
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createDomVisualElement: () => (/* binding */ createDomVisualElement)
@@ -9469,6 +9559,7 @@ const createDomVisualElement = (Component, options) => {
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createMotionProxy: () => (/* binding */ createMotionProxy)
@@ -9531,6 +9622,7 @@ function createMotionProxy(createConfig) {
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createDomMotionComponent: () => (/* binding */ createDomMotionComponent),
@@ -9590,12 +9682,681 @@ function createDomMotionComponent(key) {
 
 /***/ }),
 
+/***/ "./node_modules/framer-motion/dist/es/render/dom/resize/handle-element.mjs":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/resize/handle-element.mjs ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resizeElement: () => (/* binding */ resizeElement)
+/* harmony export */ });
+/* harmony import */ var _utils_resolve_element_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resolve-element.mjs */ "./node_modules/framer-motion/dist/es/render/dom/utils/resolve-element.mjs");
+
+
+const resizeHandlers = new WeakMap();
+let observer;
+function getElementSize(target, borderBoxSize) {
+    if (borderBoxSize) {
+        const { inlineSize, blockSize } = borderBoxSize[0];
+        return { width: inlineSize, height: blockSize };
+    }
+    else if (target instanceof SVGElement && "getBBox" in target) {
+        return target.getBBox();
+    }
+    else {
+        return {
+            width: target.offsetWidth,
+            height: target.offsetHeight,
+        };
+    }
+}
+function notifyTarget({ target, contentRect, borderBoxSize, }) {
+    var _a;
+    (_a = resizeHandlers.get(target)) === null || _a === void 0 ? void 0 : _a.forEach((handler) => {
+        handler({
+            target,
+            contentSize: contentRect,
+            get size() {
+                return getElementSize(target, borderBoxSize);
+            },
+        });
+    });
+}
+function notifyAll(entries) {
+    entries.forEach(notifyTarget);
+}
+function createResizeObserver() {
+    if (typeof ResizeObserver === "undefined")
+        return;
+    observer = new ResizeObserver(notifyAll);
+}
+function resizeElement(target, handler) {
+    if (!observer)
+        createResizeObserver();
+    const elements = (0,_utils_resolve_element_mjs__WEBPACK_IMPORTED_MODULE_0__.resolveElements)(target);
+    elements.forEach((element) => {
+        let elementHandlers = resizeHandlers.get(element);
+        if (!elementHandlers) {
+            elementHandlers = new Set();
+            resizeHandlers.set(element, elementHandlers);
+        }
+        elementHandlers.add(handler);
+        observer === null || observer === void 0 ? void 0 : observer.observe(element);
+    });
+    return () => {
+        elements.forEach((element) => {
+            const elementHandlers = resizeHandlers.get(element);
+            elementHandlers === null || elementHandlers === void 0 ? void 0 : elementHandlers.delete(handler);
+            if (!(elementHandlers === null || elementHandlers === void 0 ? void 0 : elementHandlers.size)) {
+                observer === null || observer === void 0 ? void 0 : observer.unobserve(element);
+            }
+        });
+    };
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/resize/handle-window.mjs":
+/*!********************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/resize/handle-window.mjs ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resizeWindow: () => (/* binding */ resizeWindow)
+/* harmony export */ });
+const windowCallbacks = new Set();
+let windowResizeHandler;
+function createWindowResizeHandler() {
+    windowResizeHandler = () => {
+        const size = {
+            width: window.innerWidth,
+            height: window.innerHeight,
+        };
+        const info = {
+            target: window,
+            size,
+            contentSize: size,
+        };
+        windowCallbacks.forEach((callback) => callback(info));
+    };
+    window.addEventListener("resize", windowResizeHandler);
+}
+function resizeWindow(callback) {
+    windowCallbacks.add(callback);
+    if (!windowResizeHandler)
+        createWindowResizeHandler();
+    return () => {
+        windowCallbacks.delete(callback);
+        if (!windowCallbacks.size && windowResizeHandler) {
+            windowResizeHandler = undefined;
+        }
+    };
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/resize/index.mjs":
+/*!************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/resize/index.mjs ***!
+  \************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resize: () => (/* binding */ resize)
+/* harmony export */ });
+/* harmony import */ var _handle_element_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./handle-element.mjs */ "./node_modules/framer-motion/dist/es/render/dom/resize/handle-element.mjs");
+/* harmony import */ var _handle_window_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handle-window.mjs */ "./node_modules/framer-motion/dist/es/render/dom/resize/handle-window.mjs");
+
+
+
+function resize(a, b) {
+    return typeof a === "function" ? (0,_handle_window_mjs__WEBPACK_IMPORTED_MODULE_0__.resizeWindow)(a) : (0,_handle_element_mjs__WEBPACK_IMPORTED_MODULE_1__.resizeElement)(a, b);
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/scroll/info.mjs":
+/*!***********************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/scroll/info.mjs ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createScrollInfo: () => (/* binding */ createScrollInfo),
+/* harmony export */   updateScrollInfo: () => (/* binding */ updateScrollInfo)
+/* harmony export */ });
+/* harmony import */ var _utils_progress_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/progress.mjs */ "./node_modules/framer-motion/dist/es/utils/progress.mjs");
+/* harmony import */ var _utils_velocity_per_second_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/velocity-per-second.mjs */ "./node_modules/framer-motion/dist/es/utils/velocity-per-second.mjs");
+
+
+
+/**
+ * A time in milliseconds, beyond which we consider the scroll velocity to be 0.
+ */
+const maxElapsed = 50;
+const createAxisInfo = () => ({
+    current: 0,
+    offset: [],
+    progress: 0,
+    scrollLength: 0,
+    targetOffset: 0,
+    targetLength: 0,
+    containerLength: 0,
+    velocity: 0,
+});
+const createScrollInfo = () => ({
+    time: 0,
+    x: createAxisInfo(),
+    y: createAxisInfo(),
+});
+const keys = {
+    x: {
+        length: "Width",
+        position: "Left",
+    },
+    y: {
+        length: "Height",
+        position: "Top",
+    },
+};
+function updateAxisInfo(element, axisName, info, time) {
+    const axis = info[axisName];
+    const { length, position } = keys[axisName];
+    const prev = axis.current;
+    const prevTime = info.time;
+    axis.current = element["scroll" + position];
+    axis.scrollLength = element["scroll" + length] - element["client" + length];
+    axis.offset.length = 0;
+    axis.offset[0] = 0;
+    axis.offset[1] = axis.scrollLength;
+    axis.progress = (0,_utils_progress_mjs__WEBPACK_IMPORTED_MODULE_0__.progress)(0, axis.scrollLength, axis.current);
+    const elapsed = time - prevTime;
+    axis.velocity =
+        elapsed > maxElapsed
+            ? 0
+            : (0,_utils_velocity_per_second_mjs__WEBPACK_IMPORTED_MODULE_1__.velocityPerSecond)(axis.current - prev, elapsed);
+}
+function updateScrollInfo(element, info, time) {
+    updateAxisInfo(element, "x", info, time);
+    updateAxisInfo(element, "y", info, time);
+    info.time = time;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/edge.mjs":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/edge.mjs ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   namedEdges: () => (/* binding */ namedEdges),
+/* harmony export */   resolveEdge: () => (/* binding */ resolveEdge)
+/* harmony export */ });
+const namedEdges = {
+    start: 0,
+    center: 0.5,
+    end: 1,
+};
+function resolveEdge(edge, length, inset = 0) {
+    let delta = 0;
+    /**
+     * If we have this edge defined as a preset, replace the definition
+     * with the numerical value.
+     */
+    if (namedEdges[edge] !== undefined) {
+        edge = namedEdges[edge];
+    }
+    /**
+     * Handle unit values
+     */
+    if (typeof edge === "string") {
+        const asNumber = parseFloat(edge);
+        if (edge.endsWith("px")) {
+            delta = asNumber;
+        }
+        else if (edge.endsWith("%")) {
+            edge = asNumber / 100;
+        }
+        else if (edge.endsWith("vw")) {
+            delta = (asNumber / 100) * document.documentElement.clientWidth;
+        }
+        else if (edge.endsWith("vh")) {
+            delta = (asNumber / 100) * document.documentElement.clientHeight;
+        }
+        else {
+            edge = asNumber;
+        }
+    }
+    /**
+     * If the edge is defined as a number, handle as a progress value.
+     */
+    if (typeof edge === "number") {
+        delta = length * edge;
+    }
+    return inset + delta;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/index.mjs":
+/*!********************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/index.mjs ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resolveOffsets: () => (/* binding */ resolveOffsets)
+/* harmony export */ });
+/* harmony import */ var _inset_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inset.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/inset.mjs");
+/* harmony import */ var _presets_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./presets.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/presets.mjs");
+/* harmony import */ var _offset_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./offset.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/offset.mjs");
+/* harmony import */ var _utils_interpolate_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../utils/interpolate.mjs */ "./node_modules/framer-motion/dist/es/utils/interpolate.mjs");
+/* harmony import */ var _utils_offsets_default_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../utils/offsets/default.mjs */ "./node_modules/framer-motion/dist/es/utils/offsets/default.mjs");
+
+
+
+
+
+
+const point = { x: 0, y: 0 };
+function getTargetSize(target) {
+    return "getBBox" in target && target.tagName !== "svg"
+        ? target.getBBox()
+        : { width: target.clientWidth, height: target.clientHeight };
+}
+function resolveOffsets(container, info, options) {
+    let { offset: offsetDefinition = _presets_mjs__WEBPACK_IMPORTED_MODULE_0__.ScrollOffset.All } = options;
+    const { target = container, axis = "y" } = options;
+    const lengthLabel = axis === "y" ? "height" : "width";
+    const inset = target !== container ? (0,_inset_mjs__WEBPACK_IMPORTED_MODULE_1__.calcInset)(target, container) : point;
+    /**
+     * Measure the target and container. If they're the same thing then we
+     * use the container's scrollWidth/Height as the target, from there
+     * all other calculations can remain the same.
+     */
+    const targetSize = target === container
+        ? { width: container.scrollWidth, height: container.scrollHeight }
+        : getTargetSize(target);
+    const containerSize = {
+        width: container.clientWidth,
+        height: container.clientHeight,
+    };
+    /**
+     * Reset the length of the resolved offset array rather than creating a new one.
+     * TODO: More reusable data structures for targetSize/containerSize would also be good.
+     */
+    info[axis].offset.length = 0;
+    /**
+     * Populate the offset array by resolving the user's offset definition into
+     * a list of pixel scroll offets.
+     */
+    let hasChanged = !info[axis].interpolate;
+    const numOffsets = offsetDefinition.length;
+    for (let i = 0; i < numOffsets; i++) {
+        const offset = (0,_offset_mjs__WEBPACK_IMPORTED_MODULE_2__.resolveOffset)(offsetDefinition[i], containerSize[lengthLabel], targetSize[lengthLabel], inset[axis]);
+        if (!hasChanged && offset !== info[axis].interpolatorOffsets[i]) {
+            hasChanged = true;
+        }
+        info[axis].offset[i] = offset;
+    }
+    /**
+     * If the pixel scroll offsets have changed, create a new interpolator function
+     * to map scroll value into a progress.
+     */
+    if (hasChanged) {
+        info[axis].interpolate = (0,_utils_interpolate_mjs__WEBPACK_IMPORTED_MODULE_3__.interpolate)(info[axis].offset, (0,_utils_offsets_default_mjs__WEBPACK_IMPORTED_MODULE_4__.defaultOffset)(offsetDefinition));
+        info[axis].interpolatorOffsets = [...info[axis].offset];
+    }
+    info[axis].progress = info[axis].interpolate(info[axis].current);
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/inset.mjs":
+/*!********************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/inset.mjs ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   calcInset: () => (/* binding */ calcInset)
+/* harmony export */ });
+function calcInset(element, container) {
+    const inset = { x: 0, y: 0 };
+    let current = element;
+    while (current && current !== container) {
+        if (current instanceof HTMLElement) {
+            inset.x += current.offsetLeft;
+            inset.y += current.offsetTop;
+            current = current.offsetParent;
+        }
+        else if (current.tagName === "svg") {
+            /**
+             * This isn't an ideal approach to measuring the offset of <svg /> tags.
+             * It would be preferable, given they behave like HTMLElements in most ways
+             * to use offsetLeft/Top. But these don't exist on <svg />. Likewise we
+             * can't use .getBBox() like most SVG elements as these provide the offset
+             * relative to the SVG itself, which for <svg /> is usually 0x0.
+             */
+            const svgBoundingBox = current.getBoundingClientRect();
+            current = current.parentElement;
+            const parentBoundingBox = current.getBoundingClientRect();
+            inset.x += svgBoundingBox.left - parentBoundingBox.left;
+            inset.y += svgBoundingBox.top - parentBoundingBox.top;
+        }
+        else if (current instanceof SVGGraphicsElement) {
+            const { x, y } = current.getBBox();
+            inset.x += x;
+            inset.y += y;
+            let svg = null;
+            let parent = current.parentNode;
+            while (!svg) {
+                if (parent.tagName === "svg") {
+                    svg = parent;
+                }
+                parent = current.parentNode;
+            }
+            current = svg;
+        }
+        else {
+            break;
+        }
+    }
+    return inset;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/offset.mjs":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/offset.mjs ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resolveOffset: () => (/* binding */ resolveOffset)
+/* harmony export */ });
+/* harmony import */ var _edge_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edge.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/edge.mjs");
+
+
+const defaultOffset = [0, 0];
+function resolveOffset(offset, containerLength, targetLength, targetInset) {
+    let offsetDefinition = Array.isArray(offset) ? offset : defaultOffset;
+    let targetPoint = 0;
+    let containerPoint = 0;
+    if (typeof offset === "number") {
+        /**
+         * If we're provided offset: [0, 0.5, 1] then each number x should become
+         * [x, x], so we default to the behaviour of mapping 0 => 0 of both target
+         * and container etc.
+         */
+        offsetDefinition = [offset, offset];
+    }
+    else if (typeof offset === "string") {
+        offset = offset.trim();
+        if (offset.includes(" ")) {
+            offsetDefinition = offset.split(" ");
+        }
+        else {
+            /**
+             * If we're provided a definition like "100px" then we want to apply
+             * that only to the top of the target point, leaving the container at 0.
+             * Whereas a named offset like "end" should be applied to both.
+             */
+            offsetDefinition = [offset, _edge_mjs__WEBPACK_IMPORTED_MODULE_0__.namedEdges[offset] ? offset : `0`];
+        }
+    }
+    targetPoint = (0,_edge_mjs__WEBPACK_IMPORTED_MODULE_0__.resolveEdge)(offsetDefinition[0], targetLength, targetInset);
+    containerPoint = (0,_edge_mjs__WEBPACK_IMPORTED_MODULE_0__.resolveEdge)(offsetDefinition[1], containerLength);
+    return targetPoint - containerPoint;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/presets.mjs":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/presets.mjs ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ScrollOffset: () => (/* binding */ ScrollOffset)
+/* harmony export */ });
+const ScrollOffset = {
+    Enter: [
+        [0, 1],
+        [1, 1],
+    ],
+    Exit: [
+        [0, 0],
+        [1, 0],
+    ],
+    Any: [
+        [1, 0],
+        [0, 1],
+    ],
+    All: [
+        [0, 0],
+        [1, 1],
+    ],
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/scroll/on-scroll-handler.mjs":
+/*!************************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/scroll/on-scroll-handler.mjs ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createOnScrollHandler: () => (/* binding */ createOnScrollHandler)
+/* harmony export */ });
+/* harmony import */ var _info_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./info.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/info.mjs");
+/* harmony import */ var _offsets_index_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./offsets/index.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/offsets/index.mjs");
+
+
+
+function measure(container, target = container, info) {
+    /**
+     * Find inset of target within scrollable container
+     */
+    info.x.targetOffset = 0;
+    info.y.targetOffset = 0;
+    if (target !== container) {
+        let node = target;
+        while (node && node !== container) {
+            info.x.targetOffset += node.offsetLeft;
+            info.y.targetOffset += node.offsetTop;
+            node = node.offsetParent;
+        }
+    }
+    info.x.targetLength =
+        target === container ? target.scrollWidth : target.clientWidth;
+    info.y.targetLength =
+        target === container ? target.scrollHeight : target.clientHeight;
+    info.x.containerLength = container.clientWidth;
+    info.y.containerLength = container.clientHeight;
+}
+function createOnScrollHandler(element, onScroll, info, options = {}) {
+    return {
+        measure: () => measure(element, options.target, info),
+        update: (time) => {
+            (0,_info_mjs__WEBPACK_IMPORTED_MODULE_0__.updateScrollInfo)(element, info, time);
+            if (options.offset || options.target) {
+                (0,_offsets_index_mjs__WEBPACK_IMPORTED_MODULE_1__.resolveOffsets)(element, info, options);
+            }
+        },
+        notify: () => onScroll(info),
+    };
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/render/dom/scroll/track.mjs":
+/*!************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/scroll/track.mjs ***!
+  \************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   scrollInfo: () => (/* binding */ scrollInfo)
+/* harmony export */ });
+/* harmony import */ var _resize_index_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../resize/index.mjs */ "./node_modules/framer-motion/dist/es/render/dom/resize/index.mjs");
+/* harmony import */ var _info_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./info.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/info.mjs");
+/* harmony import */ var _on_scroll_handler_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./on-scroll-handler.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/on-scroll-handler.mjs");
+/* harmony import */ var _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../frameloop/frame.mjs */ "./node_modules/framer-motion/dist/es/frameloop/frame.mjs");
+
+
+
+
+
+const scrollListeners = new WeakMap();
+const resizeListeners = new WeakMap();
+const onScrollHandlers = new WeakMap();
+const getEventTarget = (element) => element === document.documentElement ? window : element;
+function scrollInfo(onScroll, { container = document.documentElement, ...options } = {}) {
+    let containerHandlers = onScrollHandlers.get(container);
+    /**
+     * Get the onScroll handlers for this container.
+     * If one isn't found, create a new one.
+     */
+    if (!containerHandlers) {
+        containerHandlers = new Set();
+        onScrollHandlers.set(container, containerHandlers);
+    }
+    /**
+     * Create a new onScroll handler for the provided callback.
+     */
+    const info = (0,_info_mjs__WEBPACK_IMPORTED_MODULE_0__.createScrollInfo)();
+    const containerHandler = (0,_on_scroll_handler_mjs__WEBPACK_IMPORTED_MODULE_1__.createOnScrollHandler)(container, onScroll, info, options);
+    containerHandlers.add(containerHandler);
+    /**
+     * Check if there's a scroll event listener for this container.
+     * If not, create one.
+     */
+    if (!scrollListeners.has(container)) {
+        const measureAll = () => {
+            for (const handler of containerHandlers)
+                handler.measure();
+        };
+        const updateAll = () => {
+            for (const handler of containerHandlers) {
+                handler.update(_frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.frameData.timestamp);
+            }
+        };
+        const notifyAll = () => {
+            for (const handler of containerHandlers)
+                handler.notify();
+        };
+        const listener = () => {
+            _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.frame.read(measureAll, false, true);
+            _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.frame.update(updateAll, false, true);
+            _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.frame.update(notifyAll, false, true);
+        };
+        scrollListeners.set(container, listener);
+        const target = getEventTarget(container);
+        window.addEventListener("resize", listener, { passive: true });
+        if (container !== document.documentElement) {
+            resizeListeners.set(container, (0,_resize_index_mjs__WEBPACK_IMPORTED_MODULE_3__.resize)(container, listener));
+        }
+        target.addEventListener("scroll", listener, { passive: true });
+    }
+    const listener = scrollListeners.get(container);
+    _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.frame.read(listener, false, true);
+    return () => {
+        var _a;
+        (0,_frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.cancelFrame)(listener);
+        /**
+         * Check if we even have any handlers for this container.
+         */
+        const currentHandlers = onScrollHandlers.get(container);
+        if (!currentHandlers)
+            return;
+        currentHandlers.delete(containerHandler);
+        if (currentHandlers.size)
+            return;
+        /**
+         * If no more handlers, remove the scroll listener too.
+         */
+        const scrollListener = scrollListeners.get(container);
+        scrollListeners.delete(container);
+        if (scrollListener) {
+            getEventTarget(container).removeEventListener("scroll", scrollListener);
+            (_a = resizeListeners.get(container)) === null || _a === void 0 ? void 0 : _a();
+            window.removeEventListener("resize", scrollListener);
+        }
+    };
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/framer-motion/dist/es/render/dom/use-render.mjs":
 /*!**********************************************************************!*\
   !*** ./node_modules/framer-motion/dist/es/render/dom/use-render.mjs ***!
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createUseRender: () => (/* binding */ createUseRender)
@@ -9651,6 +10412,7 @@ function createUseRender(forwardMotionProps = false) {
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   camelToDash: () => (/* binding */ camelToDash)
@@ -9671,6 +10433,7 @@ const camelToDash = (str) => str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createDomMotionConfig: () => (/* binding */ createDomMotionConfig)
@@ -9708,6 +10471,7 @@ function createDomMotionConfig(Component, { forwardMotionProps = false }, preloa
   \******************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   parseCSSVariable: () => (/* binding */ parseCSSVariable),
@@ -9815,6 +10579,7 @@ function resolveCSSVariables(visualElement, { ...target }, transitionEnd) {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   filterProps: () => (/* binding */ filterProps),
@@ -9888,6 +10653,7 @@ function filterProps(props, isDom, forwardMotionProps) {
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   cssVariableRegex: () => (/* binding */ cssVariableRegex),
@@ -9910,6 +10676,7 @@ const cssVariableRegex = /var\s*\(\s*--[\w-]+(\s*,\s*(?:(?:[^)(]|\((?:[^)(]+|\([
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isSVGComponent: () => (/* binding */ isSVGComponent)
@@ -9955,6 +10722,7 @@ function isSVGComponent(Component) {
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isSVGElement: () => (/* binding */ isSVGElement)
@@ -9974,6 +10742,7 @@ function isSVGElement(element) {
   \***********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   parseDomVariant: () => (/* binding */ parseDomVariant)
@@ -9999,12 +10768,57 @@ const parseDomVariant = (visualElement, target, origin, transitionEnd) => {
 
 /***/ }),
 
+/***/ "./node_modules/framer-motion/dist/es/render/dom/utils/resolve-element.mjs":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/render/dom/utils/resolve-element.mjs ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resolveElements: () => (/* binding */ resolveElements)
+/* harmony export */ });
+/* harmony import */ var _utils_errors_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/errors.mjs */ "./node_modules/framer-motion/dist/es/utils/errors.mjs");
+
+
+function resolveElements(elements, scope, selectorCache) {
+    var _a;
+    if (typeof elements === "string") {
+        let root = document;
+        if (scope) {
+            (0,_utils_errors_mjs__WEBPACK_IMPORTED_MODULE_0__.invariant)(Boolean(scope.current), "Scope provided, but no element detected.");
+            root = scope.current;
+        }
+        if (selectorCache) {
+            (_a = selectorCache[elements]) !== null && _a !== void 0 ? _a : (selectorCache[elements] = root.querySelectorAll(elements));
+            elements = selectorCache[elements];
+        }
+        else {
+            elements = root.querySelectorAll(elements);
+        }
+    }
+    else if (elements instanceof Element) {
+        elements = [elements];
+    }
+    /**
+     * Return an empty array
+     */
+    return Array.from(elements || []);
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/framer-motion/dist/es/render/dom/utils/unit-conversion.mjs":
 /*!*********************************************************************************!*\
   !*** ./node_modules/framer-motion/dist/es/render/dom/utils/unit-conversion.mjs ***!
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   positionalValues: () => (/* binding */ positionalValues),
@@ -10257,6 +11071,7 @@ function unitConversion(visualElement, target, origin, transitionEnd) {
   \***************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getAnimatableNone: () => (/* binding */ getAnimatableNone)
@@ -10289,6 +11104,7 @@ function getAnimatableNone(key, value) {
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   defaultValueTypes: () => (/* binding */ defaultValueTypes),
@@ -10337,6 +11153,7 @@ const getDefaultValueType = (key) => defaultValueTypes[key];
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dimensionValueTypes: () => (/* binding */ dimensionValueTypes),
@@ -10371,6 +11188,7 @@ const findDimensionValueType = (v) => dimensionValueTypes.find((0,_test_mjs__WEB
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   findValueType: () => (/* binding */ findValueType)
@@ -10404,6 +11222,7 @@ const findValueType = (v) => valueTypes.find((0,_test_mjs__WEBPACK_IMPORTED_MODU
   \***********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getValueAsType: () => (/* binding */ getValueAsType)
@@ -10428,6 +11247,7 @@ const getValueAsType = (value, type) => {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   numberValueTypes: () => (/* binding */ numberValueTypes)
@@ -10517,6 +11337,7 @@ const numberValueTypes = {
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   testValueType: () => (/* binding */ testValueType)
@@ -10537,6 +11358,7 @@ const testValueType = (v) => (type) => type.test(v);
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   auto: () => (/* binding */ auto)
@@ -10560,6 +11382,7 @@ const auto = {
   \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   int: () => (/* binding */ int)
@@ -10583,6 +11406,7 @@ const int = {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HTMLVisualElement: () => (/* binding */ HTMLVisualElement),
@@ -10662,6 +11486,7 @@ class HTMLVisualElement extends _dom_DOMVisualElement_mjs__WEBPACK_IMPORTED_MODU
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   htmlMotionConfig: () => (/* binding */ htmlMotionConfig)
@@ -10691,6 +11516,7 @@ const htmlMotionConfig = {
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   copyRawValuesOnly: () => (/* binding */ copyRawValuesOnly),
@@ -10768,6 +11594,7 @@ function useHTMLProps(props, visualState, isStatic) {
   \*******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   buildHTMLStyles: () => (/* binding */ buildHTMLStyles)
@@ -10861,6 +11688,7 @@ function buildHTMLStyles(state, latestValues, options, transformTemplate) {
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   buildTransform: () => (/* binding */ buildTransform)
@@ -10921,6 +11749,7 @@ function buildTransform(transform, { enableHardwareAcceleration = true, allowTra
   \**************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createHtmlRenderState: () => (/* binding */ createHtmlRenderState)
@@ -10943,6 +11772,7 @@ const createHtmlRenderState = () => ({
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   renderHTML: () => (/* binding */ renderHTML)
@@ -10966,6 +11796,7 @@ function renderHTML(element, { style, vars }, styleProp, projection) {
   \***************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   scrapeMotionValuesFromProps: () => (/* binding */ scrapeMotionValuesFromProps)
@@ -10999,6 +11830,7 @@ function scrapeMotionValuesFromProps(props, prevProps) {
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   transformPropOrder: () => (/* binding */ transformPropOrder),
@@ -11042,6 +11874,7 @@ const transformProps = new Set(transformPropOrder);
   \*************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   visualElementStore: () => (/* binding */ visualElementStore)
@@ -11059,6 +11892,7 @@ const visualElementStore = new WeakMap();
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SVGVisualElement: () => (/* binding */ SVGVisualElement)
@@ -11129,6 +11963,7 @@ class SVGVisualElement extends _dom_DOMVisualElement_mjs__WEBPACK_IMPORTED_MODUL
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   svgMotionConfig: () => (/* binding */ svgMotionConfig)
@@ -11190,6 +12025,7 @@ const svgMotionConfig = {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   lowercaseSVGElements: () => (/* binding */ lowercaseSVGElements)
@@ -11237,6 +12073,7 @@ const lowercaseSVGElements = [
   \*********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   useSVGProps: () => (/* binding */ useSVGProps)
@@ -11280,6 +12117,7 @@ function useSVGProps(props, visualState, _isStatic, Component) {
   \*****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   buildSVGAttrs: () => (/* binding */ buildSVGAttrs)
@@ -11349,6 +12187,7 @@ function buildSVGAttrs(state, { attrX, attrY, attrScale, originX, originY, pathL
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   camelCaseAttributes: () => (/* binding */ camelCaseAttributes)
@@ -11393,6 +12232,7 @@ const camelCaseAttributes = new Set([
   \*************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createSvgRenderState: () => (/* binding */ createSvgRenderState)
@@ -11416,6 +12256,7 @@ const createSvgRenderState = () => ({
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isSVGTag: () => (/* binding */ isSVGTag)
@@ -11433,6 +12274,7 @@ const isSVGTag = (tag) => typeof tag === "string" && tag.toLowerCase() === "svg"
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   buildSVGPath: () => (/* binding */ buildSVGPath)
@@ -11480,6 +12322,7 @@ function buildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   renderSVG: () => (/* binding */ renderSVG)
@@ -11509,6 +12352,7 @@ function renderSVG(element, renderState, _styleProp, projection) {
   \**************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   scrapeMotionValuesFromProps: () => (/* binding */ scrapeMotionValuesFromProps)
@@ -11544,6 +12388,7 @@ function scrapeMotionValuesFromProps(props, prevProps) {
   \**********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   calcSVGTransformOrigin: () => (/* binding */ calcSVGTransformOrigin)
@@ -11577,6 +12422,7 @@ function calcSVGTransformOrigin(dimensions, originX, originY) {
   \*****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   checkVariantsDidChange: () => (/* binding */ checkVariantsDidChange),
@@ -11918,6 +12764,7 @@ function createState() {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   compareByDepth: () => (/* binding */ compareByDepth)
@@ -11935,6 +12782,7 @@ const compareByDepth = (a, b) => a.depth - b.depth;
   \***********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   FlatTree: () => (/* binding */ FlatTree)
@@ -11975,6 +12823,7 @@ class FlatTree {
   \*************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isControllingVariants: () => (/* binding */ isControllingVariants),
@@ -12006,6 +12855,7 @@ function isVariantNode(props) {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isVariantLabel: () => (/* binding */ isVariantLabel)
@@ -12028,6 +12878,7 @@ function isVariantLabel(v) {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   updateMotionValuesFromProps: () => (/* binding */ updateMotionValuesFromProps)
@@ -12109,6 +12960,7 @@ function updateMotionValuesFromProps(element, next, prev) {
   \**************************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   resolveVariant: () => (/* binding */ resolveVariant)
@@ -12148,6 +13000,7 @@ function resolveVariant(visualElement, definition, custom) {
   \******************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   resolveVariantFromProps: () => (/* binding */ resolveVariantFromProps)
@@ -12188,6 +13041,7 @@ function resolveVariantFromProps(props, definition, custom, currentValues = {}, 
   \*********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   checkTargetForNewValues: () => (/* binding */ checkTargetForNewValues),
@@ -12338,6 +13192,7 @@ function getOrigin(target, transition, visualElement) {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   variantPriorityOrder: () => (/* binding */ variantPriorityOrder),
@@ -12365,6 +13220,7 @@ const variantProps = ["initial", ...variantPriorityOrder];
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addUniqueItem: () => (/* binding */ addUniqueItem),
@@ -12402,6 +13258,7 @@ function moveItem([...arr], fromIndex, toIndex) {
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   clamp: () => (/* binding */ clamp)
@@ -12419,6 +13276,7 @@ const clamp = (min, max, v) => Math.min(Math.max(v, min), max);
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   delay: () => (/* binding */ delay)
@@ -12453,6 +13311,7 @@ function delay(callback, timeout) {
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   distance: () => (/* binding */ distance),
@@ -12477,6 +13336,7 @@ function distance2D(a, b) {
   \*************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   invariant: () => (/* binding */ invariant),
@@ -12511,6 +13371,7 @@ if (true) {
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getContextWindow: () => (/* binding */ getContextWindow)
@@ -12531,6 +13392,7 @@ const getContextWindow = ({ current }) => {
   \*******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   hslaToRgba: () => (/* binding */ hslaToRgba)
@@ -12587,6 +13449,7 @@ function hslaToRgba({ hue, saturation, lightness, alpha }) {
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   interpolate: () => (/* binding */ interpolate)
@@ -12702,6 +13565,7 @@ function interpolate(input, output, { clamp: isClamp = true, ease, mixer } = {})
   \*****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isBrowser: () => (/* binding */ isBrowser)
@@ -12719,6 +13583,7 @@ const isBrowser = typeof document !== "undefined";
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isNumericalString: () => (/* binding */ isNumericalString)
@@ -12739,6 +13604,7 @@ const isNumericalString = (v) => /^\-?\d*\.?\d+$/.test(v);
   \********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isRefObject: () => (/* binding */ isRefObject)
@@ -12759,6 +13625,7 @@ function isRefObject(ref) {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isZeroValueString: () => (/* binding */ isZeroValueString)
@@ -12779,6 +13646,7 @@ const isZeroValueString = (v) => /^0[^.\s]+$/.test(v);
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   memo: () => (/* binding */ memo)
@@ -12803,6 +13671,7 @@ function memo(callback) {
   \****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   mixColor: () => (/* binding */ mixColor),
@@ -12864,6 +13733,7 @@ const mixColor = (from, to) => {
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   mixArray: () => (/* binding */ mixArray),
@@ -12950,6 +13820,7 @@ const mixComplex = (origin, target) => {
   \**********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   mix: () => (/* binding */ mix)
@@ -12988,6 +13859,7 @@ const mix = (from, to, progress) => -progress * from + progress * to + from;
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   noop: () => (/* binding */ noop)
@@ -13005,6 +13877,7 @@ const noop = (any) => any;
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   defaultOffset: () => (/* binding */ defaultOffset)
@@ -13029,6 +13902,7 @@ function defaultOffset(arr) {
   \*******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   fillOffset: () => (/* binding */ fillOffset)
@@ -13057,6 +13931,7 @@ function fillOffset(offset, remaining) {
   \*******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   convertOffsetToTimes: () => (/* binding */ convertOffsetToTimes)
@@ -13076,6 +13951,7 @@ function convertOffsetToTimes(offset, duration) {
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   pipe: () => (/* binding */ pipe)
@@ -13101,6 +13977,7 @@ const pipe = (...transformers) => transformers.reduce(combineFunctions);
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   progress: () => (/* binding */ progress)
@@ -13133,6 +14010,7 @@ const progress = (from, to, value) => {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   initPrefersReducedMotion: () => (/* binding */ initPrefersReducedMotion)
@@ -13168,6 +14046,7 @@ function initPrefersReducedMotion() {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   hasReducedMotionListener: () => (/* binding */ hasReducedMotionListener),
@@ -13188,6 +14067,7 @@ const hasReducedMotionListener = { current: false };
   \********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isCustomValue: () => (/* binding */ isCustomValue),
@@ -13215,6 +14095,7 @@ const resolveFinalValueInKeyframes = (v) => {
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   shallowCompare: () => (/* binding */ shallowCompare)
@@ -13243,6 +14124,7 @@ function shallowCompare(next, prev) {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SubscriptionManager: () => (/* binding */ SubscriptionManager)
@@ -13298,6 +14180,7 @@ class SubscriptionManager {
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   millisecondsToSeconds: () => (/* binding */ millisecondsToSeconds),
@@ -13317,12 +14200,50 @@ const millisecondsToSeconds = (milliseconds) => milliseconds / 1000;
 
 /***/ }),
 
+/***/ "./node_modules/framer-motion/dist/es/utils/transform.mjs":
+/*!****************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/utils/transform.mjs ***!
+  \****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   transform: () => (/* binding */ transform)
+/* harmony export */ });
+/* harmony import */ var _interpolate_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./interpolate.mjs */ "./node_modules/framer-motion/dist/es/utils/interpolate.mjs");
+
+
+const isCustomValueType = (v) => {
+    return typeof v === "object" && v.mix;
+};
+const getMixer = (v) => (isCustomValueType(v) ? v.mix : undefined);
+function transform(...args) {
+    const useImmediate = !Array.isArray(args[0]);
+    const argOffset = useImmediate ? 0 : -1;
+    const inputValue = args[0 + argOffset];
+    const inputRange = args[1 + argOffset];
+    const outputRange = args[2 + argOffset];
+    const options = args[3 + argOffset];
+    const interpolator = (0,_interpolate_mjs__WEBPACK_IMPORTED_MODULE_0__.interpolate)(inputRange, outputRange, {
+        mixer: getMixer(outputRange[0]),
+        ...options,
+    });
+    return useImmediate ? interpolator(inputValue) : interpolator;
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/framer-motion/dist/es/utils/use-constant.mjs":
 /*!*******************************************************************!*\
   !*** ./node_modules/framer-motion/dist/es/utils/use-constant.mjs ***!
   \*******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   useConstant: () => (/* binding */ useConstant)
@@ -13350,12 +14271,50 @@ function useConstant(init) {
 
 /***/ }),
 
+/***/ "./node_modules/framer-motion/dist/es/utils/use-force-update.mjs":
+/*!***********************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/utils/use-force-update.mjs ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useForceUpdate: () => (/* binding */ useForceUpdate)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _use_is_mounted_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./use-is-mounted.mjs */ "./node_modules/framer-motion/dist/es/utils/use-is-mounted.mjs");
+/* harmony import */ var _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../frameloop/frame.mjs */ "./node_modules/framer-motion/dist/es/frameloop/frame.mjs");
+
+
+
+
+function useForceUpdate() {
+    const isMounted = (0,_use_is_mounted_mjs__WEBPACK_IMPORTED_MODULE_1__.useIsMounted)();
+    const [forcedRenderCount, setForcedRenderCount] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+    const forceRender = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+        isMounted.current && setForcedRenderCount(forcedRenderCount + 1);
+    }, [forcedRenderCount]);
+    /**
+     * Defer this to the end of the next animation frame in case there are multiple
+     * synchronous calls.
+     */
+    const deferredForceRender = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.frame.postRender(forceRender), [forceRender]);
+    return [deferredForceRender, forcedRenderCount];
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/framer-motion/dist/es/utils/use-instant-transition-state.mjs":
 /*!***********************************************************************************!*\
   !*** ./node_modules/framer-motion/dist/es/utils/use-instant-transition-state.mjs ***!
   \***********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   instantAnimationState: () => (/* binding */ instantAnimationState)
@@ -13369,12 +14328,45 @@ const instantAnimationState = {
 
 /***/ }),
 
+/***/ "./node_modules/framer-motion/dist/es/utils/use-is-mounted.mjs":
+/*!*********************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/utils/use-is-mounted.mjs ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useIsMounted: () => (/* binding */ useIsMounted)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _use_isomorphic_effect_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./use-isomorphic-effect.mjs */ "./node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs");
+
+
+
+function useIsMounted() {
+    const isMounted = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+    (0,_use_isomorphic_effect_mjs__WEBPACK_IMPORTED_MODULE_1__.useIsomorphicLayoutEffect)(() => {
+        isMounted.current = true;
+        return () => {
+            isMounted.current = false;
+        };
+    }, []);
+    return isMounted;
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs":
 /*!****************************************************************************!*\
   !*** ./node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs ***!
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   useIsomorphicLayoutEffect: () => (/* binding */ useIsomorphicLayoutEffect)
@@ -13391,12 +14383,36 @@ const useIsomorphicLayoutEffect = _is_browser_mjs__WEBPACK_IMPORTED_MODULE_1__.i
 
 /***/ }),
 
+/***/ "./node_modules/framer-motion/dist/es/utils/use-unmount-effect.mjs":
+/*!*************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/utils/use-unmount-effect.mjs ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useUnmountEffect: () => (/* binding */ useUnmountEffect)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+
+
+function useUnmountEffect(callback) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => () => callback(), []);
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/framer-motion/dist/es/utils/velocity-per-second.mjs":
 /*!**************************************************************************!*\
   !*** ./node_modules/framer-motion/dist/es/utils/velocity-per-second.mjs ***!
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   velocityPerSecond: () => (/* binding */ velocityPerSecond)
@@ -13422,6 +14438,7 @@ function velocityPerSecond(velocity, frameDuration) {
   \****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   warnOnce: () => (/* binding */ warnOnce)
@@ -13447,6 +14464,7 @@ function warnOnce(condition, message, element) {
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   MotionValue: () => (/* binding */ MotionValue),
@@ -13804,6 +14822,7 @@ function motionValue(init, options) {
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   hex: () => (/* binding */ hex)
@@ -13860,6 +14879,7 @@ const hex = {
   \***********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   hsla: () => (/* binding */ hsla)
@@ -13900,6 +14920,7 @@ const hsla = {
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   color: () => (/* binding */ color)
@@ -13946,6 +14967,7 @@ const color = {
   \***********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   rgbUnit: () => (/* binding */ rgbUnit),
@@ -13990,6 +15012,7 @@ const rgba = {
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isColorString: () => (/* binding */ isColorString),
@@ -14029,6 +15052,7 @@ const splitColor = (aName, bName, cName) => (v) => {
   \***************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   filter: () => (/* binding */ filter)
@@ -14075,6 +15099,7 @@ const filter = {
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   analyseComplexValue: () => (/* binding */ analyseComplexValue),
@@ -14187,6 +15212,7 @@ const complex = {
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   alpha: () => (/* binding */ alpha),
@@ -14221,6 +15247,7 @@ const scale = {
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   degrees: () => (/* binding */ degrees),
@@ -14260,6 +15287,7 @@ const progressPercentage = {
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   colorRegex: () => (/* binding */ colorRegex),
@@ -14287,12 +15315,269 @@ function isString(v) {
 
 /***/ }),
 
+/***/ "./node_modules/framer-motion/dist/es/value/use-combine-values.mjs":
+/*!*************************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/value/use-combine-values.mjs ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useCombineMotionValues: () => (/* binding */ useCombineMotionValues)
+/* harmony export */ });
+/* harmony import */ var _use_motion_value_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./use-motion-value.mjs */ "./node_modules/framer-motion/dist/es/value/use-motion-value.mjs");
+/* harmony import */ var _utils_use_isomorphic_effect_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/use-isomorphic-effect.mjs */ "./node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs");
+/* harmony import */ var _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../frameloop/frame.mjs */ "./node_modules/framer-motion/dist/es/frameloop/frame.mjs");
+
+
+
+
+function useCombineMotionValues(values, combineValues) {
+    /**
+     * Initialise the returned motion value. This remains the same between renders.
+     */
+    const value = (0,_use_motion_value_mjs__WEBPACK_IMPORTED_MODULE_0__.useMotionValue)(combineValues());
+    /**
+     * Create a function that will update the template motion value with the latest values.
+     * This is pre-bound so whenever a motion value updates it can schedule its
+     * execution in Framesync. If it's already been scheduled it won't be fired twice
+     * in a single frame.
+     */
+    const updateValue = () => value.set(combineValues());
+    /**
+     * Synchronously update the motion value with the latest values during the render.
+     * This ensures that within a React render, the styles applied to the DOM are up-to-date.
+     */
+    updateValue();
+    /**
+     * Subscribe to all motion values found within the template. Whenever any of them change,
+     * schedule an update.
+     */
+    (0,_utils_use_isomorphic_effect_mjs__WEBPACK_IMPORTED_MODULE_1__.useIsomorphicLayoutEffect)(() => {
+        const scheduleUpdate = () => _frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.frame.update(updateValue, false, true);
+        const subscriptions = values.map((v) => v.on("change", scheduleUpdate));
+        return () => {
+            subscriptions.forEach((unsubscribe) => unsubscribe());
+            (0,_frameloop_frame_mjs__WEBPACK_IMPORTED_MODULE_2__.cancelFrame)(updateValue);
+        };
+    });
+    return value;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/value/use-computed.mjs":
+/*!*******************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/value/use-computed.mjs ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useComputed: () => (/* binding */ useComputed)
+/* harmony export */ });
+/* harmony import */ var _index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.mjs */ "./node_modules/framer-motion/dist/es/value/index.mjs");
+/* harmony import */ var _use_combine_values_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./use-combine-values.mjs */ "./node_modules/framer-motion/dist/es/value/use-combine-values.mjs");
+
+
+
+function useComputed(compute) {
+    /**
+     * Open session of collectMotionValues. Any MotionValue that calls get()
+     * will be saved into this array.
+     */
+    _index_mjs__WEBPACK_IMPORTED_MODULE_0__.collectMotionValues.current = [];
+    compute();
+    const value = (0,_use_combine_values_mjs__WEBPACK_IMPORTED_MODULE_1__.useCombineMotionValues)(_index_mjs__WEBPACK_IMPORTED_MODULE_0__.collectMotionValues.current, compute);
+    /**
+     * Synchronously close session of collectMotionValues.
+     */
+    _index_mjs__WEBPACK_IMPORTED_MODULE_0__.collectMotionValues.current = undefined;
+    return value;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/value/use-motion-value.mjs":
+/*!***********************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/value/use-motion-value.mjs ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useMotionValue: () => (/* binding */ useMotionValue)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _index_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.mjs */ "./node_modules/framer-motion/dist/es/value/index.mjs");
+/* harmony import */ var _context_MotionConfigContext_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../context/MotionConfigContext.mjs */ "./node_modules/framer-motion/dist/es/context/MotionConfigContext.mjs");
+/* harmony import */ var _utils_use_constant_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/use-constant.mjs */ "./node_modules/framer-motion/dist/es/utils/use-constant.mjs");
+
+
+
+
+
+/**
+ * Creates a `MotionValue` to track the state and velocity of a value.
+ *
+ * Usually, these are created automatically. For advanced use-cases, like use with `useTransform`, you can create `MotionValue`s externally and pass them into the animated component via the `style` prop.
+ *
+ * ```jsx
+ * export const MyComponent = () => {
+ *   const scale = useMotionValue(1)
+ *
+ *   return <motion.div style={{ scale }} />
+ * }
+ * ```
+ *
+ * @param initial - The initial state.
+ *
+ * @public
+ */
+function useMotionValue(initial) {
+    const value = (0,_utils_use_constant_mjs__WEBPACK_IMPORTED_MODULE_1__.useConstant)(() => (0,_index_mjs__WEBPACK_IMPORTED_MODULE_2__.motionValue)(initial));
+    /**
+     * If this motion value is being used in static mode, like on
+     * the Framer canvas, force components to rerender when the motion
+     * value is updated.
+     */
+    const { isStatic } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context_MotionConfigContext_mjs__WEBPACK_IMPORTED_MODULE_3__.MotionConfigContext);
+    if (isStatic) {
+        const [, setLatest] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initial);
+        (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => value.on("change", setLatest), []);
+    }
+    return value;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/value/use-scroll.mjs":
+/*!*****************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/value/use-scroll.mjs ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useScroll: () => (/* binding */ useScroll)
+/* harmony export */ });
+/* harmony import */ var _index_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.mjs */ "./node_modules/framer-motion/dist/es/value/index.mjs");
+/* harmony import */ var _utils_use_constant_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/use-constant.mjs */ "./node_modules/framer-motion/dist/es/utils/use-constant.mjs");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _utils_errors_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/errors.mjs */ "./node_modules/framer-motion/dist/es/utils/errors.mjs");
+/* harmony import */ var _render_dom_scroll_track_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../render/dom/scroll/track.mjs */ "./node_modules/framer-motion/dist/es/render/dom/scroll/track.mjs");
+/* harmony import */ var _utils_use_isomorphic_effect_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/use-isomorphic-effect.mjs */ "./node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs");
+
+
+
+
+
+
+
+function refWarning(name, ref) {
+    (0,_utils_errors_mjs__WEBPACK_IMPORTED_MODULE_1__.warning)(Boolean(!ref || ref.current), `You have defined a ${name} options but the provided ref is not yet hydrated, probably because it's defined higher up the tree. Try calling useScroll() in the same component as the ref, or setting its \`layoutEffect: false\` option.`);
+}
+const createScrollMotionValues = () => ({
+    scrollX: (0,_index_mjs__WEBPACK_IMPORTED_MODULE_2__.motionValue)(0),
+    scrollY: (0,_index_mjs__WEBPACK_IMPORTED_MODULE_2__.motionValue)(0),
+    scrollXProgress: (0,_index_mjs__WEBPACK_IMPORTED_MODULE_2__.motionValue)(0),
+    scrollYProgress: (0,_index_mjs__WEBPACK_IMPORTED_MODULE_2__.motionValue)(0),
+});
+function useScroll({ container, target, layoutEffect = true, ...options } = {}) {
+    const values = (0,_utils_use_constant_mjs__WEBPACK_IMPORTED_MODULE_3__.useConstant)(createScrollMotionValues);
+    const useLifecycleEffect = layoutEffect
+        ? _utils_use_isomorphic_effect_mjs__WEBPACK_IMPORTED_MODULE_4__.useIsomorphicLayoutEffect
+        : react__WEBPACK_IMPORTED_MODULE_0__.useEffect;
+    useLifecycleEffect(() => {
+        refWarning("target", target);
+        refWarning("container", container);
+        return (0,_render_dom_scroll_track_mjs__WEBPACK_IMPORTED_MODULE_5__.scrollInfo)(({ x, y }) => {
+            values.scrollX.set(x.current);
+            values.scrollXProgress.set(x.progress);
+            values.scrollY.set(y.current);
+            values.scrollYProgress.set(y.progress);
+        }, {
+            ...options,
+            container: (container === null || container === void 0 ? void 0 : container.current) || undefined,
+            target: (target === null || target === void 0 ? void 0 : target.current) || undefined,
+        });
+    }, [container, target, JSON.stringify(options.offset)]);
+    return values;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/framer-motion/dist/es/value/use-transform.mjs":
+/*!********************************************************************!*\
+  !*** ./node_modules/framer-motion/dist/es/value/use-transform.mjs ***!
+  \********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useTransform: () => (/* binding */ useTransform)
+/* harmony export */ });
+/* harmony import */ var _utils_transform_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/transform.mjs */ "./node_modules/framer-motion/dist/es/utils/transform.mjs");
+/* harmony import */ var _use_combine_values_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./use-combine-values.mjs */ "./node_modules/framer-motion/dist/es/value/use-combine-values.mjs");
+/* harmony import */ var _utils_use_constant_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/use-constant.mjs */ "./node_modules/framer-motion/dist/es/utils/use-constant.mjs");
+/* harmony import */ var _use_computed_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./use-computed.mjs */ "./node_modules/framer-motion/dist/es/value/use-computed.mjs");
+
+
+
+
+
+function useTransform(input, inputRangeOrTransformer, outputRange, options) {
+    if (typeof input === "function") {
+        return (0,_use_computed_mjs__WEBPACK_IMPORTED_MODULE_0__.useComputed)(input);
+    }
+    const transformer = typeof inputRangeOrTransformer === "function"
+        ? inputRangeOrTransformer
+        : (0,_utils_transform_mjs__WEBPACK_IMPORTED_MODULE_1__.transform)(inputRangeOrTransformer, outputRange, options);
+    return Array.isArray(input)
+        ? useListTransform(input, transformer)
+        : useListTransform([input], ([latest]) => transformer(latest));
+}
+function useListTransform(values, transformer) {
+    const latest = (0,_utils_use_constant_mjs__WEBPACK_IMPORTED_MODULE_2__.useConstant)(() => []);
+    return (0,_use_combine_values_mjs__WEBPACK_IMPORTED_MODULE_3__.useCombineMotionValues)(values, () => {
+        latest.length = 0;
+        const numValues = values.length;
+        for (let i = 0; i < numValues; i++) {
+            latest[i] = values[i].get();
+        }
+        return transformer(latest);
+    });
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/framer-motion/dist/es/value/use-will-change/is.mjs":
 /*!*************************************************************************!*\
   !*** ./node_modules/framer-motion/dist/es/value/use-will-change/is.mjs ***!
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isWillChangeMotionValue: () => (/* binding */ isWillChangeMotionValue)
@@ -14315,6 +15600,7 @@ function isWillChangeMotionValue(value) {
   \****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isMotionValue: () => (/* binding */ isMotionValue)
@@ -14332,6 +15618,7 @@ const isMotionValue = (value) => Boolean(value && value.getVelocity);
   \*********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   resolveMotionValue: () => (/* binding */ resolveMotionValue)
@@ -14355,46 +15642,6 @@ function resolveMotionValue(value) {
 
 
 
-
-/***/ }),
-
-/***/ "./.cache/caches/gatsby-plugin-image/1157632170.json":
-/*!***********************************************************!*\
-  !*** ./.cache/caches/gatsby-plugin-image/1157632170.json ***!
-  \***********************************************************/
-/***/ ((module) => {
-
-module.exports = JSON.parse('{"layout":"constrained","backgroundColor":"#f8f8f8","images":{"fallback":{"src":"/static/1d80d3824ed44796a20fccd30aef6866/d470a/email_icon.png","srcSet":"/static/1d80d3824ed44796a20fccd30aef6866/549c4/email_icon.png 5w,\\n/static/1d80d3824ed44796a20fccd30aef6866/d25a7/email_icon.png 10w,\\n/static/1d80d3824ed44796a20fccd30aef6866/d470a/email_icon.png 20w","sizes":"(min-width: 20px) 20px, 100vw"},"sources":[{"srcSet":"/static/1d80d3824ed44796a20fccd30aef6866/fadb2/email_icon.webp 5w,\\n/static/1d80d3824ed44796a20fccd30aef6866/46057/email_icon.webp 10w,\\n/static/1d80d3824ed44796a20fccd30aef6866/31045/email_icon.webp 20w","type":"image/webp","sizes":"(min-width: 20px) 20px, 100vw"}]},"width":20,"height":18}');
-
-/***/ }),
-
-/***/ "./.cache/caches/gatsby-plugin-image/1921112257.json":
-/*!***********************************************************!*\
-  !*** ./.cache/caches/gatsby-plugin-image/1921112257.json ***!
-  \***********************************************************/
-/***/ ((module) => {
-
-module.exports = JSON.parse('{"layout":"constrained","backgroundColor":"#382828","images":{"fallback":{"src":"/static/0471d6d088e8c235054fa6c2998948f8/33f3b/hamburger_icon.png","srcSet":"/static/0471d6d088e8c235054fa6c2998948f8/58680/hamburger_icon.png 9w,\\n/static/0471d6d088e8c235054fa6c2998948f8/40ef0/hamburger_icon.png 18w,\\n/static/0471d6d088e8c235054fa6c2998948f8/33f3b/hamburger_icon.png 36w","sizes":"(min-width: 36px) 36px, 100vw"},"sources":[{"srcSet":"/static/0471d6d088e8c235054fa6c2998948f8/c3d08/hamburger_icon.webp 9w,\\n/static/0471d6d088e8c235054fa6c2998948f8/5557d/hamburger_icon.webp 18w,\\n/static/0471d6d088e8c235054fa6c2998948f8/aa015/hamburger_icon.webp 36w","type":"image/webp","sizes":"(min-width: 36px) 36px, 100vw"}]},"width":36,"height":24}');
-
-/***/ }),
-
-/***/ "./.cache/caches/gatsby-plugin-image/2642326661.json":
-/*!***********************************************************!*\
-  !*** ./.cache/caches/gatsby-plugin-image/2642326661.json ***!
-  \***********************************************************/
-/***/ ((module) => {
-
-module.exports = JSON.parse('{"layout":"constrained","backgroundColor":"#080808","images":{"fallback":{"src":"/static/cee79a106944ec75debd796be93e104e/15e42/quityouraddiction_logo.png","srcSet":"/static/cee79a106944ec75debd796be93e104e/88208/quityouraddiction_logo.png 25w,\\n/static/cee79a106944ec75debd796be93e104e/e9fba/quityouraddiction_logo.png 50w,\\n/static/cee79a106944ec75debd796be93e104e/15e42/quityouraddiction_logo.png 100w","sizes":"(min-width: 100px) 100px, 100vw"},"sources":[{"srcSet":"/static/cee79a106944ec75debd796be93e104e/2fa99/quityouraddiction_logo.webp 25w,\\n/static/cee79a106944ec75debd796be93e104e/dbc4a/quityouraddiction_logo.webp 50w,\\n/static/cee79a106944ec75debd796be93e104e/d8057/quityouraddiction_logo.webp 100w","type":"image/webp","sizes":"(min-width: 100px) 100px, 100vw"}]},"width":100,"height":100}');
-
-/***/ }),
-
-/***/ "./.cache/caches/gatsby-plugin-image/3736608665.json":
-/*!***********************************************************!*\
-  !*** ./.cache/caches/gatsby-plugin-image/3736608665.json ***!
-  \***********************************************************/
-/***/ ((module) => {
-
-module.exports = JSON.parse('{"layout":"constrained","backgroundColor":"#f8f8f8","images":{"fallback":{"src":"/static/d06133b212e6687d665f95d96a006061/ca121/search_icon.png","srcSet":"/static/d06133b212e6687d665f95d96a006061/549c4/search_icon.png 5w,\\n/static/d06133b212e6687d665f95d96a006061/ebf64/search_icon.png 10w,\\n/static/d06133b212e6687d665f95d96a006061/ca121/search_icon.png 20w","sizes":"(min-width: 20px) 20px, 100vw"},"sources":[{"srcSet":"/static/d06133b212e6687d665f95d96a006061/fadb2/search_icon.webp 5w,\\n/static/d06133b212e6687d665f95d96a006061/bd5c1/search_icon.webp 10w,\\n/static/d06133b212e6687d665f95d96a006061/264f2/search_icon.webp 20w","type":"image/webp","sizes":"(min-width: 20px) 20px, 100vw"}]},"width":20,"height":20}');
 
 /***/ })
 
