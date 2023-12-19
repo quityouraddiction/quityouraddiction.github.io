@@ -24,14 +24,14 @@ const Menu = () => {
         </Link>
       </motion.div>
       <motion.div style={{ marginTop }}>
-        <ul className="flex whitespace-nowrap items-center gap-7 mt-10">
+        <ul className="flex whitespace-nowrap items-center justify-center gap-12 mt-10">
           <NavItem to={"/"}>Home</NavItem>
           <NavItem to={"/"}>Resources</NavItem>
           <NavItem to={"/"}>Addiction 101</NavItem>
           <NavItem to={"/"}>Recovery Process</NavItem>
           <NavItem to={"/"}>Inspiration</NavItem>
-          <NavItem to={"/"}>About</NavItem>
-          <div className="bg-orange-500 p-2 shadow-md rounded-xl flex gap-3">
+          <NavItem to={"/about"}>About</NavItem>
+          <div className="bg-[#E27022] p-2 shadow-md rounded-xl flex gap-3">
             <motion.button whileHover={{ scale: 1.1 }} className="fill-white">
               <SearchIcon />
             </motion.button>

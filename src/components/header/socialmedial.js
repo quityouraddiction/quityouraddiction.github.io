@@ -8,7 +8,7 @@ import XIcon from "../../images/x_icon.svg";
 
 const ScocialMediaIcons = () => {
   return (
-    <ul className="flex flex-col gap-10 self-center">
+    <ul className="flex flex-col gap-10">
       <motion.li whileHover={{scale : 1.2}}>
         <Link to="/">
           <FacebookIcon />
