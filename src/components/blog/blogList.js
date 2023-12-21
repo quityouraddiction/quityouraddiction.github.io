@@ -1,35 +1,52 @@
 import React from "react";
 import { graphql, useStaticQuery, Link } from "gatsby";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const BlogList = () => {
   const data = useStaticQuery(graphql`
-  query {
-    allMdx {
-      nodes {
-        id
-        frontmatter {
-          title,
-          date
-          
-          
+    query {
+      allMdx {
+        nodes {
+          id
+          frontmatter {
+            title
+            date
+          }
         }
       }
     }
-  }
   `);
 
-  return <div>
-          {data.allMdx.nodes.map((node) => (
-        <article
-          key={node.id}
-          className="border-b-white border-b mb-3"
-        >
+  const settings = {
+    dots: true,
+    infinite: false,
+    vertical: true,
+    slidesToShow: 2,
+    slidesToScroll: 3,
+    arrows: false,
+    swipeToSlide: true,
+    autoPlay: false,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
+  return (
+    <Slider {...settings}>
+      {data.allMdx.nodes.map((node) => (
+        <article key={node.id} className="border-b-white border-b mb-3">
           <h2 className="mb-2 text-xl font-bold tracking-tight  text-white">
             <Link to={``}>{node.frontmatter.title}</Link>
           </h2>
-          <p className="text-white mb-5 font-light">
-            {node.frontmatter.date}
-          </p>
+          <p className="text-white mb-5 font-light">{node.frontmatter.date}</p>
           <div className="flex justify-between items-center">
             <Link
               to={`/blog/${node.frontmatter.slug}`}
@@ -52,7 +69,8 @@ const BlogList = () => {
           </div>
         </article>
       ))}
-  </div>;
+    </Slider>
+  );
 };
 
 export default BlogList;

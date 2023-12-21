@@ -1,14 +1,8 @@
 import React from "react";
-import { Link } from "gatsby";
-import QuitYourAddictionLogo from "../../images/quit-your-addiction-logo.svg";
+import QuitYourAddictionLogo from "../../images/quit_logo.svg";
 
 const Logo = () => {
-  return (
-
-      <QuitYourAddictionLogo />
-
-  );
+  return <QuitYourAddictionLogo/>;
 };
-
 
 export default Logo;

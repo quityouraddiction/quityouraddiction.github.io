@@ -13,3 +13,12 @@ html{
     overflow-x: hidden;
     top: 0;
 }
+.slick-dots{
+    position: relative !important;
+    bottom: 0 !important;
+}
+
+.slick-dots li button:before{
+    color: white !important;
+    font-size: 12px !important;
+}
