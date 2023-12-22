@@ -5,12 +5,17 @@ module.exports = {
     "./src/components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-
     extend: {
       backgroundImage: {
         "mobile-menu-bg": "url('../images/mobile_menu_bg.png')",
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: false,
+    darkTheme: "light",
+    base: true,
+    styled: true,
+  },
 };

@@ -6,7 +6,7 @@ import Modal from "../assets/modal";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col items-center pt-28 mt-32 z-30">
+    <div className="flex flex-col items-center pt-28">
       <div className="flex pb-4 gap-4 items-end">
         <Modal width="w-80" bgColor="bg-[#E27022]" borderColor="border-black">
           <h1 className="text-white text-3xl font-extrabold">

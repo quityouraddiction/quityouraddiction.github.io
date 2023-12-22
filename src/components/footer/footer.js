@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <section className="p-10">
+        <section className="footer p-10 bg-neutral text-neutral-content">
             <div>footer</div>
         </section>
     );
