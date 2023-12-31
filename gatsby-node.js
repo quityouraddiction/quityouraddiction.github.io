@@ -12,7 +12,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           id
           frontmatter {
             slug
-            origin
+            origin  
           }
           internal {
             contentFilePath

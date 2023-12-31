@@ -23,7 +23,7 @@ const BlogList = () => {
     dots: true,
     infinite: false,
     vertical: true,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 3,
     arrows: false,
     swipeToSlide: true,
@@ -41,16 +41,20 @@ const BlogList = () => {
 
   return (
     <Slider {...settings}>
-      {data.allMdx.nodes.map((node) => (
-        <article key={node.id} className="border-b-white border-b mb-3">
-          <h2 className="mb-2 text-xl font-bold tracking-tight  text-white">
-            <Link to={``}>{node.frontmatter.title}</Link>
-          </h2>
-          <p className="text-white mb-5 font-light">{node.frontmatter.date}</p>
+      {data.allMdx.nodes.map((node, index) => (
+        <article key={node.id} className=" mb-3">
+          <div className="flex justify-between">
+            <h2 className="mb-2 text-xl font-bold tracking-tight text-[#E27022]">
+              <Link to={``}>{node.frontmatter.title}</Link>
+            </h2>
+            <p className="text-[#E27022] mb-5 font-light">
+              {node.frontmatter.date}
+            </p>
+          </div>
           <div className="flex justify-between items-center">
             <Link
               to={`/blog/${node.frontmatter.slug}`}
-              className="text-white inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline mb-3"
+              className="text-[#E27022] inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline mb-3"
             >
               Read more
               <svg
@@ -67,6 +71,7 @@ const BlogList = () => {
               </svg>
             </Link>
           </div>
+          {index !== data.allMdx.nodes.length - 1 && <hr className="my-3 text-[#E27022]" />}
         </article>
       ))}
     </Slider>

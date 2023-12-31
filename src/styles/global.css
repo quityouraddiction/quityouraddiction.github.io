@@ -4,6 +4,7 @@
 
 body{
     font-family: "montserrat";
+    background-color: #ecece9;
 }
 
 html{
@@ -19,6 +20,6 @@ html{
 }
 
 .slick-dots li button:before{
-    color: white !important;
+    color: #E27022 !important;
     font-size: 12px !important;
 }

@@ -10,7 +10,7 @@ const Menu = () => {
   const marginTop = useTransform(scrollY, [0, 100], [0, -40]);
   return (
     <div
-      className="flex items-center justify-between p-4 bg-white"
+      className="flex items-center justify-between p-5 bg-white"
       style={{ marginTop }}
     >
       <motion.div className="w-28">
