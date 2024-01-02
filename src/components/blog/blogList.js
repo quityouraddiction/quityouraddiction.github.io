@@ -44,17 +44,17 @@ const BlogList = () => {
       {data.allMdx.nodes.map((node, index) => (
         <article key={node.id} className=" mb-3">
           <div className="flex justify-between">
-            <h2 className="mb-2 text-xl font-bold tracking-tight text-[#E27022]">
+            <h2 className="mb-2 text-xl font-bold tracking-tight text-primary">
               <Link to={``}>{node.frontmatter.title}</Link>
             </h2>
-            <p className="text-[#E27022] mb-5 font-light">
+            <p className="text-primary mb-5 font-light">
               {node.frontmatter.date}
             </p>
           </div>
           <div className="flex justify-between items-center">
             <Link
               to={`/blog/${node.frontmatter.slug}`}
-              className="text-[#E27022] inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline mb-3"
+              className="text-primary inline-flex items-center font-medium hover:underline mb-3"
             >
               Read more
               <svg
@@ -71,7 +71,7 @@ const BlogList = () => {
               </svg>
             </Link>
           </div>
-          {index !== data.allMdx.nodes.length - 1 && <hr className="my-3 text-[#E27022]" />}
+          {index !== data.allMdx.nodes.length - 1 && <hr className="my-3 text-primary" />}
         </article>
       ))}
     </Slider>

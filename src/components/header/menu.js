@@ -26,7 +26,7 @@ const Menu = () => {
           <NavItem to={"/"}>Recovery Process</NavItem>
           <NavItem to={"/"}>Inspiration</NavItem>
           <NavItem to={"/about"}>About</NavItem>
-          <div className="bg-[#E27022] p-2 shadow-md rounded-xl flex gap-3">
+          <div className="bg-primary p-2 shadow-md rounded-xl flex gap-3">
             <motion.button whileHover={{ scale: 1.1 }} className="fill-white">
               <SearchIcon />
             </motion.button>

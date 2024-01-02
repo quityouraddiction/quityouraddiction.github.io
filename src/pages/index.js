@@ -1,7 +1,8 @@
 import React from "react";
 import Layout from "../components/layout";
 import Hero from "../components/hero/hero";
-import Modal from "../components/assets/modal";
+import { motion } from "framer-motion";
+// import Modal from "../components/assets/modal";
 
 const IndexPage = () => {
   return (
@@ -11,26 +12,38 @@ const IndexPage = () => {
         <Hero />
       </section>
       <section>
-        <div className="flex items-center justify-center gap-4 p-10 max-md:p-4 max-md:flex-col max-md:mt-52">
-          <div>
-            <h2 className="text-orange-500 text-3xl font-bold">
-              Quit Your
-              <br /> Addiction
-              <br /> Now !
-            </h2>
-          </div>
-          <Modal bgColor={"bg-[#E7E7E7]"} width={"w-2/3"}>
-            <p className="text-base text-black font-light">
-              Welcome to my first honest blog about what really matters to me, a
-              compassionate and informative blog dedicated to helping
-              individuals break free from the grip of addiction and embark on a
-              transformative journey towards lasting recovery. I understand the
-              challenges you face, and I'm here to offer support, guidance, and
-              inspiration every step of the way.
-            </p>
-          </Modal>
-        </div>
-        <div className="p-32 max-md:p-10"><p>At "quityouraddiction," our purpose is clear - to empower individuals struggling with addiction to take control of their lives, overcome their dependencies, and find a path to healing and wholeness. We firmly believe that everyone deserves a chance at a brighter future, free from the chains of addiction. Through our content, resources, and community, we aim to provide the tools and knowledge needed to make positive changes and embrace a life of sobriety, fulfillment, and well-being.</p></div>
+        <motion.div
+          className="px-52 leading-loose"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <h1>Quit Your Addiction : Unlocking a Life of Freedom</h1>
+          <p className="text-xs leading-loose">
+            Welcome to 
+            <strong className="text-primary"> QuitYourAddiction</strong>, my
+            personal blog dedicated to helping individuals break free from the
+            grips of addiction and embrace a healthier, happier life. I
+            understand firsthand the challenges and complexities that come with
+            addiction, and through this blog, I want to share my experiences,
+            insights, and strategies to support you on your journey to recovery.
+            <br />
+            <br />
+            The purpose of this blog is to empower individuals like you to
+            regain control over your lives and conquer addictive behaviors. I
+            firmly believe that everyone deserves a chance to live a fulfilling
+            life free from the chains of addiction. Together, we can navigate
+            the ups and downs of the recovery process, providing mutual support
+            and encouragement. <br />
+            <br />
+            In this personal blog, I share my own journey, struggles, and
+            victories with addiction. I believe that by speaking from my own
+            experiences, I can connect with you on a deeper level and provide a
+            sense of empathy and understanding. I'm here to share what has
+            worked for me, what hasn't, and what I continue to learn on this
+            transformative path.
+          </p>
+        </motion.div>
       </section>
     </Layout>
   );
