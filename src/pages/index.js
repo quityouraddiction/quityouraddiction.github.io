@@ -13,14 +13,14 @@ const IndexPage = () => {
       </section>
       <section>
         <motion.div
-          className="px-52 leading-loose"
+          className="md:px-40 max-sm:px-28 leading-loose"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
           <h1>Quit Your Addiction : Unlocking a Life of Freedom</h1>
           <p className="text-xs leading-loose">
-            Welcome to 
+            Welcome to
             <strong className="text-primary"> QuitYourAddiction</strong>, my
             personal blog dedicated to helping individuals break free from the
             grips of addiction and embrace a healthier, happier life. I

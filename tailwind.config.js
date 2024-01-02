@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "mobile-menu-bg": "url('../images/mobile_menu_bg.png')",
+        "hero-bg": "url('../images/freedom.jpg')",
       },
     },
   },
