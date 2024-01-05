@@ -12,9 +12,9 @@ const Modal = ({
 }) => {
   return (
     <motion.div
-      initial={{ y: 10, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: delay }}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
       className={`${width} ${bgColor} ${bgImage} ${padding} rounded-xl shadow-md border-2 ${borderColor}`}
     >
       {children}

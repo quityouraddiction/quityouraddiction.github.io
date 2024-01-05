@@ -8,17 +8,17 @@ const IndexPage = () => {
   return (
     <Layout pageTitle="Home Page">
       {/* hero header */}
-      <section className="max-md:hidden">
+      <section>
         <Hero />
       </section>
       <section>
         <motion.div
-          className="md:px-40 max-sm:px-28 leading-loose"
+          className="md:px-48 max-sm:px-28 leading-loose pt-5"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1>Quit Your Addiction : Unlocking a Life of Freedom</h1>
+          <h1 className="text-3xl text-primary mb-3"><strong>Quit Your Addiction : </strong><br />Unlocking a Life of Freedom</h1>
           <p className="text-xs leading-loose">
             Welcome to
             <strong className="text-primary"> QuitYourAddiction</strong>, my
