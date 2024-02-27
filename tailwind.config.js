@@ -5,9 +5,14 @@ module.exports = {
     "./src/components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+
+      'md': '912px',
+
+    },
     extend: {
       backgroundImage: {
-        "hero-bg": "url('../images/freedom.jpg')",
+        "hero-bg": "url('../images/hero_bg.jpg')",
       },
     },
   },

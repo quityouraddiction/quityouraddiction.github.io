@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/layout";
 import Hero from "../components/hero/hero";
 import { motion } from "framer-motion";
+import { StaticImage } from "gatsby-plugin-image";
 // import Modal from "../components/assets/modal";
 
 const IndexPage = () => {
@@ -11,9 +12,9 @@ const IndexPage = () => {
       <section>
         <Hero />
       </section>
-      <section>
+      <section className=" flex flex-col justify-center items-center">
         <motion.div
-          className="md:px-48 max-sm:px-28 leading-loose pt-5"
+          className="w-1/2 leading-loose pt-10"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -27,23 +28,16 @@ const IndexPage = () => {
             understand firsthand the challenges and complexities that come with
             addiction, and through this blog, I want to share my experiences,
             insights, and strategies to support you on your journey to recovery.
-            <br />
-            <br />
-            The purpose of this blog is to empower individuals like you to
-            regain control over your lives and conquer addictive behaviors. I
-            firmly believe that everyone deserves a chance to live a fulfilling
-            life free from the chains of addiction. Together, we can navigate
-            the ups and downs of the recovery process, providing mutual support
-            and encouragement. <br />
-            <br />
-            In this personal blog, I share my own journey, struggles, and
-            victories with addiction. I believe that by speaking from my own
-            experiences, I can connect with you on a deeper level and provide a
-            sense of empathy and understanding. I'm here to share what has
-            worked for me, what hasn't, and what I continue to learn on this
-            transformative path.
+            
           </p>
         </motion.div>
+      <StaticImage
+      src="../images/arrow_down.png" />
+      <div className="flex flex-row gap-4 mt-10">
+        <StaticImage src="../images/youtube_interview.jpg" />
+        <StaticImage src="../images/tedx_talk.jpg"/>
+        <StaticImage src="../images/spotify_podcast.jpg"/>
+      </div>
       </section>
     </Layout>
   );

@@ -7,23 +7,23 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <div className="flex justify-center pt-24 p-14 gap-3">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="p-0 bg-[url('../images/freedom.jpg')] bg-cover 0 bg-center rounded-xl w-1/3 shadow-md"
-      ></motion.div>
-      <div className="flex items-end gap-3">
+    <div className="flex justify-center pt-40 hero-bg">
+
+      <div className="flex items-end w-full justify-center gap-3 ">
         <Modal
           bgColor={"bg-white"}
           padding={"p-4"}
           borderColor={"border-primary"}
-          width={"max-w-sm"}
+          width={"w-1/2"}
         >
           <BlogList />
         </Modal>
-        <ScocialMediaIcons />
+        <div className="w-1/2">
+          <h1 className="text-5xl font-bold text-primary">Quit Your Addiction for Good</h1>
+          <h5>Your Guide to Ending Addiction</h5>
+          <p>Practical tools, inspiring stories and expert insignts to reclaim your life</p>
+          <button className="btn">Start Your Journey</button>
+        </div>
       </div>
     </div>
   );

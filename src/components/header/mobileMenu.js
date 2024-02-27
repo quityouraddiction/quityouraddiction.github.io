@@ -38,7 +38,7 @@ const MobileMenu = () => {
         className="bg-white flex justify-between p-10"
         style={{ padding }}
       >
-        <motion.div style={{ width }}>
+        <motion.div className="w-32" style={{ width }}>
           {}
           <Link to="/">
             <QuitYourAddictionLogo key="mobile" />
@@ -57,7 +57,7 @@ const MobileMenu = () => {
             className="flex justify-between bg-white"
           >
             <div className="self-center p-7">
-              <ScocialMediaIcons />
+              <ScocialMediaIcons flexDirection={"flex-col"} />
             </div>
             <motion.nav className="flex justify-end text-right">
               <motion.ul className="flex flex-col gap-5 p-7">
@@ -67,7 +67,7 @@ const MobileMenu = () => {
                 <NavItem to={"/"}>Recovery Process</NavItem>
                 <NavItem to={"/"}>Inspiration</NavItem>
                 <NavItem to={"/about"}>About</NavItem>
-                {}
+                
                 <div className="flex justify-end gap-3">
                   <button aria-label="search">
                     <SearchIcon className="fill-orange-500" />
