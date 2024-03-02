@@ -47,14 +47,14 @@ const BlogList = () => {
             <h2 className="mb-2 text-xl font-bold tracking-tight text-primary">
               <Link to={``}>{node.frontmatter.title}</Link>
             </h2>
-            <p className="text-neutral mb-5 font-light">
+            <p className="text-primary mb-5 font-light">
               {node.frontmatter.date}
             </p>
           </div>
           <div className="flex justify-between items-center">
             <Link
               to={`/blog/${node.frontmatter.slug}`}
-              className="text-neutral inline-flex items-center font-medium hover:underline mb-3"
+              className="text-primary  inline-flex items-center font-medium hover:underline mb-3"
             >
               Read more
               <svg
