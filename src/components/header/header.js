@@ -10,7 +10,7 @@ const Header = () => {
         <ScocialMediaIcons flexDirection={"flex-row"} />
         <Menu />
       </div>
-      <div className="md:hidden">
+      <div className="min-[913px]:hidden">
         <MobileMenu />
       </div>
     </div>

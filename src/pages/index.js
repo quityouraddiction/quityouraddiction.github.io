@@ -3,6 +3,7 @@ import Layout from "../components/layout";
 import Hero from "../components/hero/hero";
 import { motion } from "framer-motion";
 import { StaticImage } from "gatsby-plugin-image";
+import Benefits from "../components/benefits/benefits";
 // import Modal from "../components/assets/modal";
 
 const IndexPage = () => {
@@ -12,14 +13,14 @@ const IndexPage = () => {
       <section>
         <Hero />
       </section>
-      <section className=" flex flex-col justify-center items-center">
+      <section className="flex flex-col items-center ">
         <motion.div
           className="w-1/2 leading-loose pt-10"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="text-3xl text-primary mb-3"><strong>Quit Your Addiction : </strong><br />Unlocking a Life of Freedom</h1>
+          <h1 className="text-3xl text-primary mb-3"><strong>Quit Your Addiction</strong><br />Unlocking a Life of Freedom</h1>
           <p className="text-xs leading-loose">
             Welcome to
             <strong className="text-primary"> QuitYourAddiction</strong>, my
@@ -38,6 +39,9 @@ const IndexPage = () => {
         <StaticImage src="../images/tedx_talk.jpg"/>
         <StaticImage src="../images/spotify_podcast.jpg"/>
       </div>
+      </section>
+      <section>
+        <Benefits />
       </section>
     </Layout>
   );
