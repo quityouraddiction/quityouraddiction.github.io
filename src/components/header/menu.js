@@ -5,7 +5,6 @@ import NavItem from "./navItem.js";
 import QuitYourAddictionLogo from "../../images/quit_logo.svg";
 import SearchIcon from "../../images/search_icon.svg";
 import EmailIcon from "../../images/email_icon.svg";
-import ScocialMediaIcons from "./socialmedial.js";
 const Menu = () => {
   const { scrollY } = useScroll();
   const marginTop = useTransform(scrollY, [0, 100], [0, -40]);

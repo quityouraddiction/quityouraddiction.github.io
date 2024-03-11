@@ -16,18 +16,24 @@ const Hero = () => {
       >
         <BlogList />
       </Modal>
-      <div className="mr-10">
-        <h1 className="max-md:text-6xl text-7xl font-extrabold leading-tight text-primary">
-          Quit<br /> Your Addiction<br /> for Good
-        </h1>
-        <h5 className="text-2xl text-primary">
-          Your Guide to Ending Addiction
-        </h5>
-        <p className="font-extrabold">
-          Practical tools, inspiring stories and expert insignts to reclaim your
-          life
-        </p>
-        <button className="btn mt-4">Start Your Journey</button>
+      <div className="mr-10 flex flex-col justify-between">
+        <div>
+          <h1 className="max-md:text-6xl text-7xl font-extrabold leading-tight text-primary">
+            Quit
+            <br /> Your Addiction
+            <br /> for Good
+          </h1>
+          <h5 className="text-2xl text-primary">
+            Your Guide to Ending Addiction
+          </h5>
+          <p className="font-extrabold">
+            Practical tools, inspiring stories and expert insignts to reclaim
+            your life
+          </p>
+        </div>
+        <button className="btn btn-primary btn-outline max-md:btn-sm mt-10 w-2/3">
+          Start Your Journey
+        </button>
       </div>
     </div>
   );

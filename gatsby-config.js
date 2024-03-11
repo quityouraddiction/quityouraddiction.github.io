@@ -17,6 +17,7 @@ module.exports = {
     `gatsby-plugin-postcss`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-react-svg`,
     {
       resolve: `gatsby-omni-font-loader`,
@@ -38,6 +39,14 @@ module.exports = {
         // name of the folder
         name: `resources`,
         path: `${__dirname}/content/resources`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options:{
+        // name of the folder
+        name: `images`,
+        path: `${__dirname}/src/images`,
       },
     },
     {
