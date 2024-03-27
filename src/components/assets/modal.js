@@ -8,7 +8,6 @@ const Modal = ({
   bgImage,
   borderColor,
   padding,
-  delay,
 }) => {
   return (
     <motion.div

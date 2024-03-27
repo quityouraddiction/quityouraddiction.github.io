@@ -1,66 +1,84 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-// import { getImage } from "gatsby-plugin-image";
-import { motion } from "framer-motion";
-import Carousel from "../assets/carousel";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { Link } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 
 const FeaturedContent = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allFile(
-        filter: {
-          sourceInstanceName: { eq: "images" }
-          name: { regex: "/^featured/" }
-        }
-      ) {
-        edges {
-          node {
-            childImageSharp {
-              gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO])
-            }
-          }
-        }
-      }
-    }
-  `);
-  const images = data.allFile.edges.map(({ node }) => (
-    <GatsbyImage
-      key={node.childImageSharp.gatsbyImageData.src}
-      image={node.childImageSharp.gatsbyImageData}
-      alt=""
-    />
-  ));
   return (
-    <div className="flex flex-row flex-wrap justify-center items-baseline gap-7 mx-9">
-      <div className="w-1/3">
-        <Carousel images={images} />
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-left text-primary">Featured Content</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+        <div class="featured-content-card overflow-hidden">
+          <div class="relative p-4 text-right">
+            <p class="text-gray-600 leading-relaxed">
+              <b className="text-primary">QuitYourAddiction</b>, a personal blog
+              dedicated to helping individuals break free from the grips of
+              addiction and embrace a happier life. This section will introduce
+              you to the core idea behind this approach. To get started, it's
+              important to understand the concept by taking the time to watch
+              the following videos and think about the ideas presented.
+            </p>
+          </div>
+        </div>
+
+        <div class=" rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform duration-300 ease-in-out">
+          <div class="relative">
+            <Link to="#">
+              <StaticImage
+                src="../../images/featured_tedx_talk.jpg"
+                alt="Featured Image 2"
+                class="w-full h-64 object-cover"
+              />
+            </Link>
+            <div class="inset-0 flex flex-col justify-center items-center text-center opacity-0 hover:opacity-90 transition-opacity duration-300 ease-in-out absolute  p-6 bg-primary">
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Featured Content Title
+              </h3>
+              <p class="text-gray-300">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class=" rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform duration-300 ease-in-out">
+          <div class="relative">
+            <Link to="#">
+              <StaticImage
+                src="../../images/featured_youtube_interview.jpg"
+                alt="Featured Image 2"
+                class="w-full h-64 object-cover"
+              />
+            </Link>
+            <div class="inset-0 flex flex-col justify-center items-center text-center opacity-0 hover:opacity-90 transition-opacity duration-300 ease-in-out absolute  p-6 bg-primary">
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Featured Content Title
+              </h3>
+              <p class="text-gray-300">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class=" rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform duration-300 ease-in-out">
+          <div class="relative">
+            <Link to="#">
+              <StaticImage
+                src="../../images/featured_spotify_podcast.jpg"
+                alt="Featured Image 2"
+                class="w-full h-64 object-cover"
+              />
+            </Link>
+            <div class="inset-0 flex flex-col justify-center items-center text-center opacity-0 hover:opacity-90 transition-opacity duration-300 ease-in-out absolute  p-6 bg-primary">
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Featured Content Title
+              </h3>
+              <p class="text-gray-300">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <motion.div
-        className="leading-loose pt-10 min-[912px]:w-1/3"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-      >
-        <h1 className="max-md:text-5xl text-6xl font-extrabold leading-tight text-primary">
-          Unlock a Life of Freedom
-        </h1>
-        <p className="text-xs leading-loose">
-          Welcome to
-          <strong className="text-primary"> QuitYourAddiction</strong>, my
-          personal blog dedicated to helping individuals break free from the
-          grips of addiction and embrace a healthier, happier life. I understand
-          firsthand the challenges and complexities that come with addiction,
-          and through this blog, I want to share my experiences, insights, and
-          strategies to support you on your journey to recovery.
-        </p>
-        <p className="text-xs leading-loose">
-          This section will introduce you to the core idea behind this approach.
-          To get started, it's important to understand this concept. Please take
-          the time to watch the following videos and think about the ideas
-          presented.
-        </p>
-      </motion.div>
     </div>
   );
 };
